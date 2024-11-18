@@ -1,51 +1,34 @@
 package com.example.market_kurly.feature
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.market_kurly.data.ServicePool.exampleService
-import com.example.market_kurly.data.dto.ResponseExampleDto
-import kotlinx.coroutines.Dispatchers
+import com.example.market_kurly.core.util.view.UiState
+import com.example.market_kurly.data.dto.request.RequestSignUpDto
+import com.example.market_kurly.domain.repository.ExampleRepository
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import retrofit2.HttpException
 
-class ExampleViewModel : ViewModel() {
-    private val _exampleResponse: MutableLiveData<ResponseExampleDto> = MutableLiveData()
-    val exampleResponse: MutableLiveData<ResponseExampleDto> = _exampleResponse
+class ExampleViewModel(
+    private val exampleRepository: ExampleRepository
+) : ViewModel() {
+    private val _signUpState = MutableLiveData<UiState>()
+    val signUpState: LiveData<UiState> get() = _signUpState
 
-    // 기본
-    private fun postExample1() {
-        val call = exampleService.postExample1(requestExample = Unit)
-
-        call.enqueue(object : Callback<ResponseExampleDto> {
-            override fun onResponse(
-                call: Call<ResponseExampleDto>,
-                response: Response<ResponseExampleDto>
-            ) {
-                if (response.isSuccessful) {
-                    _exampleResponse.value = response.body()
-                } else {
-
+    fun signUp(request: RequestSignUpDto) {
+        viewModelScope.launch {
+            exampleRepository.signUp(request)
+                .onSuccess {
+                    _signUpState.value = UiState(true, "signUp 성공")
                 }
-            }
-
-            override fun onFailure(call: Call<ResponseExampleDto>, t: Throwable) {
-
-            }
-        })
-    }
-
-    // 코루틴
-    private fun postExample2() = viewModelScope.launch {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val response = exampleService.postExample2(requestExample = Unit)
-                _exampleResponse.value = response
-            } catch (e: Exception) {
-
-            }
+                .onFailure {
+                    if (it is HttpException) {
+                        _signUpState.value = UiState(false, it.message())
+                    } else {
+                        _signUpState.value = UiState(false, "signUp 실패")
+                    }
+                }
         }
     }
 }
