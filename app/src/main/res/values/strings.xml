@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MARKET-KURLY</string>
+
+    <!-- ExampleComponent 스트링 추출 예시 -->
+    <string name="hide">hide</string>
+    <string name="show">show</string>
 </resources>
