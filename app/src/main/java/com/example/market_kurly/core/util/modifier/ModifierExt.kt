@@ -1,4 +1,4 @@
-package com.example.market_kurly.core.util
+package com.example.market_kurly.core.util.modifier
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource

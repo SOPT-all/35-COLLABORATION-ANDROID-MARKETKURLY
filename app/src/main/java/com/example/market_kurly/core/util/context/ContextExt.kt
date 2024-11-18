@@ -1,4 +1,4 @@
-package com.example.market_kurly.core.util
+package com.example.market_kurly.core.util.context
 
 import android.content.Context
 import android.widget.Toast
