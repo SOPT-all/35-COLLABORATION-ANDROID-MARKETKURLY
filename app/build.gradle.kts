@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 val properties = Properties().apply {
@@ -72,4 +73,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.kotlin.serialization.converter)
     implementation(libs.kotlinx.serialization.json)
+
+    // Timber
+    implementation(libs.timber)
 }
