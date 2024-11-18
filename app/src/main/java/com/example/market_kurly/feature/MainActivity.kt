@@ -1,4 +1,4 @@
-package com.example.market_kurly
+package com.example.market_kurly.feature
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
