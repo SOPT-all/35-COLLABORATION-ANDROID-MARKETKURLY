@@ -1,7 +1,9 @@
 package com.example.market_kurly.core.util
 
 object KeyStorage {
-    // 상수화 예시
-    const val API = "api"
-    const val V1 = "v1"
+    // nav graph 요소 상수화
+    const val HOME = "home"
+    const val GOODS = "goods"
+    const val REVIEW = "review"
+    const val WISHLIST = "wishlist"
 }
