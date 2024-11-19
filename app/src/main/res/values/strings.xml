@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">MARKET-KURLY</string>
+
+    <!-- ExampleComponent 스트링 추출 예시 -->
+    <string name="hide">hide</string>
+    <string name="show">show</string>
+
+    <!-- Home Screen -->
+    <string name="home_screen">Home</string>
+    <string name="btn_go_to_goods">Go to Goods</string>
+
+    <!-- Goods Screen -->
+    <string name="goods_screen">Goods</string>
+    <string name="btn_go_to_review">Go to Review</string>
+    <string name="btn_go_to_wishlist">Go to WishList</string>
+
+    <!-- Review Screen -->
+    <string name="review_screen">Review</string>
+
+    <!-- WishList Screen -->
+    <string name="wishlist_screen">WishList</string>
 </resources>
