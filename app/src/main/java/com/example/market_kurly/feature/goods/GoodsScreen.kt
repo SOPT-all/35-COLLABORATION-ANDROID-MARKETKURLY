@@ -18,6 +18,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,32 +30,37 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.market_kurly.R
 import com.example.market_kurly.feature.goods.component.KurlyGoodsInfoText
 import com.example.market_kurly.feature.goods.component.KurlyGoodsMembershipToggleButton
 import com.example.market_kurly.core.designsystem.component.KurlyProductsDetailBottomBar
 import com.example.market_kurly.core.designsystem.component.KurlyProductsDetailTopBar
-import com.example.market_kurly.core.dummymodel.AlsoViewedItem
-import com.example.market_kurly.core.util.KeyStorage.ALL_TABS
 import com.example.market_kurly.core.util.KeyStorage.GOODS
-import com.example.market_kurly.core.util.KeyStorage.GOODS_DESCRIPTION
 import com.example.market_kurly.core.util.KeyStorage.REVIEW
 import com.example.market_kurly.core.util.KeyStorage.WISHLIST
 import com.example.market_kurly.core.util.price.calculateDiscountWithFloor
 import com.example.market_kurly.core.util.price.toDecimalFormat
 import com.example.market_kurly.domain.handler.MockFavoriteHandler
+import com.example.market_kurly.domain.repositoryimpl.GoodsRepositoryImpl
 import com.example.market_kurly.feature.goods.component.KurlyAlsoViewedColumnItem
+import com.example.market_kurly.feature.goods.viewmodel.GoodsViewModel
+import com.example.market_kurly.feature.goods.viewmodel.GoodsViewModelFactory
 import com.example.market_kurly.ui.theme.Gray2
 import com.example.market_kurly.ui.theme.Gray4
 import com.example.market_kurly.ui.theme.Gray5
 import com.example.market_kurly.ui.theme.Gray7
 import com.example.market_kurly.ui.theme.MarketKurlyTheme.typography
+import com.example.market_kurly.ui.theme.PrimaryColor400
 import com.example.market_kurly.ui.theme.Red
 import com.example.market_kurly.ui.theme.White
 
 @Composable
-fun GoodsScreen(navController: NavHostController) {
+fun GoodsScreen(
+    navController: NavHostController
+) {
     val scrollState = rememberScrollState()
 
     val price = 14900
@@ -63,18 +69,18 @@ fun GoodsScreen(navController: NavHostController) {
     val deliveryType = "샛별배송"
     val origin = "국산"
     val memberDiscount = 26
-    val dummyAlsoViewedList = listOf(
-        AlsoViewedItem("[KF365] 유명산지 고당도사과 1.5kg (5~6입)", 16, 19900),
-        AlsoViewedItem("고랭지 햇사과 1.3kg (4~6입)", 13, 14900),
-        AlsoViewedItem("감홍 사과 1.3kg (4~6입)", 25, 19900),
-        AlsoViewedItem("세척 사과 1.4kg (7입)", 16, 14900)
-    )
+
+    val goodsRepository by lazy { GoodsRepositoryImpl() }
+    val viewModelFactory by lazy { GoodsViewModelFactory(goodsRepository) }
+    val viewModel : GoodsViewModel = viewModel(factory = viewModelFactory)
+
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
             KurlyProductsDetailTopBar(
                 goodsName = name,
-                selectedIndex = ALL_TABS.indexOf(GOODS_DESCRIPTION),
+                selectedIndex = uiState.selectedTabIndex,
                 navigateUp = {},
                 navigateToGoodsDescription = { navController.navigate(GOODS) },
                 navigateGoodsReview = { navController.navigate(REVIEW)}
@@ -230,8 +236,37 @@ fun GoodsScreen(navController: NavHostController) {
                         .padding(15.dp, 21.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
+                    Row (
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "다른 고객이 함께 본 상품",
+                            style = typography.bodyB16,
+                            color = Gray7
+                        )
 
-                    dummyAlsoViewedList.forEach { item ->
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "다음상품",
+                                style = typography.bodyM16,
+                                color = PrimaryColor400
+                            )
+                            Icon(
+                                imageVector = ImageVector.vectorResource(R.drawable.icn_goods_nextgoods),
+                                contentDescription = "",
+                                tint = PrimaryColor400,
+                                modifier = Modifier.size(18.dp)
+                            )
+                        }
+                    }
+
+                    Spacer(Modifier.height(7.dp))
+
+                    uiState.alsoViewedList.forEach { item ->
                         KurlyAlsoViewedColumnItem(
                             goodsName = item.goodsName,
                             discount = item.discount,
