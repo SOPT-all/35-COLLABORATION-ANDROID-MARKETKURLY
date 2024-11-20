@@ -28,10 +28,11 @@ import com.example.market_kurly.ui.theme.White
 
 @Composable
 fun HomePutInButton (
+    modifier: Modifier = Modifier,
     onPutInClick: () -> Unit = {}
 ){
     Box (
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .background(color = White, shape = RoundedCornerShape(4.dp))
             .border(width = 1.dp, color = CoolGray2, shape = RoundedCornerShape(4.dp))

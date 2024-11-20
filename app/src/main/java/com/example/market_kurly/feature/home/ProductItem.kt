@@ -7,5 +7,5 @@ data class ProductItem (
     val discountBeforePrice: Int,
     val discountPercent: Int,
     val discountAfterPrice: Int,
-    val reviewCount: Int,
+    val reviewCount: Int = 0,
 )

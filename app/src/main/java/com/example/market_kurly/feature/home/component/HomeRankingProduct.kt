@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -36,6 +37,7 @@ fun HomeRankingProduct (
 ) {
     Column (
         modifier = modifier
+            .width(177.dp)
             .background(color = White, shape = RoundedCornerShape(10.dp))
     ) {
         AsyncImageFillWidth(
@@ -45,7 +47,8 @@ fun HomeRankingProduct (
         )
         Spacer(modifier = Modifier.height(6.dp))
         Column(
-            modifier = Modifier.padding(
+            modifier = Modifier
+                .padding(
                 start = 11.dp,
                 end = 11.dp,
                 top = 21.dp,
@@ -53,6 +56,7 @@ fun HomeRankingProduct (
             )
         ) {
             Row(
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
@@ -85,9 +89,10 @@ fun HomeRankingProduct (
                 }
             }
             Spacer(modifier = Modifier.height(18.dp))
-            HomePutInButton { onPutInClick() }
+            HomePutInButton (
+                modifier = Modifier.fillMaxWidth()
+            ) { onPutInClick() }
         }
-
     }
 }
 

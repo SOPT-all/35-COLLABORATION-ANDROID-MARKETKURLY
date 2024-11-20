@@ -1,33 +1,47 @@
 package com.example.market_kurly.feature.home
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import com.example.market_kurly.R
+import com.example.market_kurly.core.util.modifier.noRippleClickable
 import com.example.market_kurly.feature.home.component.AsyncImageFillWidth
 import com.example.market_kurly.feature.home.component.HomeBannerRow
 import com.example.market_kurly.feature.home.component.HomeBottomNav
 import com.example.market_kurly.feature.home.component.HomeProductRow
 import com.example.market_kurly.feature.home.component.HomeProductTitle
+import com.example.market_kurly.feature.home.component.HomeRankingProductRow
 import com.example.market_kurly.feature.home.component.HomeTagItemRow
 import com.example.market_kurly.feature.home.component.HomeTopBar
 import com.example.market_kurly.ui.theme.CoolGray4
+import com.example.market_kurly.ui.theme.GrGray1
 import com.example.market_kurly.ui.theme.Gray8
+import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
+import com.example.market_kurly.ui.theme.White
 
 private val bannerList = listOf(
     "https://velog.velcdn.com/images/roel_dev/post/c6270de0-ab33-4374-bacd-eaa541ecc521/image.png",
@@ -95,6 +109,45 @@ private val products = listOf(
 
 )
 
+
+private val rankingProducts = listOf(
+    ProductItem(
+        title = "[사미헌] 갈비탕 ",
+        imageUrl = "https://prod-files-secure.s3.us-west-2.amazonaws.com/01c30015-16dc-4e14-8e54-35fb1a5705fe/0b844970-d88e-4dec-a8ee-fcd3fa88e415/img_home_ranking_product_dummy.png",
+        discountBeforePrice = 13000,
+        discountPercent = 15,
+        discountAfterPrice = 11050,
+    ),
+    ProductItem(
+        title = "[사미헌] 갈비탕 ",
+        imageUrl = "https://prod-files-secure.s3.us-west-2.amazonaws.com/01c30015-16dc-4e14-8e54-35fb1a5705fe/0b844970-d88e-4dec-a8ee-fcd3fa88e415/img_home_ranking_product_dummy.png",
+        discountBeforePrice = 13000,
+        discountPercent = 15,
+        discountAfterPrice = 11050,
+    ),
+    ProductItem(
+        title = "[사미헌] 갈비탕 ",
+        imageUrl = "https://prod-files-secure.s3.us-west-2.amazonaws.com/01c30015-16dc-4e14-8e54-35fb1a5705fe/0b844970-d88e-4dec-a8ee-fcd3fa88e415/img_home_ranking_product_dummy.png",
+        discountBeforePrice = 13000,
+        discountPercent = 15,
+        discountAfterPrice = 11050,
+    ),
+    ProductItem(
+        title = "[사미헌] 갈비탕 ",
+        imageUrl = "https://prod-files-secure.s3.us-west-2.amazonaws.com/01c30015-16dc-4e14-8e54-35fb1a5705fe/0b844970-d88e-4dec-a8ee-fcd3fa88e415/img_home_ranking_product_dummy.png",
+        discountBeforePrice = 13000,
+        discountPercent = 15,
+        discountAfterPrice = 11050,
+    ),
+    ProductItem(
+        title = "[사미헌] 갈비탕 ",
+        imageUrl = "https://prod-files-secure.s3.us-west-2.amazonaws.com/01c30015-16dc-4e14-8e54-35fb1a5705fe/0b844970-d88e-4dec-a8ee-fcd3fa88e415/img_home_ranking_product_dummy.png",
+        discountBeforePrice = 13000,
+        discountPercent = 15,
+        discountAfterPrice = 11050,
+    ),
+)
+
 @Composable
 fun HomeScreen(
     navController: NavHostController
@@ -136,22 +189,45 @@ fun HomeScreen(
                 imageUrl = "https://prod-files-secure.s3.us-west-2.amazonaws.com/01c30015-16dc-4e14-8e54-35fb1a5705fe/826939ec-c3d6-4b17-9258-c7170db2bf29/IMG_0136_1.png",
                 placeholder = R.mipmap.img_home_center_banner_dummy
             )
-            Spacer(modifier = Modifier.height(44.dp))
-            Text(
-                "\uD83C\uDFC6 실시간 인기 랭킹 \uD83C\uDFC6",
-                style = MarketKurlyTheme.typography.titleB18,
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center,
-                color = Gray8
-            )
-            Spacer(modifier = Modifier.height(5.dp))
-            Text(
-                "가장 인기있는 상품만 모아보세요!",
-                style = MarketKurlyTheme.typography.bodyR15,
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center,
-                color = CoolGray4
-            )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = Brush.linearGradient(
+                            colors = listOf(
+                                White,
+                                GrGray1
+                            ),
+                            start = androidx.compose.ui.geometry.Offset(0f, 0f), // 시작점
+                            end = androidx.compose.ui.geometry.Offset(0f, 1000f) // 끝점
+                        )
+                    )
+            ) {
+                Spacer(modifier = Modifier.height(44.dp))
+                Text(
+                    "\uD83C\uDFC6 실시간 인기 랭킹 \uD83C\uDFC6",
+                    style = MarketKurlyTheme.typography.titleB18,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    color = Gray8
+                )
+                Spacer(modifier = Modifier.height(5.dp))
+                Text(
+                    "가장 인기있는 상품만 모아보세요!",
+                    style = MarketKurlyTheme.typography.bodyR15,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    color = CoolGray4
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+                HomeRankingProductRow(rankingProducts)
+                Spacer(modifier = Modifier.height(23.dp))
+                HomeAllButton(
+                    modifier = Modifier.padding(horizontal = 15.dp)
+                ) {}
+                Spacer(modifier = Modifier.height(20.dp))
+            }
+
         }
         HomeBottomNav(
             modifier = Modifier
@@ -159,6 +235,38 @@ fun HomeScreen(
                     bottom.linkTo(parent.bottom)
                 }
         )
+    }
+}
+
+@Composable
+private fun HomeAllButton(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(color = White, shape = RoundedCornerShape(4.dp))
+            .padding(vertical = 14.dp)
+            .noRippleClickable { onClick() },
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center,
+    ) {
+        Text(
+            "전체보기",
+            style = MarketKurlyTheme.typography.bodyR14
+        )
+        Icon(
+            painter = painterResource(id = R.drawable.ic_home_arrow_right),
+            contentDescription = "Home 전체보기 Button"
+        )
+    }
+}
+@Preview(showBackground = true)
+@Composable
+private fun HomeScreenPreview() {
+    MARKETKURLYTheme {
+        HomeScreen(navController = NavHostController(LocalContext.current))
     }
 }
 
