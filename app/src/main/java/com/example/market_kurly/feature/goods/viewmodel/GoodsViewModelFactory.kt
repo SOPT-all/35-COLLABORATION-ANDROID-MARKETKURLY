@@ -10,7 +10,7 @@ class GoodsViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(GoodsViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return goodsRepository?.let { GoodsViewModel(it) } as T
+            return GoodsViewModel(goodsRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

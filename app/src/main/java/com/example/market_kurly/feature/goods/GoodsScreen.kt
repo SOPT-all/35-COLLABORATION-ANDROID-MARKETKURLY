@@ -38,6 +38,7 @@ import com.example.market_kurly.feature.goods.component.KurlyGoodsInfoText
 import com.example.market_kurly.feature.goods.component.KurlyGoodsMembershipToggleButton
 import com.example.market_kurly.core.designsystem.component.KurlyProductsDetailBottomBar
 import com.example.market_kurly.core.designsystem.component.KurlyProductsDetailTopBar
+import com.example.market_kurly.core.util.KeyStorage.ALL_TABS
 import com.example.market_kurly.core.util.KeyStorage.GOODS
 import com.example.market_kurly.core.util.KeyStorage.REVIEW
 import com.example.market_kurly.core.util.KeyStorage.WISHLIST
@@ -82,8 +83,14 @@ fun GoodsScreen(
                 goodsName = name,
                 selectedIndex = uiState.selectedTabIndex,
                 navigateUp = {},
-                navigateToGoodsDescription = { navController.navigate(GOODS) },
-                navigateGoodsReview = { navController.navigate(REVIEW)}
+                navigateToGoodsDescription = {
+                    viewModel.updateSelectedTabIndex(ALL_TABS.indexOf(GOODS))
+                    navController.navigate(GOODS)
+                },
+                navigateGoodsReview = {
+                    viewModel.updateSelectedTabIndex(ALL_TABS.indexOf(REVIEW))
+                    navController.navigate(REVIEW)
+                }
             )
         },
         bottomBar = {
