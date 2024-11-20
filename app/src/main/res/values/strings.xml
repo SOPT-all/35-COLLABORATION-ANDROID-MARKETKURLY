@@ -9,11 +9,6 @@
     <string name="home_screen">Home</string>
     <string name="btn_go_to_goods">Go to Goods</string>
 
-    <!-- Goods Screen -->
-    <string name="goods_screen">Goods</string>
-    <string name="btn_go_to_review">Go to Review</string>
-    <string name="btn_go_to_wishlist">Go to WishList</string>
-
     <!-- Review Screen -->
     <string name="review_screen">Review</string>
 
@@ -27,6 +22,9 @@
     <string name="kurly_btn_buying">구매하기</string>
 
     <!-- Goods Screen -->
+    <string name="goods_screen">Goods</string>
+    <string name="btn_go_to_review">Go to Review</string>
+    <string name="btn_go_to_wishlist">Go to WishList</string>
     <string name="goods_btn_cart">담기</string>
     <string name="goods_icon_share_description">share button</string>
     <string name="goods_icon_more_information_description">goods more information icon</string>
