@@ -1,6 +1,6 @@
 package com.example.market_kurly.core.dummymodel
 
-data class AlsoViewedItem(
+data class AlsoViewedData(
     val goodsName: String,
     val discount: Int,
     val price: Int
