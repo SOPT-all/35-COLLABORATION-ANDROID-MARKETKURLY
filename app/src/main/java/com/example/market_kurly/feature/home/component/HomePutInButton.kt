@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -31,10 +32,11 @@ fun HomePutInButton (
 ){
     Box (
         modifier = Modifier
+            .fillMaxWidth()
             .background(color = White, shape = RoundedCornerShape(4.dp))
             .border(width = 1.dp, color = CoolGray2, shape = RoundedCornerShape(4.dp))
             .noRippleClickable { onPutInClick() }
-            .padding(horizontal = 46.dp, vertical = 5.dp),
+            .padding(vertical = 5.dp),
         contentAlignment = Alignment.Center
     ) {
         Row(
@@ -49,6 +51,7 @@ fun HomePutInButton (
             Text(
                 stringResource(id = R.string.home_put_in),
                 style = MarketKurlyTheme.typography.bodyR14,
+                maxLines = 1,
                 color = Gray7
             )
         }
