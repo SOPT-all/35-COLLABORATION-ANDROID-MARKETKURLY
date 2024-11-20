@@ -1,7 +1,6 @@
 package com.example.market_kurly.feature.goods.component
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,10 +18,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.market_kurly.R
 import com.example.market_kurly.core.util.price.calculateDiscountWithFloor
 import com.example.market_kurly.core.util.price.toDecimalFormat
@@ -35,23 +36,26 @@ import com.example.market_kurly.ui.theme.White
 
 @Composable
 fun KurlyAlsoViewedColumnItem(
+    image : String,
     goodsName : String,
     discount : Int,
     price : Int,
     onCartButtonClick : () -> Unit = {}
 ) {
+    val context = LocalContext.current
+
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(space = 10.dp, alignment = Alignment.CenterHorizontally),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            painter = painterResource(R.drawable.img_goods_thumbnail),
-            contentDescription = "",
+        AsyncImage(
+            model = ImageRequest.Builder(context)
+                .data(image)
+                .build(),
+            contentDescription = goodsName,
             contentScale = ContentScale.Crop,
-            modifier = Modifier.clip(
-                shape = RoundedCornerShape(3.dp)
-            )
+            modifier = Modifier.clip(shape = RoundedCornerShape(3.dp))
                 .size(48.dp)
         )
         Column(
