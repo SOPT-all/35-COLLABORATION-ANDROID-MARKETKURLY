@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults.SecondaryIndicator
@@ -29,8 +28,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
+import com.example.market_kurly.core.util.InteractionSource.rememberEmptyInteractionSource
 import com.example.market_kurly.core.util.KeyStorage
 import com.example.market_kurly.core.util.modifier.customTabIndicatorOffset
+import com.example.market_kurly.core.util.modifier.noRippleClickable
 import com.example.market_kurly.ui.theme.Gray6
 import com.example.market_kurly.ui.theme.Gray7
 import com.example.market_kurly.ui.theme.Gray8
@@ -63,24 +64,22 @@ fun KurlyGoodsDetailTopBar(
                 )
             },
             navigationIcon = {
-                IconButton(onClick = navigateUp) {
                     Icon(
                         imageVector = ImageVector.vectorResource(id = R.drawable.icn_arrow_left),
                         contentDescription = stringResource(R.string.kurly_icon_navigate_up_description),
                         tint = Gray7,
-                        modifier = Modifier.size(48.dp),
+                        modifier = Modifier.size(48.dp)
+                            .noRippleClickable(navigateUp),
                     )
-                }
             },
             actions = {
-                IconButton(onClick = navigateToCart) {
                     Icon(
                         imageVector = ImageVector.vectorResource(id = R.drawable.icn_cart_large),
                         contentDescription = stringResource(R.string.kurly_icon_navigate_cart_description),
                         tint = Gray8,
-                        modifier = Modifier.size(48.dp),
+                        modifier = Modifier.size(48.dp)
+                            .noRippleClickable(navigateToCart),
                     )
-                }
             },
         )
         KurlyGoodsDetailTabRow(
@@ -91,7 +90,6 @@ fun KurlyGoodsDetailTopBar(
             when (KeyStorage.ALL_TABS[index]) {
                 KeyStorage.GOODS_DETAIL -> navigateToGoodsDetail()
                 KeyStorage.GOODS_REVIEWS -> navigateGoodsReview()
-                else -> {}
             }
         }
     }
@@ -137,6 +135,7 @@ fun KurlyGoodsDetailTabRow(
                 modifier = Modifier.width(tabWidth),
                 selected = selectedTabIndex == tabIndex,
                 onClick = { onTabClick(tabIndex) },
+                interactionSource = rememberEmptyInteractionSource(),
                 text = {
                     Text(
                         text = tab,

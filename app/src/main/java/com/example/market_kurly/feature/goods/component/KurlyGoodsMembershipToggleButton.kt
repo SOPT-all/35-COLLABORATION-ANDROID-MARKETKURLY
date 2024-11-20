@@ -3,17 +3,15 @@ package com.example.market_kurly.feature.goods.component
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +21,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -129,57 +128,52 @@ fun MembershipPriceAndSubscribe(
                 color = Mint3,
             )
         }
-        Button(
-            modifier = Modifier.fillMaxWidth(),
-            contentPadding = PaddingValues(vertical = 13.dp),
-            shape = RoundedCornerShape(6.dp),
-            border = BorderStroke(1.dp, Mint3),
-            colors = ButtonColors(
-                containerColor = Mint1,
-                contentColor = Gray7,
-                disabledContainerColor = Mint1,
-                disabledContentColor = Gray7,
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(
+                    1.dp,
+                    Mint3,
+                    RoundedCornerShape(6.dp)
+                )
+                .clip(RoundedCornerShape(6.dp))
+                .background(Mint1)
+                .padding(vertical = 13.dp),
+            horizontalArrangement = Arrangement.spacedBy(
+                space = 2.dp,
+                alignment = Alignment.CenterHorizontally,
             ),
-            onClick = {},
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(
-                    space = 2.dp,
-                    alignment = Alignment.CenterHorizontally,
+            Icon(
+                imageVector = ImageVector.vectorResource(R.drawable.icn_goods_members),
+                contentDescription = stringResource(R.string.goods_icon_membership_ticket_descrpition),
+                tint = Color.Unspecified,
+                modifier = Modifier.size(18.dp),
+            )
+            Text(
+                text = stringResource(R.string.goods_text_membership_sub_string_1),
+                style = typography.captionM12,
+                color = Gray7,
+            )
+            Text(
+                text = stringResource(
+                    R.string.goods_text_price,
+                    disCountPrice.toDecimalFormat(),
                 ),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.icn_goods_members),
-                    contentDescription = stringResource(R.string.goods_icon_membership_ticket_descrpition),
-                    tint = Color.Unspecified,
-                    modifier = Modifier.size(18.dp),
-                )
-                Text(
-                    text = stringResource(R.string.goods_text_membership_sub_string_1),
-                    style = typography.captionM12,
-                    color = Gray7,
-                )
-                Text(
-                    text = stringResource(
-                        R.string.goods_text_price,
-                        disCountPrice.toDecimalFormat(),
-                    ),
-                    style = typography.bodyB14,
-                    color = Mint3,
-                )
-                Text(
-                    text = stringResource(R.string.goods_text_membership_sub_string_2),
-                    style = typography.captionM12,
-                    color = Gray7,
-                )
-                Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.icn_goods_arrow_right),
-                    contentDescription = stringResource(R.string.goods_icon_right_arrow_description),
-                    modifier = Modifier.size(18.dp),
-                )
-            }
+                style = typography.bodyB14,
+                color = Mint3,
+            )
+            Text(
+                text = stringResource(R.string.goods_text_membership_sub_string_2),
+                style = typography.captionM12,
+                color = Gray7,
+            )
+            Icon(
+                imageVector = ImageVector.vectorResource(R.drawable.icn_goods_arrow_right),
+                contentDescription = stringResource(R.string.goods_icon_right_arrow_description),
+                modifier = Modifier.size(18.dp),
+            )
         }
     }
 }

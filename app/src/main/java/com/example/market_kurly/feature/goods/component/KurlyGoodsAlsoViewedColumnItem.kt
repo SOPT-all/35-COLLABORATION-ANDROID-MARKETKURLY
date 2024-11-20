@@ -1,15 +1,14 @@
 package com.example.market_kurly.feature.goods.component
 
-import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.market_kurly.R
+import com.example.market_kurly.core.util.modifier.noRippleClickable
 import com.example.market_kurly.core.util.price.calculateDiscountWithFloor
 import com.example.market_kurly.core.util.price.toDecimalFormat
 import com.example.market_kurly.ui.theme.CoolGray2
@@ -67,7 +67,7 @@ fun KurlyAlsoViewedColumnItem(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.Center,
 
-        ) {
+            ) {
             Text(
                 text = goodsName,
                 style = typography.bodyR15,
@@ -99,37 +99,34 @@ fun KurlyAlsoViewedColumnItem(
                 )
             }
         }
-        Button(
-            contentPadding = PaddingValues(horizontal = 8.5.dp, vertical = 6.dp),
-            shape = RoundedCornerShape(4.dp),
-            colors = ButtonColors(
-                containerColor = White,
-                contentColor = Gray7,
-                disabledContainerColor = White,
-                disabledContentColor = Gray7,
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(
+                space = 4.dp,
+                alignment = Alignment.CenterHorizontally,
             ),
-            border = BorderStroke(1.dp, CoolGray2),
-            onClick = onCartButtonClick,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .noRippleClickable(onCartButtonClick)
+                .border(
+                    1.dp,
+                    CoolGray2,
+                    RoundedCornerShape(4.dp)
+                )
+                .clip(RoundedCornerShape(4.dp))
+                .background(White)
+                .padding(horizontal = 8.5.dp, vertical = 6.5.dp),
         ) {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(
-                    space = 4.dp,
-                    alignment = Alignment.CenterHorizontally,
-                ),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.icon_cart_small),
-                    contentDescription = stringResource(R.string.goods_btn_cart),
-                    tint = Gray7,
-                    modifier = Modifier.size(18.dp),
-                )
-                Text(
-                    text = stringResource(R.string.goods_btn_cart),
-                    style = typography.bodyR14,
-                    color = Gray7,
-                )
-            }
+            Icon(
+                imageVector = ImageVector.vectorResource(R.drawable.icon_cart_small),
+                contentDescription = stringResource(R.string.goods_btn_cart),
+                tint = Gray7,
+                modifier = Modifier.size(18.dp),
+            )
+            Text(
+                text = stringResource(R.string.goods_btn_cart),
+                style = typography.bodyR14,
+                color = Gray7,
+            )
         }
     }
 }
