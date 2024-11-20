@@ -16,6 +16,7 @@ import androidx.navigation.NavHostController
 import com.example.market_kurly.R
 import com.example.market_kurly.feature.home.component.HomeBannerRow
 import com.example.market_kurly.feature.home.component.HomeBottomNav
+import com.example.market_kurly.feature.home.component.HomeProductRow
 import com.example.market_kurly.feature.home.component.HomeProductTitle
 import com.example.market_kurly.feature.home.component.HomeTagItemRow
 import com.example.market_kurly.feature.home.component.HomeTopBar
@@ -40,6 +41,50 @@ private val tagMenuList = listOf(
     TagItem("오늘의타로", R.drawable.ic_home_todaytarot),
     TagItem("마이컬리맘", R.drawable.ic_home_mykurlyfarm),
     TagItem("쇼케이스", R.drawable.ic_home_showcase),
+)
+
+private val products = listOf(
+    ProductItem(
+        "비비고 통새우만두 200g",
+        "https://prod-files-secure.s3.us-west-2.amazonaws.com/01c30015-16dc-4e14-8e54-35fb1a5705fe/fbb7af4c-1d4f-4021-90b6-6208daf83756/img_home_product_dummy.png",
+        6980,
+        33,
+        4630,
+        1200,
+    ),
+    ProductItem(
+        "비비고 통새우만두 200g",
+        "https://prod-files-secure.s3.us-west-2.amazonaws.com/01c30015-16dc-4e14-8e54-35fb1a5705fe/fbb7af4c-1d4f-4021-90b6-6208daf83756/img_home_product_dummy.png",
+        6980,
+        33,
+        4630,
+        1200,
+    ),
+    ProductItem(
+        "비비고 통새우만두 200g",
+        "https://prod-files-secure.s3.us-west-2.amazonaws.com/01c30015-16dc-4e14-8e54-35fb1a5705fe/fbb7af4c-1d4f-4021-90b6-6208daf83756/img_home_product_dummy.png",
+        6980,
+        33,
+        4630,
+        1200,
+    ),
+    ProductItem(
+        "비비고 통새우만두 200g",
+        "https://prod-files-secure.s3.us-west-2.amazonaws.com/01c30015-16dc-4e14-8e54-35fb1a5705fe/fbb7af4c-1d4f-4021-90b6-6208daf83756/img_home_product_dummy.png",
+        6980,
+        33,
+        4630,
+        1200,
+    ),
+    ProductItem(
+        "비비고 통새우만두 200g",
+        "https://prod-files-secure.s3.us-west-2.amazonaws.com/01c30015-16dc-4e14-8e54-35fb1a5705fe/fbb7af4c-1d4f-4021-90b6-6208daf83756/img_home_product_dummy.png",
+        6980,
+        33,
+        4630,
+        1200,
+    )
+
 )
 
 @Composable
@@ -77,6 +122,7 @@ fun HomeScreen(
                modifier = Modifier
                    .padding(start = 15.dp, end = 9.dp)
             ) {}
+            HomeProductRow(products)
         }
 
         HomeBottomNav(
