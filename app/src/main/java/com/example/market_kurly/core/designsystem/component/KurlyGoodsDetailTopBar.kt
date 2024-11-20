@@ -1,21 +1,15 @@
 package com.example.market_kurly.core.designsystem.component
 
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabPosition
 import androidx.compose.material3.TabRowDefaults.SecondaryIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,20 +18,18 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
 import com.example.market_kurly.core.util.KeyStorage
+import com.example.market_kurly.core.util.modifier.customTabIndicatorOffset
 import com.example.market_kurly.ui.theme.Gray6
 import com.example.market_kurly.ui.theme.Gray8
 import com.example.market_kurly.ui.theme.MarketKurlyTheme.typography
@@ -45,11 +37,11 @@ import com.example.market_kurly.ui.theme.PrimaryColor600
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun KurlyProductsDetailTopBar(
+fun KurlyGoodsDetailTopBar(
     goodsName: String,
     selectedIndex : Int,
     navigateUp: () -> Unit,
-    navigateToGoodsDescription: () -> Unit,
+    navigateToGoodsDetail: () -> Unit,
     navigateGoodsReview: () -> Unit,
     navigateToCart: () -> Unit = {}
 ) {
@@ -72,7 +64,7 @@ fun KurlyProductsDetailTopBar(
                 IconButton(onClick = navigateUp) {
                     Icon(
                         painter = painterResource(id = R.drawable.icn_arrow_left),
-                        contentDescription = "Left Icon",
+                        contentDescription = stringResource(R.string.kurly_icon_navigate_up_description),
                         modifier = Modifier.size(48.dp)
                     )
                 }
@@ -81,19 +73,19 @@ fun KurlyProductsDetailTopBar(
                 IconButton(onClick = navigateToCart) {
                     Icon(
                         painter = painterResource(id = R.drawable.icn_cart_large),
-                        contentDescription = "Right Icon",
+                        contentDescription = stringResource(R.string.kurly_icon_navigate_cart_description),
                         modifier = Modifier.size(48.dp)
                     )
                 }
             }
         )
-        KurlyProductsDetailTabRow(
+        KurlyGoodsDetailTabRow(
             tabs = KeyStorage.ALL_TABS,
             selectedTabIndex = selectedTabIndex
         ) { index ->
             selectedTabIndex = index
             when (KeyStorage.ALL_TABS[index]) {
-                KeyStorage.GOODS_DESCRIPTION -> navigateToGoodsDescription()
+                KeyStorage.GOODS_DETAIL -> navigateToGoodsDetail()
                 KeyStorage.GOODS_REVIEWS -> navigateGoodsReview()
                 else -> {}
             }
@@ -101,7 +93,7 @@ fun KurlyProductsDetailTopBar(
     }
 }
 @Composable
-fun KurlyProductsDetailTabRow(
+fun KurlyGoodsDetailTabRow(
     tabs: List<String>,
     selectedTabIndex: Int,
     onTabClick: (Int) -> Unit
@@ -154,40 +146,4 @@ fun KurlyProductsDetailTabRow(
             )
         }
     }
-}
-
-fun Modifier.customTabIndicatorOffset(
-    currentTabPosition: TabPosition,
-    tabWidth: Dp
-): Modifier = composed(
-    inspectorInfo = debugInspectorInfo {
-        name = "customTabIndicatorOffset"
-        value = currentTabPosition
-    }
-) {
-    val currentTabWidth by animateDpAsState(
-        targetValue = tabWidth,
-        animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing)
-    )
-    val indicatorOffset by animateDpAsState(
-        targetValue = ((currentTabPosition.left + currentTabPosition.right - tabWidth) / 2),
-        animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing)
-    )
-    fillMaxWidth()
-        .wrapContentSize(Alignment.BottomStart)
-        .offset(x = indicatorOffset)
-        .width(currentTabWidth)
-}
-@Preview(showBackground = true)
-@Composable
-fun PreviewTopBarWithIndicator() {
-    var selectedTabIndex by remember { mutableIntStateOf(0) }
-    KurlyProductsDetailTabRow(KeyStorage.ALL_TABS, selectedTabIndex) { tabIndex ->
-        selectedTabIndex = tabIndex
-    }
-}
-@Preview(showBackground = true)
-@Composable
-fun PreviewKurlyProductsDetailTopBar() {
-    KurlyProductsDetailTopBar("아삭하고 달콤한 황금사과1.3kg (5~7입)[품종:시나노골드]", KeyStorage.ALL_TABS.indexOf(KeyStorage.GOODS_DESCRIPTION), {}, {}, {})
 }

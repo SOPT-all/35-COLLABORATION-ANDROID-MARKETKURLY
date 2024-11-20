@@ -2,7 +2,7 @@ package com.example.market_kurly.core.dummymodel
 
 import kotlinx.serialization.SerialName
 
-data class GoodsDescriptionData(
+data class GoodsDetailData(
     val allergy: String,
     val brix: String,
     val category: String,
@@ -27,7 +27,7 @@ data class GoodsDescriptionData(
     val weight: String,
     val isFavorite: Boolean
 )
-fun GoodsDescriptionData.asGoodsDescriptionUiData() = GoodsDescriptionUiData(
+fun GoodsDetailData.asGoodsUiData() = GoodsUiData(
     deliverType = this.deliverType,
     discount = this.discount,
     image = this.image,
@@ -37,7 +37,7 @@ fun GoodsDescriptionData.asGoodsDescriptionUiData() = GoodsDescriptionUiData(
     seller = this.seller,
     origin = this.origin,
     isFavorite = this.isFavorite,
-    infoData = GoodsDescriptionInfoData(
+    infoData = GoodsInfoData(
         allergy = this.allergy,
         brix = this.brix,
         expiration = this.expiration,

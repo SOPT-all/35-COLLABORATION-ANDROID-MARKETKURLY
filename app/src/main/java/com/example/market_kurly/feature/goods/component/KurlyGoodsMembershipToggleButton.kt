@@ -19,14 +19,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
 import com.example.market_kurly.core.util.modifier.noRippleClickable
@@ -41,8 +41,9 @@ import com.example.market_kurly.ui.theme.MarketKurlyTheme.typography
 fun KurlyGoodsMembershipToggleButton(
     discount : Int,
     price : Int,
+    itemId : String
 ) {
-    var expanded by remember { mutableStateOf(false) }
+    var expanded by rememberSaveable(itemId) { mutableStateOf(false) } //리컴포지션 방지
 
     Column(
         modifier = Modifier
@@ -81,14 +82,14 @@ fun MembershipItemButton(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         Text(
-            text = "멤버스 최대혜택가",
+            text = stringResource(R.string.goods_text_membership),
             style = typography.bodyM16,
             color = Mint3
         )
         Icon(
             imageVector = if (expanded) ImageVector.vectorResource(R.drawable.icn_goods_arrow_down)
             else ImageVector.vectorResource(R.drawable.icn_goods_arrow_up),
-            contentDescription = "",
+            contentDescription = stringResource(R.string.goods_icon_expand_membership_price_description),
             tint = Mint3
         )
     }
@@ -109,12 +110,18 @@ fun MembershipPriceAndSubscribe(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "${discount}%",
+                text = stringResource(
+                    R.string.goods_text_percent,
+                    discount.toString()
+                ),
                 style = typography.titleEmoji22,
                 color = Mint3
             )
             Text(
-                text = "${disCountPrice.toDecimalFormat()}원",
+                text = stringResource(
+                    R.string.goods_text_price,
+                    disCountPrice.toDecimalFormat()
+                ),
                 style = typography.titleEmoji22,
                 color = Mint3
             )
@@ -134,45 +141,42 @@ fun MembershipPriceAndSubscribe(
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(space = 2.dp, alignment = Alignment.CenterHorizontally),
+                horizontalArrangement = Arrangement.spacedBy(
+                    space = 2.dp,
+                    alignment = Alignment.CenterHorizontally
+                ),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.icn_goods_members),
-                    contentDescription = "",
+                    contentDescription = stringResource(R.string.goods_icon_membership_ticket_descrpition),
                     tint = Color.Unspecified,
                     modifier = Modifier.size(18.dp)
                 )
                 Text(
-                    text = "멤버스 가입하고",
+                    text = stringResource(R.string.goods_text_membership_sub_string_1),
                     style = typography.captionM12,
                     color = Gray7
                 )
                 Text(
-                    text = "${disCountPrice.toDecimalFormat()}원",
+                    text = stringResource(
+                        R.string.goods_text_price,
+                        disCountPrice.toDecimalFormat()
+                    ),
                     style = typography.bodyB14,
                     color = Mint3
                 )
                 Text(
-                    text = "에 구매하기",
+                    text = stringResource(R.string.goods_text_membership_sub_string_2),
                     style = typography.captionM12,
                     color = Gray7
                 )
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.icn_goods_arrow_right),
-                    contentDescription = "",
+                    contentDescription = stringResource(R.string.goods_icon_right_arrow_description),
                     modifier = Modifier.size(18.dp)
                 )
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewToggleButton(){
-    KurlyGoodsMembershipToggleButton(
-        discount = 26,
-        price = 14900
-    )
 }

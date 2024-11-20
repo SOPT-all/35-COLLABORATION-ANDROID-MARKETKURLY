@@ -1,8 +1,10 @@
 package com.example.market_kurly.feature.goods.viewmodel
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.market_kurly.core.dummymodel.GoodsDescriptionInfoData
+import com.example.market_kurly.R
+import com.example.market_kurly.core.dummymodel.GoodsInfoData
 import com.example.market_kurly.core.util.KeyStorage.ALLERGY
 import com.example.market_kurly.core.util.KeyStorage.BRIX
 import com.example.market_kurly.core.util.KeyStorage.EXPIRATION
@@ -24,8 +26,8 @@ class GoodsViewModel(
     private val goodsRepository: GoodsRepository
 ) : ViewModel() {
 
-    private val _snackbarMessage = MutableSharedFlow<String>()
-    val snackbarMessage: SharedFlow<String> = _snackbarMessage
+    @StringRes private val _snackbarMessage = MutableSharedFlow<Int>()
+    @StringRes val snackbarMessage: SharedFlow<Int> = _snackbarMessage
 
     private val _navigateToWishlist = MutableSharedFlow<Unit>()
     val navigateToWishlist: SharedFlow<Unit> = _navigateToWishlist
@@ -39,16 +41,16 @@ class GoodsViewModel(
 
     private fun initializeGoodsState() {
         _uiState.update { currentState ->
-            val goodsDescriptionData = goodsRepository.getDummyGoodsDescription()
+            val goodsDetailData = goodsRepository.getDummyGoodsDetail()
             currentState.copy(
                 alsoViewedList = goodsRepository.getDummyAlsoViewedList(),
-                goodsDescriptions = goodsDescriptionData,
-                goodsInfoList = createDescriptionPairs(goodsDescriptionData.infoData),
-                isFavorite = goodsDescriptionData.isFavorite
+                goodsDetails = goodsDetailData,
+                goodsInfoList = createInfoPairs(goodsDetailData.infoData),
+                isFavorite = goodsDetailData.isFavorite
             )
         }
     }
-    private fun createDescriptionPairs(info: GoodsDescriptionInfoData): List<Pair<String, String>> {
+    private fun createInfoPairs(info: GoodsInfoData): List<Pair<String, String>> {
         return listOf(
             PACKAGING_TYPE to info.packagingType,
             SELLING_UNIT to info.sellingUnit,
@@ -67,7 +69,7 @@ class GoodsViewModel(
         }
         viewModelScope.launch {
             if (_uiState.value.isFavorite) {
-                _snackbarMessage.emit("찜한 상품에 추가되었습니다.")
+                _snackbarMessage.emit(R.string.goods_snackbar_message_favorite)
             }
         }
         // TODO: API 연동 추가

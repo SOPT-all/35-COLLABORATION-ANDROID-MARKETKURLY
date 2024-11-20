@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -46,7 +47,10 @@ fun KurlyAlsoViewedColumnItem(
 
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(space = 10.dp, alignment = Alignment.CenterHorizontally),
+        horizontalArrangement = Arrangement.spacedBy(
+            space = 10.dp,
+            alignment = Alignment.CenterHorizontally
+        ),
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
@@ -55,7 +59,8 @@ fun KurlyAlsoViewedColumnItem(
                 .build(),
             contentDescription = goodsName,
             contentScale = ContentScale.Crop,
-            modifier = Modifier.clip(shape = RoundedCornerShape(3.dp))
+            modifier = Modifier
+                .clip(shape = RoundedCornerShape(3.dp))
                 .size(48.dp)
         )
         Column(
@@ -76,12 +81,19 @@ fun KurlyAlsoViewedColumnItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "${discount}%",
+                    text = stringResource(
+                        R.string.goods_text_percent,
+                        discount.toString()
+                    ),
                     style = typography.bodyM16,
                     color = Red
                 )
                 Text(
-                    text = "${price.calculateDiscountWithFloor(discount).toDecimalFormat()}원",
+                    text = stringResource(
+                        R.string.goods_text_price,
+                        price.calculateDiscountWithFloor(discount)
+                            .toDecimalFormat()
+                    ),
                     style = typography.bodyM16,
                     color = Gray7
                 )
@@ -100,17 +112,20 @@ fun KurlyAlsoViewedColumnItem(
             onClick = onCartButtonClick
         ) {
             Row(
-                horizontalArrangement = Arrangement.spacedBy(space = 4.dp, alignment = Alignment.CenterHorizontally),
+                horizontalArrangement = Arrangement.spacedBy(
+                    space = 4.dp,
+                    alignment = Alignment.CenterHorizontally
+                ),
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.icon_cart_small),
-                    contentDescription = "",
+                    contentDescription = stringResource(R.string.goods_btn_cart),
                     tint = Gray7,
                     modifier = Modifier.size(18.dp)
                 )
                 Text(
-                    text = "담기",
+                    text = stringResource(R.string.goods_btn_cart),
                     style = typography.bodyR14,
                     color = Gray7
                 )

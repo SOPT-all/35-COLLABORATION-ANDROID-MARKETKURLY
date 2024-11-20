@@ -1,9 +1,9 @@
 package com.example.market_kurly.domain.repositoryimpl
 
 import com.example.market_kurly.core.dummymodel.AlsoViewedData
-import com.example.market_kurly.core.dummymodel.GoodsDescriptionData
-import com.example.market_kurly.core.dummymodel.GoodsDescriptionUiData
-import com.example.market_kurly.core.dummymodel.asGoodsDescriptionUiData
+import com.example.market_kurly.core.dummymodel.GoodsDetailData
+import com.example.market_kurly.core.dummymodel.GoodsUiData
+import com.example.market_kurly.core.dummymodel.asGoodsUiData
 import com.example.market_kurly.domain.repository.GoodsRepository
 
 class GoodsRepositoryImpl(
@@ -17,8 +17,8 @@ class GoodsRepositoryImpl(
             AlsoViewedData("https://product-image.kurly.com/hdims/resize/%5E%3E720x%3E936/cropcenter/720x936/quality/85/src/product/image/30b30de4-14f7-438a-844d-604b5a2acde9.jpg","세척 사과 1.4kg (7입)", 16, 14900)
         )
 
-    override fun getDummyGoodsDescription(): GoodsDescriptionUiData =
-        GoodsDescriptionData(
+    override fun getDummyGoodsDetail(): GoodsUiData =
+        GoodsDetailData(
             allergy = "0",
             brix = "13.5 Brix 이상",
             category = "과일, 견과, 쌀",
@@ -38,5 +38,5 @@ class GoodsRepositoryImpl(
             view = 156327,
             weight = "1.3kg 내외",
             isFavorite = true
-        ).asGoodsDescriptionUiData()
+        ).asGoodsUiData()
 }

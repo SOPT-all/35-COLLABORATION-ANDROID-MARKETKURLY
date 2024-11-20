@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
@@ -29,7 +30,7 @@ import com.example.market_kurly.ui.theme.PrimaryColor600
 import com.example.market_kurly.ui.theme.White
 
 @Composable
-fun KurlyProductsDetailBottomBar(
+fun KurlyGoodsDetailBottomBar(
     isFavorite: Boolean,
     onFavoriteClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -66,7 +67,7 @@ fun KurlyProductsDetailBottomBar(
         ) {
             Icon(
                 imageVector = ImageVector.vectorResource(favoriteResource),
-                contentDescription = "",
+                contentDescription = stringResource(R.string.kurly_icon_favorite_description),
                 tint = Color.Unspecified,
                 modifier = Modifier.size(27.dp)
             )
@@ -86,7 +87,7 @@ fun KurlyProductsDetailBottomBar(
                 .height(IntrinsicSize.Max)
         ) {
             Text(
-                text = "구매하기",
+                text = stringResource(R.string.kurly_btn_buying),
                 style = typography.titleM18,
                 color = White
             )
