@@ -19,10 +19,11 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -31,6 +32,7 @@ import com.example.market_kurly.R
 import com.example.market_kurly.core.util.KeyStorage
 import com.example.market_kurly.core.util.modifier.customTabIndicatorOffset
 import com.example.market_kurly.ui.theme.Gray6
+import com.example.market_kurly.ui.theme.Gray7
 import com.example.market_kurly.ui.theme.Gray8
 import com.example.market_kurly.ui.theme.MarketKurlyTheme.typography
 import com.example.market_kurly.ui.theme.PrimaryColor600
@@ -39,49 +41,51 @@ import com.example.market_kurly.ui.theme.PrimaryColor600
 @Composable
 fun KurlyGoodsDetailTopBar(
     goodsName: String,
-    selectedIndex : Int,
+    selectedIndex: Int,
     navigateUp: () -> Unit,
     navigateToGoodsDetail: () -> Unit,
     navigateGoodsReview: () -> Unit,
-    navigateToCart: () -> Unit = {}
+    navigateToCart: () -> Unit = {},
 ) {
     var selectedTabIndex by remember { mutableIntStateOf(selectedIndex) }
     Column {
         CenterAlignedTopAppBar(
             modifier = Modifier.fillMaxWidth(),
             title = {
-                    Text(
-                        text = goodsName,
-                        style = typography.titleM18,
-                        textAlign = TextAlign.Center,
-                        overflow = TextOverflow.Ellipsis,
-                        maxLines = 1,
-                        color = Gray8,
-                        modifier = Modifier.weight(1f)
-                    )
+                Text(
+                    text = goodsName,
+                    style = typography.titleM18,
+                    textAlign = TextAlign.Center,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1,
+                    color = Gray8,
+                    modifier = Modifier.weight(1f),
+                )
             },
             navigationIcon = {
                 IconButton(onClick = navigateUp) {
                     Icon(
-                        painter = painterResource(id = R.drawable.icn_arrow_left),
+                        imageVector = ImageVector.vectorResource(id = R.drawable.icn_arrow_left),
                         contentDescription = stringResource(R.string.kurly_icon_navigate_up_description),
-                        modifier = Modifier.size(48.dp)
+                        tint = Gray7,
+                        modifier = Modifier.size(48.dp),
                     )
                 }
             },
             actions = {
                 IconButton(onClick = navigateToCart) {
                     Icon(
-                        painter = painterResource(id = R.drawable.icn_cart_large),
+                        imageVector = ImageVector.vectorResource(id = R.drawable.icn_cart_large),
                         contentDescription = stringResource(R.string.kurly_icon_navigate_cart_description),
-                        modifier = Modifier.size(48.dp)
+                        tint = Gray8,
+                        modifier = Modifier.size(48.dp),
                     )
                 }
-            }
+            },
         )
         KurlyGoodsDetailTabRow(
             tabs = KeyStorage.ALL_TABS,
-            selectedTabIndex = selectedTabIndex
+            selectedTabIndex = selectedTabIndex,
         ) { index ->
             selectedTabIndex = index
             when (KeyStorage.ALL_TABS[index]) {
@@ -92,11 +96,12 @@ fun KurlyGoodsDetailTopBar(
         }
     }
 }
+
 @Composable
 fun KurlyGoodsDetailTabRow(
     tabs: List<String>,
     selectedTabIndex: Int,
-    onTabClick: (Int) -> Unit
+    onTabClick: (Int) -> Unit,
 ) {
     val density = LocalDensity.current
     val tabWidths = remember {
@@ -119,11 +124,11 @@ fun KurlyGoodsDetailTabRow(
             SecondaryIndicator(
                 modifier = Modifier.customTabIndicatorOffset(
                     currentTabPosition = tabPositions[selectedTabIndex],
-                    tabWidth = tabWidths[selectedTabIndex]
+                    tabWidth = tabWidths[selectedTabIndex],
                 ),
-                color = PrimaryColor600
+                color = PrimaryColor600,
             )
-        }
+        },
     ) {
         tabs.forEachIndexed { tabIndex, tab ->
             val selectedColor = if (selectedTabIndex == tabIndex) PrimaryColor600 else Gray6
@@ -142,7 +147,7 @@ fun KurlyGoodsDetailTabRow(
                         },
                         color = selectedColor,
                     )
-                }
+                },
             )
         }
     }

@@ -39,8 +39,6 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.market_kurly.R
-import com.example.market_kurly.feature.goods.component.KurlyGoodsInfoText
-import com.example.market_kurly.feature.goods.component.KurlyGoodsMembershipToggleButton
 import com.example.market_kurly.core.designsystem.component.KurlyGoodsDetailBottomBar
 import com.example.market_kurly.core.designsystem.component.KurlyGoodsDetailTopBar
 import com.example.market_kurly.core.util.KeyStorage.EMPTY_RESPONSE
@@ -52,6 +50,8 @@ import com.example.market_kurly.core.util.price.calculateDiscountWithFloor
 import com.example.market_kurly.core.util.price.toDecimalFormat
 import com.example.market_kurly.domain.repositoryimpl.GoodsRepositoryImpl
 import com.example.market_kurly.feature.goods.component.KurlyAlsoViewedColumnItem
+import com.example.market_kurly.feature.goods.component.KurlyGoodsInfoText
+import com.example.market_kurly.feature.goods.component.KurlyGoodsMembershipToggleButton
 import com.example.market_kurly.feature.goods.state.GoodsState
 import com.example.market_kurly.feature.goods.viewmodel.GoodsViewModel
 import com.example.market_kurly.feature.goods.viewmodel.GoodsViewModelFactory
@@ -66,12 +66,12 @@ import com.example.market_kurly.ui.theme.White
 
 @Composable
 fun GoodsScreen(
-    navController: NavHostController
+    navController: NavHostController,
 ) {
     val context = LocalContext.current
     val goodsRepository by lazy { GoodsRepositoryImpl() }
     val viewModelFactory by lazy { GoodsViewModelFactory(goodsRepository) }
-    val viewModel : GoodsViewModel = viewModel(factory = viewModelFactory)
+    val viewModel: GoodsViewModel = viewModel(factory = viewModelFactory)
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -82,7 +82,7 @@ fun GoodsScreen(
             val result = snackbarHostState.showSnackbar(
                 message = context.getString(message),
                 actionLabel = context.getString(R.string.goods_snackbar_action_go_to_wishlist),
-                duration = SnackbarDuration.Short
+                duration = SnackbarDuration.Short,
             )
             if (result == SnackbarResult.ActionPerformed) {
                 viewModel.navigateToWishlist()
@@ -116,16 +116,16 @@ fun GoodsScreen(
                         popUpTo(REVIEW) { inclusive = true }
                         launchSingleTop = true
                     }
-                }
+                },
             )
         },
         bottomBar = {
             KurlyGoodsDetailBottomBar(
                 modifier = Modifier.background(White),
                 isFavorite = uiState.isFavorite,
-                onFavoriteClick = { viewModel.toggleFavorite() }
+                onFavoriteClick = { viewModel.toggleFavorite() },
             )
-        }
+        },
     ) { innerPadding ->
         LazyColumn(
             modifier = Modifier
@@ -133,7 +133,6 @@ fun GoodsScreen(
                 .padding(innerPadding)
                 .background(Gray2),
         ) {
-
             item {
                 GoodsOverViewSection(uiState)
                 Spacer(Modifier.height(8.dp))
@@ -152,19 +151,19 @@ fun GoodsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(White)
-                        .padding(15.dp, 14.dp)
+                        .padding(15.dp, 14.dp),
                 )
             }
 
             items(uiState.goodsInfoList) { info ->
-                if(info.second != EMPTY_RESPONSE) {
+                if (info.second != EMPTY_RESPONSE) {
                     KurlyGoodsInfoText(
                         modifier = Modifier
                             .fillMaxWidth()
                             .background(White)
                             .padding(15.dp, 5.dp),
                         infoTitle = info.first,
-                        infoContent = info.second
+                        infoContent = info.second,
                     )
                 }
             }
@@ -183,17 +182,17 @@ fun GoodsOverViewSection(uiState: GoodsState) {
         contentDescription = uiState.goodsDetails?.name.orEmpty(),
         modifier = Modifier
             .fillMaxWidth()
-            .aspectRatio(0.777f)
+            .aspectRatio(0.777f),
     )
     Column(
         modifier = Modifier
             .background(White)
-            .padding(15.dp, 25.dp)
+            .padding(start = 15.dp, top = 25.dp, end = 15.dp, bottom = 7.dp),
     ) {
         Text(
             text = uiState.goodsDetails?.deliverType.orEmpty(),
             style = typography.bodyB14,
-            color = Gray5
+            color = Gray5,
         )
 
         Spacer(Modifier.height(8.dp))
@@ -201,26 +200,27 @@ fun GoodsOverViewSection(uiState: GoodsState) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(60.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 text = uiState.goodsDetails?.name.orEmpty(),
                 style = typography.titleM18,
                 color = Gray7,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
             )
             Icon(
                 imageVector = ImageVector.vectorResource(R.drawable.icn_goods_share),
                 contentDescription = stringResource(R.string.goods_icon_share_description),
-                modifier = Modifier.size(40.dp)
+                modifier = Modifier.size(40.dp),
             )
         }
+
         Spacer(Modifier.height(8.dp))
 
         Text(
             text = stringResource(
                 R.string.goods_text_origin,
-                uiState.goodsDetails?.origin.orEmpty()
+                uiState.goodsDetails?.origin.orEmpty(),
             ),
             style = typography.titleM18,
             color = Gray7,
@@ -232,35 +232,34 @@ fun GoodsOverViewSection(uiState: GoodsState) {
             Text(
                 text = stringResource(
                     R.string.goods_text_price,
-                    uiState.goodsDetails?.price?.toDecimalFormat().toString()
+                    uiState.goodsDetails?.price?.toDecimalFormat().toString(),
                 ),
                 textDecoration = TextDecoration.LineThrough,
                 style = typography.bodyR16,
-                color = Gray4
+                color = Gray4,
             )
             Icon(
                 imageVector = ImageVector.vectorResource(R.drawable.icn_goods_info),
                 contentDescription = stringResource(R.string.goods_icon_more_information_description),
                 tint = Gray4,
-                modifier = Modifier.size(18.dp)
+                modifier = Modifier.size(18.dp),
             )
         }
-        Spacer(Modifier.height(8.dp))
 
         Spacer(Modifier.height(6.dp))
 
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(7.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 text = stringResource(
                     R.string.goods_text_percent,
-                    uiState.goodsDetails?.discount.toString()
+                    uiState.goodsDetails?.discount.toString(),
                 ),
                 style = typography.titleB22,
-                color = Red
+                color = Red,
             )
             Text(
                 text = stringResource(
@@ -268,10 +267,10 @@ fun GoodsOverViewSection(uiState: GoodsState) {
                     uiState.goodsDetails
                         ?.price
                         ?.calculateDiscountWithFloor(uiState.goodsDetails.discount)
-                        ?.toDecimalFormat().orEmpty()
+                        ?.toDecimalFormat().orEmpty(),
                 ),
                 style = typography.titleB22,
-                color = Gray7
+                color = Gray7,
             )
         }
 
@@ -280,7 +279,7 @@ fun GoodsOverViewSection(uiState: GoodsState) {
         KurlyGoodsMembershipToggleButton(
             discount = uiState.goodsDetails?.membersDiscount ?: 0,
             price = uiState.goodsDetails?.price ?: 0,
-            itemId = MEMBERSHIP_EXPAND
+            itemId = MEMBERSHIP_EXPAND,
         )
     }
 
@@ -290,13 +289,13 @@ fun GoodsOverViewSection(uiState: GoodsState) {
         modifier = Modifier
             .background(White)
             .padding(15.dp, 17.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         KurlyGoodsInfoText(
             modifier = Modifier.fillMaxWidth(),
             infoTitle = stringResource(R.string.goods_text_delivery),
             infoContent = uiState.goodsDetails?.deliverType.orEmpty(),
-            infoSubContent = stringResource(R.string.goods_text_delivery_sub_description)
+            infoSubContent = stringResource(R.string.goods_text_delivery_sub_description),
         )
         KurlyGoodsInfoText(
             modifier = Modifier.fillMaxWidth(),
@@ -312,29 +311,29 @@ fun AlsoViewedGoodsSection(uiState: GoodsState) {
         modifier = Modifier
             .background(White)
             .padding(15.dp, 21.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 text = stringResource(R.string.goods_text_also_viewed),
                 style = typography.bodyB16,
-                color = Gray7
+                color = Gray7,
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = stringResource(R.string.goods_text_next_goods),
                     style = typography.bodyM16,
-                    color = PrimaryColor400
+                    color = PrimaryColor400,
                 )
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.icn_goods_nextgoods),
                     contentDescription = stringResource(R.string.goods_icon_next_goods_description),
                     tint = PrimaryColor400,
-                    modifier = Modifier.size(18.dp)
+                    modifier = Modifier.size(18.dp),
                 )
             }
         }
@@ -346,7 +345,7 @@ fun AlsoViewedGoodsSection(uiState: GoodsState) {
                 image = item.image,
                 goodsName = item.goodsName,
                 discount = item.discount,
-                price = item.price
+                price = item.price,
             )
         }
     }

@@ -23,10 +23,11 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class GoodsViewModel(
-    private val goodsRepository: GoodsRepository
+    private val goodsRepository: GoodsRepository,
 ) : ViewModel() {
 
     @StringRes private val _snackbarMessage = MutableSharedFlow<Int>()
+
     @StringRes val snackbarMessage: SharedFlow<Int> = _snackbarMessage
 
     private val _navigateToWishlist = MutableSharedFlow<Unit>()
@@ -46,7 +47,7 @@ class GoodsViewModel(
                 alsoViewedList = goodsRepository.getDummyAlsoViewedList(),
                 goodsDetails = goodsDetailData,
                 goodsInfoList = createInfoPairs(goodsDetailData.infoData),
-                isFavorite = goodsDetailData.isFavorite
+                isFavorite = goodsDetailData.isFavorite,
             )
         }
     }

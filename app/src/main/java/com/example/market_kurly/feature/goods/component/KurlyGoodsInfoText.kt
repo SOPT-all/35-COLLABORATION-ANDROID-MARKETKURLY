@@ -16,8 +16,8 @@ import com.example.market_kurly.ui.theme.MarketKurlyTheme.typography
 fun KurlyGoodsInfoText(
     modifier: Modifier,
     infoTitle: String,
-    infoContent : String,
-    infoSubContent : String? = null
+    infoContent: String,
+    infoSubContent: String? = null,
 
 ) {
     Row(
@@ -28,21 +28,21 @@ fun KurlyGoodsInfoText(
             style = typography.bodyM14,
             color = Gray6,
             modifier = Modifier.weight(0.25f)
-                .padding(end = 20.dp)
+                .padding(end = 20.dp),
         )
         Column(
-            modifier = Modifier.weight(0.75f)
+            modifier = Modifier.weight(0.75f),
         ) {
             Text(
                 text = infoContent,
                 style = typography.bodyR14,
-                color = Gray8
+                color = Gray8,
             )
             infoSubContent?.let {
                 Text(
                     text = infoSubContent,
                     style = typography.bodyR14,
-                    color = Gray6
+                    color = Gray6,
                 )
             }
         }

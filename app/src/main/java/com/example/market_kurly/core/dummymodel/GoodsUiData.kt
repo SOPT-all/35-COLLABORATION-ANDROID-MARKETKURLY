@@ -1,7 +1,5 @@
 package com.example.market_kurly.core.dummymodel
 
-
-
 data class GoodsUiData(
     val deliverType: String,
     val discount: Int,
@@ -12,7 +10,7 @@ data class GoodsUiData(
     val seller: String,
     val origin: String,
     val isFavorite: Boolean,
-    val infoData: GoodsInfoData
+    val infoData: GoodsInfoData,
 )
 data class GoodsInfoData(
     val allergy: String,
@@ -22,5 +20,5 @@ data class GoodsInfoData(
     val notification: String,
     val packagingType: String,
     val sellingUnit: String,
-    val weight: String
+    val weight: String,
 )

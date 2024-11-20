@@ -37,11 +37,11 @@ import com.example.market_kurly.ui.theme.White
 
 @Composable
 fun KurlyAlsoViewedColumnItem(
-    image : String,
-    goodsName : String,
-    discount : Int,
-    price : Int,
-    onCartButtonClick : () -> Unit = {}
+    image: String,
+    goodsName: String,
+    discount: Int,
+    price: Int,
+    onCartButtonClick: () -> Unit = {},
 ) {
     val context = LocalContext.current
 
@@ -49,9 +49,9 @@ fun KurlyAlsoViewedColumnItem(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(
             space = 10.dp,
-            alignment = Alignment.CenterHorizontally
+            alignment = Alignment.CenterHorizontally,
         ),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         AsyncImage(
             model = ImageRequest.Builder(context)
@@ -61,7 +61,7 @@ fun KurlyAlsoViewedColumnItem(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .clip(shape = RoundedCornerShape(3.dp))
-                .size(48.dp)
+                .size(48.dp),
         )
         Column(
             modifier = Modifier.weight(1f),
@@ -78,24 +78,24 @@ fun KurlyAlsoViewedColumnItem(
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
                     text = stringResource(
                         R.string.goods_text_percent,
-                        discount.toString()
+                        discount.toString(),
                     ),
                     style = typography.bodyM16,
-                    color = Red
+                    color = Red,
                 )
                 Text(
                     text = stringResource(
                         R.string.goods_text_price,
                         price.calculateDiscountWithFloor(discount)
-                            .toDecimalFormat()
+                            .toDecimalFormat(),
                     ),
                     style = typography.bodyM16,
-                    color = Gray7
+                    color = Gray7,
                 )
             }
         }
@@ -106,28 +106,28 @@ fun KurlyAlsoViewedColumnItem(
                 containerColor = White,
                 contentColor = Gray7,
                 disabledContainerColor = White,
-                disabledContentColor = Gray7
+                disabledContentColor = Gray7,
             ),
             border = BorderStroke(1.dp, CoolGray2),
-            onClick = onCartButtonClick
+            onClick = onCartButtonClick,
         ) {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(
                     space = 4.dp,
-                    alignment = Alignment.CenterHorizontally
+                    alignment = Alignment.CenterHorizontally,
                 ),
-                verticalAlignment = Alignment.CenterVertically
-            ){
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.icon_cart_small),
                     contentDescription = stringResource(R.string.goods_btn_cart),
                     tint = Gray7,
-                    modifier = Modifier.size(18.dp)
+                    modifier = Modifier.size(18.dp),
                 )
                 Text(
                     text = stringResource(R.string.goods_btn_cart),
                     style = typography.bodyR14,
-                    color = Gray7
+                    color = Gray7,
                 )
             }
         }

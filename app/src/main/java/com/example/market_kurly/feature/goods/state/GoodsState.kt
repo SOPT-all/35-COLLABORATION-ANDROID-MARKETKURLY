@@ -7,8 +7,8 @@ import com.example.market_kurly.core.util.KeyStorage.GOODS_DETAIL
 
 data class GoodsState(
     val selectedTabIndex: Int = ALL_TABS.indexOf(GOODS_DETAIL),
-    val isFavorite : Boolean = false,
+    val isFavorite: Boolean = false,
     val alsoViewedList: List<AlsoViewedData> = emptyList(),
     val goodsDetails: GoodsUiData? = null,
-    val goodsInfoList: List<Pair<String, String>> = emptyList()
+    val goodsInfoList: List<Pair<String, String>> = emptyList(),
 )

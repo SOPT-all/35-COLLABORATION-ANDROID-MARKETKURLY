@@ -79,6 +79,6 @@ dependencies {
     // Timber
     implementation(libs.timber)
 
-    //Coil
+    // Coil
     implementation(libs.coil)
 }

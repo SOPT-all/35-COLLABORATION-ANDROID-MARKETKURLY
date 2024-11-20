@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.market_kurly.domain.repository.GoodsRepository
 
 class GoodsViewModelFactory(
-    private val goodsRepository: GoodsRepository
+    private val goodsRepository: GoodsRepository,
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(GoodsViewModel::class.java)) {

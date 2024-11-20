@@ -34,7 +34,7 @@ fun KurlyGoodsDetailBottomBar(
     isFavorite: Boolean,
     onFavoriteClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onBuyingButtonClick: () -> Unit = {}
+    onBuyingButtonClick: () -> Unit = {},
 ) {
     val favoriteResource = if (isFavorite) {
         R.drawable.icn_favorite_activate
@@ -49,9 +49,9 @@ fun KurlyGoodsDetailBottomBar(
             .navigationBarsPadding(),
         horizontalArrangement = Arrangement.spacedBy(
             space = 7.dp,
-            alignment = Alignment.CenterHorizontally
+            alignment = Alignment.CenterHorizontally,
         ),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Button(
             contentPadding = PaddingValues(horizontal = 11.dp, vertical = 11.dp),
@@ -61,15 +61,15 @@ fun KurlyGoodsDetailBottomBar(
                 containerColor = White,
                 contentColor = Color.Unspecified,
                 disabledContainerColor = White,
-                disabledContentColor = Color.Unspecified
+                disabledContentColor = Color.Unspecified,
             ),
-            border = BorderStroke(1.dp, Gray3)
+            border = BorderStroke(1.dp, Gray3),
         ) {
             Icon(
                 imageVector = ImageVector.vectorResource(favoriteResource),
                 contentDescription = stringResource(R.string.kurly_icon_favorite_description),
                 tint = Color.Unspecified,
-                modifier = Modifier.size(27.dp)
+                modifier = Modifier.size(27.dp),
             )
         }
         Button(
@@ -80,16 +80,16 @@ fun KurlyGoodsDetailBottomBar(
                 containerColor = PrimaryColor600,
                 contentColor = White,
                 disabledContainerColor = PrimaryColor600,
-                disabledContentColor = White
+                disabledContentColor = White,
             ),
             modifier = Modifier
                 .weight(1f)
-                .height(IntrinsicSize.Max)
+                .height(IntrinsicSize.Max),
         ) {
             Text(
                 text = stringResource(R.string.kurly_btn_buying),
                 style = typography.titleM18,
-                color = White
+                color = White,
             )
         }
     }

@@ -33,26 +33,26 @@ import com.example.market_kurly.core.util.modifier.noRippleClickable
 import com.example.market_kurly.core.util.price.calculateDiscountWithFloor
 import com.example.market_kurly.core.util.price.toDecimalFormat
 import com.example.market_kurly.ui.theme.Gray7
+import com.example.market_kurly.ui.theme.MarketKurlyTheme.typography
 import com.example.market_kurly.ui.theme.Mint1
 import com.example.market_kurly.ui.theme.Mint3
-import com.example.market_kurly.ui.theme.MarketKurlyTheme.typography
 
 @Composable
 fun KurlyGoodsMembershipToggleButton(
-    discount : Int,
-    price : Int,
-    itemId : String
+    discount: Int,
+    price: Int,
+    itemId: String,
 ) {
-    var expanded by rememberSaveable(itemId) { mutableStateOf(false) } //리컴포지션 방지
+    var expanded by rememberSaveable(itemId) { mutableStateOf(false) } // 리컴포지션 방지
 
     Column(
         modifier = Modifier
             .animateContentSize(
                 animationSpec = spring(
                     dampingRatio = Spring.DampingRatioNoBouncy,
-                    stiffness = Spring.StiffnessMedium
-                )
-            )
+                    stiffness = Spring.StiffnessMedium,
+                ),
+            ),
     ) {
         MembershipItemButton(
             expanded = expanded,
@@ -62,7 +62,7 @@ fun KurlyGoodsMembershipToggleButton(
         if (expanded) {
             MembershipPriceAndSubscribe(
                 discount = discount,
-                disCountPrice = price.calculateDiscountWithFloor(discount)
+                disCountPrice = price.calculateDiscountWithFloor(discount),
             )
         }
     }
@@ -72,8 +72,8 @@ fun KurlyGoodsMembershipToggleButton(
 fun MembershipItemButton(
     expanded: Boolean,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
-){
+    modifier: Modifier = Modifier,
+) {
     Row(
         modifier = modifier
             .padding(vertical = 10.5.dp)
@@ -84,46 +84,49 @@ fun MembershipItemButton(
         Text(
             text = stringResource(R.string.goods_text_membership),
             style = typography.bodyM16,
-            color = Mint3
+            color = Mint3,
         )
         Icon(
-            imageVector = if (expanded) ImageVector.vectorResource(R.drawable.icn_goods_arrow_down)
-            else ImageVector.vectorResource(R.drawable.icn_goods_arrow_up),
+            imageVector = if (expanded) {
+                ImageVector.vectorResource(R.drawable.icn_goods_arrow_down)
+            } else ImageVector.vectorResource(R.drawable.icn_goods_arrow_up),
             contentDescription = stringResource(R.string.goods_icon_expand_membership_price_description),
-            tint = Mint3
+            tint = Mint3,
         )
     }
 }
+
 @Composable
 fun MembershipPriceAndSubscribe(
-    discount : Int,
-    disCountPrice : Int,
-    modifier: Modifier = Modifier
+    discount: Int,
+    disCountPrice: Int,
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(11.dp)
+        modifier = modifier.fillMaxWidth()
+            .padding(bottom = 17.dp),
+        verticalArrangement = Arrangement.spacedBy(11.dp),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(7.dp) ,
-            verticalAlignment = Alignment.CenterVertically
+            horizontalArrangement = Arrangement.spacedBy(7.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 text = stringResource(
                     R.string.goods_text_percent,
-                    discount.toString()
+                    discount.toString(),
                 ),
                 style = typography.titleEmoji22,
-                color = Mint3
+                color = Mint3,
             )
             Text(
                 text = stringResource(
                     R.string.goods_text_price,
-                    disCountPrice.toDecimalFormat()
+                    disCountPrice.toDecimalFormat(),
                 ),
                 style = typography.titleEmoji22,
-                color = Mint3
+                color = Mint3,
             )
         }
         Button(
@@ -135,46 +138,46 @@ fun MembershipPriceAndSubscribe(
                 containerColor = Mint1,
                 contentColor = Gray7,
                 disabledContainerColor = Mint1,
-                disabledContentColor = Gray7
+                disabledContentColor = Gray7,
             ),
-            onClick = {}
+            onClick = {},
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(
                     space = 2.dp,
-                    alignment = Alignment.CenterHorizontally
+                    alignment = Alignment.CenterHorizontally,
                 ),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.icn_goods_members),
                     contentDescription = stringResource(R.string.goods_icon_membership_ticket_descrpition),
                     tint = Color.Unspecified,
-                    modifier = Modifier.size(18.dp)
+                    modifier = Modifier.size(18.dp),
                 )
                 Text(
                     text = stringResource(R.string.goods_text_membership_sub_string_1),
                     style = typography.captionM12,
-                    color = Gray7
+                    color = Gray7,
                 )
                 Text(
                     text = stringResource(
                         R.string.goods_text_price,
-                        disCountPrice.toDecimalFormat()
+                        disCountPrice.toDecimalFormat(),
                     ),
                     style = typography.bodyB14,
-                    color = Mint3
+                    color = Mint3,
                 )
                 Text(
                     text = stringResource(R.string.goods_text_membership_sub_string_2),
                     style = typography.captionM12,
-                    color = Gray7
+                    color = Gray7,
                 )
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.icn_goods_arrow_right),
                     contentDescription = stringResource(R.string.goods_icon_right_arrow_description),
-                    modifier = Modifier.size(18.dp)
+                    modifier = Modifier.size(18.dp),
                 )
             }
         }

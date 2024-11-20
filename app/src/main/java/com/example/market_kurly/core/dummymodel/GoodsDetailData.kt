@@ -25,7 +25,7 @@ data class GoodsDetailData(
     val sellingUnit: String,
     val view: Int,
     val weight: String,
-    val isFavorite: Boolean
+    val isFavorite: Boolean,
 )
 fun GoodsDetailData.asGoodsUiData() = GoodsUiData(
     deliverType = this.deliverType,
@@ -45,6 +45,6 @@ fun GoodsDetailData.asGoodsUiData() = GoodsUiData(
         notification = this.notification,
         packagingType = this.packagingType,
         sellingUnit = this.sellingUnit,
-        weight = this.weight
-    )
+        weight = this.weight,
+    ),
 )
