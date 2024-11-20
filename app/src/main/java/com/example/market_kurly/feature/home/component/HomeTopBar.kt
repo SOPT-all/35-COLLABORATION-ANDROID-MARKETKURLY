@@ -3,12 +3,13 @@ package com.example.market_kurly.feature.home.component
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -34,6 +35,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
+import com.example.market_kurly.core.util.modifier.noRippleClickable
 import com.example.market_kurly.ui.theme.Gray6
 import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
@@ -148,12 +150,13 @@ private fun HomeTopTabBar() {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .padding(horizontal = 15.dp)
         ) {
             tabTitles.forEachIndexed { index, title ->
                 Box(
                     modifier = Modifier
+                        .fillMaxHeight()
                         .drawBehind {
                             val borderSize = 2.dp.toPx()
                             val borderColor = PrimaryColor700
@@ -163,15 +166,16 @@ private fun HomeTopTabBar() {
                                 end = Offset(size.width, size.height - borderSize / 2),
                                 strokeWidth = borderSize
                             )
-                        }
+                        },
+                    contentAlignment = Alignment.Center
                 ) {
                     Text(
                         text = title,
                         color = if (selectedTabIndex == index) PrimaryColor700 else Gray6,
                         style = MarketKurlyTheme.typography.bodyM14,
                         modifier = Modifier
-                            .clickable { selectedTabIndex = index }
-                            .padding(8.dp)
+                            .noRippleClickable { selectedTabIndex = index }
+                            .padding(horizontal = 2.dp)
                     )
                 }
             }
