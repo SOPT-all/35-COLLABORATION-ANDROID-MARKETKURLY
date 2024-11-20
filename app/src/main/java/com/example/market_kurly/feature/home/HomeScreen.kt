@@ -227,7 +227,16 @@ fun HomeScreen(
                 ) {}
                 Spacer(modifier = Modifier.height(20.dp))
             }
-
+            Spacer(modifier = Modifier.height(44.dp))
+            HomeProductTitle(
+                "\uD83C\uDF8A 이 상품은 어때요?",
+                "껄디님의 취향에 맞는 상품을 담아보세요",
+                modifier = Modifier
+                    .padding(start = 15.dp, end = 9.dp)
+            ) {}
+            Spacer(modifier = Modifier.height(17.dp))
+            HomeProductRow(products)
+            Spacer(modifier = Modifier.height(28.dp))
         }
         HomeBottomNav(
             modifier = Modifier
