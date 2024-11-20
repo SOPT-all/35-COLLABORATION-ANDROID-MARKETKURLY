@@ -3,7 +3,6 @@ package com.example.market_kurly.feature.home.component
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,17 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
-import coil3.request.ImageRequest
-import coil3.request.error
-import coil3.request.placeholder
 import com.example.market_kurly.R
 import com.example.market_kurly.ui.theme.CoolGray3
 import com.example.market_kurly.ui.theme.Gray8
@@ -46,7 +39,11 @@ fun HomeProduct (
     Column (
         modifier = modifier.width(140.dp)
     ) {
-        HomeProductImage(imageUrl)
+        AsyncImageFillWidth(
+            imageUrl = imageUrl,
+            modifier = Modifier.clip(RoundedCornerShape(4.dp)),
+            placeholder = R.mipmap.img_home_product_dummy
+        )
         Spacer(modifier = Modifier.height(6.dp))
         HomePutInButton { onPutInClick() }
         Spacer(modifier = Modifier.height(7.dp))
@@ -94,25 +91,6 @@ fun HomeProduct (
     }
 }
 
-@Composable
-private fun HomeProductImage (
-    imageUrl: String? = null
-) {
-    val context = LocalContext.current
-    AsyncImage(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(4.dp)),
-        model = ImageRequest.Builder(context).data(imageUrl)
-            .placeholder(R.mipmap.img_home_product_dummy)
-            .error(R.mipmap.img_home_product_dummy)
-            .build(),
-        contentDescription = "Home Banner",
-        placeholder = painterResource(id = R.mipmap.img_home_product_dummy),
-        onError = {},
-        contentScale = ContentScale.Fit
-    )
-}
 
 @Preview(showBackground = true)
 @Composable

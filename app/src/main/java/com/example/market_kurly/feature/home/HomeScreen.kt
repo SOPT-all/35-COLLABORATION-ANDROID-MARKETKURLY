@@ -3,25 +3,31 @@ package com.example.market_kurly.feature.home
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import com.example.market_kurly.R
-import com.example.market_kurly.feature.home.component.AsyncImageFit
+import com.example.market_kurly.feature.home.component.AsyncImageFillWidth
 import com.example.market_kurly.feature.home.component.HomeBannerRow
 import com.example.market_kurly.feature.home.component.HomeBottomNav
 import com.example.market_kurly.feature.home.component.HomeProductRow
 import com.example.market_kurly.feature.home.component.HomeProductTitle
 import com.example.market_kurly.feature.home.component.HomeTagItemRow
 import com.example.market_kurly.feature.home.component.HomeTopBar
+import com.example.market_kurly.ui.theme.CoolGray4
+import com.example.market_kurly.ui.theme.Gray8
+import com.example.market_kurly.ui.theme.MarketKurlyTheme
 
 private val bannerList = listOf(
     "https://velog.velcdn.com/images/roel_dev/post/c6270de0-ab33-4374-bacd-eaa541ecc521/image.png",
@@ -98,14 +104,12 @@ fun HomeScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         val (topBar, content, bottomNav) = createRefs()
-
         HomeTopBar(
             modifier = Modifier
                 .constrainAs(topBar) {
                     top.linkTo(parent.top)
                 }
         )
-
         Column(
             modifier = Modifier
                 .constrainAs(content) {
@@ -128,12 +132,27 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(17.dp))
             HomeProductRow(products)
             Spacer(modifier = Modifier.height(14.dp))
-            AsyncImageFit(
+            AsyncImageFillWidth(
                 imageUrl = "https://prod-files-secure.s3.us-west-2.amazonaws.com/01c30015-16dc-4e14-8e54-35fb1a5705fe/826939ec-c3d6-4b17-9258-c7170db2bf29/IMG_0136_1.png",
                 placeholder = R.mipmap.img_home_center_banner_dummy
             )
+            Spacer(modifier = Modifier.height(44.dp))
+            Text(
+                "\uD83C\uDFC6 실시간 인기 랭킹 \uD83C\uDFC6",
+                style = MarketKurlyTheme.typography.titleB18,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                color = Gray8
+            )
+            Spacer(modifier = Modifier.height(5.dp))
+            Text(
+                "가장 인기있는 상품만 모아보세요!",
+                style = MarketKurlyTheme.typography.bodyR15,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                color = CoolGray4
+            )
         }
-
         HomeBottomNav(
             modifier = Modifier
                 .constrainAs(bottomNav) {

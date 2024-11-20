@@ -16,13 +16,14 @@ import com.example.market_kurly.R
 import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 
 @Composable
-fun AsyncImageFit (
-    imageUrl: String,
+fun AsyncImageFillWidth (
+    imageUrl: String?,
+    modifier: Modifier = Modifier,
     @DrawableRes placeholder: Int,
 ) {
     val context = LocalContext.current
     AsyncImage(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
         model = ImageRequest.Builder(context).data(imageUrl)
             .placeholder(placeholder)
@@ -41,7 +42,7 @@ fun AsyncImageFit (
 @Composable
 private fun HomeBannerPreview() {
     MARKETKURLYTheme {
-        AsyncImageFit(
+        AsyncImageFillWidth(
             imageUrl = "https://velog.velcdn.com/images/roel_dev/post/7b723d45-14a7-45a9-b489-f6cbc9c2035e/image.png",
             placeholder = R.mipmap.img_home_banner_dummy
         )

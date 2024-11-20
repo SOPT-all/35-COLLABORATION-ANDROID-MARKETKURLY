@@ -28,7 +28,7 @@ fun HomeBannerRow (
             .fillMaxWidth(),
         contentPadding = PaddingValues(0.dp),
     ) { page ->
-        AsyncImageFit(
+        AsyncImageFillWidth(
             imageUrl = bannerList[page],
             placeholder = R.mipmap.img_home_banner_dummy
         )
