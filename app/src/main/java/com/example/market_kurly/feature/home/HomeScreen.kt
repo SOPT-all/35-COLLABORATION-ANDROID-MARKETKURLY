@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -15,6 +16,7 @@ import androidx.navigation.NavHostController
 import com.example.market_kurly.R
 import com.example.market_kurly.feature.home.component.HomeBannerRow
 import com.example.market_kurly.feature.home.component.HomeBottomNav
+import com.example.market_kurly.feature.home.component.HomeProductTitle
 import com.example.market_kurly.feature.home.component.HomeTagItemRow
 import com.example.market_kurly.feature.home.component.HomeTopBar
 
@@ -69,6 +71,12 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(8.dp))
             HomeTagItemRow(tagMenuList)
             Spacer(modifier = Modifier.height(31.dp))
+            HomeProductTitle(
+                "\uD83D\uDC51 껄디님을 위해 엄선했어요",
+                "찜해 놓은 그 상품, 지금 빅세일로 저렴하게!",
+               modifier = Modifier
+                   .padding(start = 15.dp, end = 9.dp)
+            ) {}
         }
 
         HomeBottomNav(
