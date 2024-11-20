@@ -28,7 +28,7 @@ import com.example.market_kurly.ui.theme.MarketKurlyTheme
 
 
 @Composable
-fun TagMenu (
+fun HomeTagItem (
     tag: String,
     @DrawableRes icon: Int,
 ) {
@@ -62,7 +62,7 @@ fun TagMenu (
 @Composable
 private fun TagMenuPreview() {
     MARKETKURLYTheme {
-        TagMenu(
+        HomeTagItem(
             "컬리큐레이터",
             R.drawable.ic_home_lowestprice
         )

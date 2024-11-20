@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.example.market_kurly.R
 import com.example.market_kurly.feature.home.component.HomeBannerRow
-import com.example.market_kurly.feature.home.component.HomeTagMenuRow
+import com.example.market_kurly.feature.home.component.HomeTagItemRow
 import com.example.market_kurly.feature.home.component.HomeTopBar
 
 private val bannerList = listOf(
@@ -39,7 +39,7 @@ fun HomeScreen(navController: NavHostController) {
     ) {
         HomeTopBar()
         HomeBannerRow(bannerList)
-        HomeTagMenuRow(tagMenuList)
+        HomeTagItemRow(tagMenuList)
     }
 }
 

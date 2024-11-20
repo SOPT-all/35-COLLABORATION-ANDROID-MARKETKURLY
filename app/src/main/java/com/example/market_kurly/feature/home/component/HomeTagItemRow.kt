@@ -16,7 +16,7 @@ import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 
 
 @Composable
-fun HomeTagMenuRow (
+fun HomeTagItemRow (
     tagList: List<TagItem>,
 ) {
     val chunkedList = tagList.chunked(6)
@@ -33,7 +33,7 @@ fun HomeTagMenuRow (
                 horizontalArrangement = Arrangement.spacedBy(0.dp) // 메뉴 간 간격
             ) {
                 items(group) { tag ->
-                    TagMenu(
+                    TagItem(
                         tag = tag.tag,
                         icon = tag.icon
                     )
@@ -60,8 +60,8 @@ private val sampleTags = listOf(
 
 @Preview
 @Composable
-private fun HomeTagRowPreview() {
+private fun HomeTagItemRowPreview() {
     MARKETKURLYTheme {
-        HomeTagMenuRow(sampleTags)
+        HomeTagItemRow(sampleTags)
     }
 }
