@@ -1,9 +1,7 @@
 package com.example.market_kurly.feature.home.component
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
@@ -14,24 +12,21 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun HomeBannerRow (
-    bannerList : List<String>
+    bannerList : List<String>,
+    modifier : Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(
         initialPage = 0,
         initialPageOffsetFraction = 0f,
         pageCount = { bannerList.size }
     )
-    Column(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        HorizontalPager(
-            pageSize = PageSize.Fill,
-            state = pagerState,
-            modifier = Modifier
-                .fillMaxWidth()
-        ) { page ->
-            HomeBanner(imageUrl = bannerList[page])
-        }
-        Spacer(modifier = Modifier.height(8.dp))
+    HorizontalPager(
+        pageSize = PageSize.Fill,
+        state = pagerState,
+        modifier = modifier
+            .fillMaxWidth(),
+        contentPadding = PaddingValues(0.dp),
+    ) { page ->
+        HomeBanner(imageUrl = bannerList[page])
     }
 }

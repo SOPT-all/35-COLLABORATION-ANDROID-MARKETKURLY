@@ -84,4 +84,7 @@ dependencies {
 
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.pager.indicators)
+
+    // constraintlayout
+    implementation(libs.constraintlayout.compose)
 }

@@ -33,7 +33,7 @@ fun HomeTagItemRow (
                 horizontalArrangement = Arrangement.spacedBy(0.dp) // 메뉴 간 간격
             ) {
                 items(group) { tag ->
-                    TagItem(
+                    HomeTagItem(
                         tag = tag.tag,
                         icon = tag.icon
                     )

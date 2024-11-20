@@ -1,12 +1,20 @@
 package com.example.market_kurly.feature.home
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import com.example.market_kurly.R
 import com.example.market_kurly.feature.home.component.HomeBannerRow
+import com.example.market_kurly.feature.home.component.HomeBottomNav
 import com.example.market_kurly.feature.home.component.HomeTagItemRow
 import com.example.market_kurly.feature.home.component.HomeTopBar
 
@@ -33,13 +41,42 @@ private val tagMenuList = listOf(
 )
 
 @Composable
-fun HomeScreen(navController: NavHostController) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
+fun HomeScreen(
+    navController: NavHostController
+) {
+    ConstraintLayout(
+        modifier = Modifier.fillMaxSize()
     ) {
-        HomeTopBar()
-        HomeBannerRow(bannerList)
-        HomeTagItemRow(tagMenuList)
+        val (topBar, content, bottomNav) = createRefs()
+
+        HomeTopBar(
+            modifier = Modifier
+                .constrainAs(topBar) {
+                    top.linkTo(parent.top)
+                }
+        )
+
+        Column(
+            modifier = Modifier
+                .constrainAs(content) {
+                    top.linkTo(topBar.bottom)
+                    bottom.linkTo(bottomNav.top)
+                    height = Dimension.fillToConstraints
+                }
+                .verticalScroll(rememberScrollState())
+        ) {
+            HomeBannerRow(bannerList)
+            Spacer(modifier = Modifier.height(8.dp))
+            HomeTagItemRow(tagMenuList)
+            Spacer(modifier = Modifier.height(31.dp))
+        }
+
+        HomeBottomNav(
+            modifier = Modifier
+                .constrainAs(bottomNav) {
+                    bottom.linkTo(parent.bottom)
+                }
+        )
     }
 }
 
