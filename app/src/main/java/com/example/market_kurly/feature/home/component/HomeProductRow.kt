@@ -1,6 +1,7 @@
 package com.example.market_kurly.feature.home.component
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -15,11 +16,13 @@ import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 
 @Composable
 fun HomeProductRow (
-    products: List<ProductItem>
+    products: List<ProductItem>,
+    modifier: Modifier = Modifier
 ) {
     LazyRow(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(7.dp) // 메뉴 간 간격
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(7.dp),
+        contentPadding = PaddingValues(horizontal = 15.dp)
     ) {
         items(products) { product ->
             HomeProduct(

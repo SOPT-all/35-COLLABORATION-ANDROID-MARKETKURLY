@@ -1,5 +1,6 @@
 package com.example.market_kurly.feature.home.component
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,23 +16,24 @@ import com.example.market_kurly.R
 import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 
 @Composable
-fun HomeBanner (
-    imageUrl: String
+fun AsyncImageFit (
+    imageUrl: String,
+    @DrawableRes placeholder: Int,
 ) {
     val context = LocalContext.current
     AsyncImage(
         modifier = Modifier
             .fillMaxWidth(),
         model = ImageRequest.Builder(context).data(imageUrl)
-            .placeholder(R.mipmap.img_home_banner_dummy)
-            .error(R.mipmap.img_home_banner_dummy)
+            .placeholder(placeholder)
+            .error(placeholder)
             .build(),
         contentDescription = "Home Banner",
-        placeholder = painterResource(id = R.mipmap.img_home_banner_dummy),
+        placeholder = painterResource(id = placeholder),
         onError = {
             // 여기서 에러 잡으면 됩니다.
         },
-        contentScale = ContentScale.Fit
+        contentScale = ContentScale.FillWidth
     )
 }
 
@@ -39,8 +41,9 @@ fun HomeBanner (
 @Composable
 private fun HomeBannerPreview() {
     MARKETKURLYTheme {
-        HomeBanner(
-            imageUrl = "https://velog.velcdn.com/images/roel_dev/post/7b723d45-14a7-45a9-b489-f6cbc9c2035e/image.png"
+        AsyncImageFit(
+            imageUrl = "https://velog.velcdn.com/images/roel_dev/post/7b723d45-14a7-45a9-b489-f6cbc9c2035e/image.png",
+            placeholder = R.mipmap.img_home_banner_dummy
         )
     }
 }

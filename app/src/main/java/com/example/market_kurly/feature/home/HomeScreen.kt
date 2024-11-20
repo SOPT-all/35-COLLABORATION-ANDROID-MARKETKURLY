@@ -9,11 +9,13 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import com.example.market_kurly.R
+import com.example.market_kurly.feature.home.component.AsyncImageFit
 import com.example.market_kurly.feature.home.component.HomeBannerRow
 import com.example.market_kurly.feature.home.component.HomeBottomNav
 import com.example.market_kurly.feature.home.component.HomeProductRow
@@ -91,6 +93,7 @@ private val products = listOf(
 fun HomeScreen(
     navController: NavHostController
 ) {
+    val context = LocalContext.current
     ConstraintLayout(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -122,7 +125,13 @@ fun HomeScreen(
                modifier = Modifier
                    .padding(start = 15.dp, end = 9.dp)
             ) {}
+            Spacer(modifier = Modifier.height(17.dp))
             HomeProductRow(products)
+            Spacer(modifier = Modifier.height(14.dp))
+            AsyncImageFit(
+                imageUrl = "https://prod-files-secure.s3.us-west-2.amazonaws.com/01c30015-16dc-4e14-8e54-35fb1a5705fe/826939ec-c3d6-4b17-9258-c7170db2bf29/IMG_0136_1.png",
+                placeholder = R.mipmap.img_home_center_banner_dummy
+            )
         }
 
         HomeBottomNav(

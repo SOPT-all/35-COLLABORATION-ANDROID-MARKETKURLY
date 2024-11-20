@@ -8,6 +8,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.market_kurly.R
 
 
 @Composable
@@ -27,6 +28,9 @@ fun HomeBannerRow (
             .fillMaxWidth(),
         contentPadding = PaddingValues(0.dp),
     ) { page ->
-        HomeBanner(imageUrl = bannerList[page])
+        AsyncImageFit(
+            imageUrl = bannerList[page],
+            placeholder = R.mipmap.img_home_banner_dummy
+        )
     }
 }
