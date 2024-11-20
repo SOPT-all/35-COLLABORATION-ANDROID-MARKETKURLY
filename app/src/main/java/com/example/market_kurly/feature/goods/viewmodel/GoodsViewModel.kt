@@ -1,6 +1,7 @@
 package com.example.market_kurly.feature.goods.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.market_kurly.core.dummymodel.GoodsDescriptionInfoData
 import com.example.market_kurly.core.util.KeyStorage.ALLERGY
 import com.example.market_kurly.core.util.KeyStorage.BRIX
@@ -10,21 +11,24 @@ import com.example.market_kurly.core.util.KeyStorage.NOTIFICATION
 import com.example.market_kurly.core.util.KeyStorage.PACKAGING_TYPE
 import com.example.market_kurly.core.util.KeyStorage.SELLING_UNIT
 import com.example.market_kurly.core.util.KeyStorage.WEIGHT
-import com.example.market_kurly.domain.handler.FavoriteHandler
 import com.example.market_kurly.domain.repository.GoodsRepository
 import com.example.market_kurly.feature.goods.state.GoodsState
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class GoodsViewModel(
     private val goodsRepository: GoodsRepository
-) : ViewModel(), FavoriteHandler {
+) : ViewModel() {
 
-    //TODO: isFavorite 찜하기 여부 어떻게 관리할 지 (현재 중복 됨)
-    private val _isFavorite = MutableStateFlow(false)
-    override val isFavorite: StateFlow<Boolean> = _isFavorite //BottomBar에 쓰이는 찜하기 변수
+    private val _snackbarMessage = MutableSharedFlow<String>()
+    val snackbarMessage: SharedFlow<String> = _snackbarMessage
+
+    private val _navigateToWishlist = MutableSharedFlow<Unit>()
+    val navigateToWishlist: SharedFlow<Unit> = _navigateToWishlist
 
     private var _uiState = MutableStateFlow(GoodsState())
     val uiState = _uiState.asStateFlow()
@@ -43,26 +47,35 @@ class GoodsViewModel(
                 isFavorite = goodsDescriptionData.isFavorite
             )
         }
-        _isFavorite.value = _uiState.value.isFavorite
     }
     private fun createDescriptionPairs(info: GoodsDescriptionInfoData): List<Pair<String, String>> {
         return listOf(
-            ALLERGY to info.allergy,
-            BRIX to info.brix,
-            EXPIRATION to info.expiration,
-            LIVESTOCK to info.livestock,
-            NOTIFICATION to info.notification,
             PACKAGING_TYPE to info.packagingType,
             SELLING_UNIT to info.sellingUnit,
-            WEIGHT to info.weight
+            WEIGHT to info.weight,
+            ALLERGY to info.allergy,
+            EXPIRATION to info.expiration,
+            BRIX to info.brix,
+            NOTIFICATION to info.notification,
+            LIVESTOCK to info.livestock,
         )
     }
 
-    override fun toggleFavorite() {
+    fun toggleFavorite() {
         _uiState.update { currentState ->
             currentState.copy(isFavorite = !_uiState.value.isFavorite)
         }
-        _isFavorite.value = !_isFavorite.value
+        viewModelScope.launch {
+            if (_uiState.value.isFavorite) {
+                _snackbarMessage.emit("찜한 상품에 추가되었습니다.")
+            }
+        }
         // TODO: API 연동 추가
+    }
+
+    fun navigateToWishlist() {
+        viewModelScope.launch {
+            _navigateToWishlist.emit(Unit)
+        }
     }
 }

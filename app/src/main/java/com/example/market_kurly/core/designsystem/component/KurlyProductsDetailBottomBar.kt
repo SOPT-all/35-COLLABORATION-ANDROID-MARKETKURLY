@@ -2,7 +2,6 @@ package com.example.market_kurly.core.designsystem.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -15,16 +14,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
-import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,7 +23,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
-import com.example.market_kurly.domain.handler.FavoriteHandler
 import com.example.market_kurly.ui.theme.Gray3
 import com.example.market_kurly.ui.theme.MarketKurlyTheme.typography
 import com.example.market_kurly.ui.theme.PrimaryColor600
@@ -40,84 +30,66 @@ import com.example.market_kurly.ui.theme.White
 
 @Composable
 fun KurlyProductsDetailBottomBar(
-    modifier : Modifier = Modifier,
-    favoriteHandler: FavoriteHandler,
-    navigateToWishList : () -> Unit,
-    onBuyingButtonClick : () -> Unit = {}
+    isFavorite: Boolean,
+    onFavoriteClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    onBuyingButtonClick: () -> Unit = {}
 ) {
-    val isFavorite by favoriteHandler.isFavorite.collectAsState()
-    val favoriteResource =  if (isFavorite) R.drawable.icn_favorite_activate else R.drawable.icn_favorite_default
-    val snackbarHostState = remember { SnackbarHostState() }
-
-    LaunchedEffect(isFavorite) {
-        if (isFavorite) {
-            val result = snackbarHostState.showSnackbar(
-                message = "찜한 상품이 추가되었습니다.",
-                actionLabel = "찜한 상품으로 가기",
-                duration = SnackbarDuration.Short
-            )
-            if (result == SnackbarResult.ActionPerformed) {
-                navigateToWishList()
-            }
-        }
+    val favoriteResource = if (isFavorite) {
+        R.drawable.icn_favorite_activate
+    } else {
+        R.drawable.icn_favorite_default
     }
-    Column {
-        SnackbarHost(
-            hostState = snackbarHostState,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
-        Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(13.dp, 16.dp, 13.dp, 11.dp)
-                .navigationBarsPadding(),
-            horizontalArrangement = Arrangement.spacedBy(
-                space = 7.dp,
-                alignment = Alignment.CenterHorizontally
+
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(13.dp, 16.dp, 13.dp, 11.dp)
+            .navigationBarsPadding(),
+        horizontalArrangement = Arrangement.spacedBy(
+            space = 7.dp,
+            alignment = Alignment.CenterHorizontally
+        ),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Button(
+            contentPadding = PaddingValues(horizontal = 11.dp, vertical = 11.dp),
+            onClick = onFavoriteClick,
+            shape = RoundedCornerShape(5.dp),
+            colors = ButtonColors(
+                containerColor = White,
+                contentColor = Color.Unspecified,
+                disabledContainerColor = White,
+                disabledContentColor = Color.Unspecified
             ),
-            verticalAlignment = Alignment.CenterVertically
+            border = BorderStroke(1.dp, Gray3)
         ) {
-            Button(
-                contentPadding = PaddingValues(horizontal = 11.dp, vertical = 11.dp),
-                onClick = {
-                    favoriteHandler.toggleFavorite()
-                },
-                shape = RoundedCornerShape(5.dp),
-                colors = ButtonColors(
-                    containerColor = White,
-                    contentColor = Color.Unspecified,
-                    disabledContainerColor = White,
-                    disabledContentColor = Color.Unspecified
-                ),
-                border = BorderStroke(1.dp, Gray3)
-            ) {
-                Icon(
-                    imageVector = ImageVector.vectorResource(favoriteResource),
-                    contentDescription = "",
-                    tint = Color.Unspecified,
-                    modifier = Modifier.size(27.dp)
-                )
-            }
-            Button(
-                contentPadding = PaddingValues(horizontal = 11.dp),
-                onClick = onBuyingButtonClick,
-                shape = RoundedCornerShape(6.dp),
-                colors = ButtonColors(
-                    containerColor = PrimaryColor600,
-                    contentColor = White,
-                    disabledContainerColor = PrimaryColor600,
-                    disabledContentColor = White
-                ),
-                modifier = Modifier
-                    .weight(1f)
-                    .height(IntrinsicSize.Max)
-            ) {
-                Text(
-                    text = "구매하기",
-                    style = typography.titleM18,
-                    color = White
-                )
-            }
+            Icon(
+                imageVector = ImageVector.vectorResource(favoriteResource),
+                contentDescription = "",
+                tint = Color.Unspecified,
+                modifier = Modifier.size(27.dp)
+            )
+        }
+        Button(
+            contentPadding = PaddingValues(horizontal = 11.dp),
+            onClick = onBuyingButtonClick,
+            shape = RoundedCornerShape(6.dp),
+            colors = ButtonColors(
+                containerColor = PrimaryColor600,
+                contentColor = White,
+                disabledContainerColor = PrimaryColor600,
+                disabledContentColor = White
+            ),
+            modifier = Modifier
+                .weight(1f)
+                .height(IntrinsicSize.Max)
+        ) {
+            Text(
+                text = "구매하기",
+                style = typography.titleM18,
+                color = White
+            )
         }
     }
 }
