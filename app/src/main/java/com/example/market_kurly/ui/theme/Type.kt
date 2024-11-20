@@ -13,7 +13,7 @@ val NotoSansKrNormal = FontFamily(Font(R.font.noto_sans_kr_regular))
 
 data class MarketKurlyTypography(
     val titleEmoji22: TextStyle = TextStyle(
-        fontFamily = NotoSansKrExtraBold,
+        fontFamily = NotoSansKrMedium,
         fontSize = 22.sp,
         lineHeight = 22.sp,
         letterSpacing = 0.sp
