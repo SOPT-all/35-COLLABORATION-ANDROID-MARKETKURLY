@@ -15,9 +15,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
+import com.example.market_kurly.R
+import com.example.market_kurly.ui.theme.Gray2
 import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
 import com.example.market_kurly.ui.theme.White
@@ -25,31 +28,43 @@ import com.example.market_kurly.ui.theme.White
 @Composable
 fun ReviewImageRow(
     modifier: Modifier = Modifier,
-    imageUrls: List<String>
+    imageUrls: List<String>,
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(2.dp),
     ) {
         val maxVisibleImages = 4
 
         val visibleImages = imageUrls.take(maxVisibleImages)
 
         visibleImages.forEachIndexed { index, url ->
+            val cornerShape =
+                when {
+                    imageUrls.size == 1 -> RoundedCornerShape(8.dp)
+                    index == 0 -> RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp)
+                    index == maxVisibleImages - 1 || (index == visibleImages.lastIndex && imageUrls.size <= maxVisibleImages) ->
+                        RoundedCornerShape(
+                            topEnd = 8.dp,
+                            bottomEnd = 8.dp,
+                        )
+                    else -> RoundedCornerShape(0.dp)
+                }
+
             if (index == maxVisibleImages - 1 && imageUrls.size > maxVisibleImages) {
                 Box(
                     modifier = Modifier
                         .size(81.dp)
-                        .clip(RoundedCornerShape(8.dp))
+                        .clip(cornerShape)
                         .background(Color.Gray.copy(alpha = 0.6f)),
-                    contentAlignment = Alignment.Center
+                    contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        text = "+ 더보기",
+                        text = stringResource(R.string.review_more_image),
                         style = MarketKurlyTheme.typography.captionR12,
-                        color = White
+                        color = White,
                     )
                 }
             } else {
@@ -57,9 +72,8 @@ fun ReviewImageRow(
                     painter = rememberAsyncImagePainter(model = url),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(81.dp)
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(Color.LightGray)
+                        .size(81.dp).clip(cornerShape)
+                        .background(Gray2),
                 )
             }
         }
@@ -69,16 +83,21 @@ fun ReviewImageRow(
 @Preview(showBackground = true)
 @Composable
 fun ReviewImageRowPreview() {
-    val dummyImageUrls = listOf(
-        "https://via.placeholder.com/81",
-        "https://via.placeholder.com/81",
-        "https://via.placeholder.com/81"
-    )
+    val dummyImageUrls =
+        listOf(
+            "https://via.placeholder.com/81",
+            "https://via.placeholder.com/81",
+            "https://via.placeholder.com/81",
+            "https://via.placeholder.com/81",
+            "https://via.placeholder.com/81",
+            "https://via.placeholder.com/81",
+            "https://via.placeholder.com/81",
+        )
 
     MARKETKURLYTheme {
         ReviewImageRow(
             imageUrls = dummyImageUrls,
-            modifier = Modifier
+            modifier = Modifier,
         )
     }
 }
