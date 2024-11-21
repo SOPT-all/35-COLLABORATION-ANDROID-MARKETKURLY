@@ -6,7 +6,7 @@ import com.example.market_kurly.domain.repository.ExampleRepository
 import com.example.market_kurly.feature.ExampleViewModel
 
 class BaseViewModelFactory(
-    private val exampleRepository: ExampleRepository
+    private val exampleRepository: ExampleRepository,
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ExampleViewModel::class.java)) {

@@ -59,7 +59,7 @@ fun KurlyGoodsDetailBottomBar(
                 .border(
                     1.dp,
                     Gray3,
-                    RoundedCornerShape(5.dp)
+                    RoundedCornerShape(5.dp),
                 )
                 .clip(RoundedCornerShape(5.dp))
                 .background(White)

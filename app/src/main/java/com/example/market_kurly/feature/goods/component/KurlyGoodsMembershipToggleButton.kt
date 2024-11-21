@@ -134,7 +134,7 @@ fun MembershipPriceAndSubscribe(
                 .border(
                     1.dp,
                     Mint3,
-                    RoundedCornerShape(6.dp)
+                    RoundedCornerShape(6.dp),
                 )
                 .clip(RoundedCornerShape(6.dp))
                 .background(Mint1)

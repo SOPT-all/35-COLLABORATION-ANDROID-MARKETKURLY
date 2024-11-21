@@ -67,7 +67,7 @@ fun KurlyAlsoViewedColumnItem(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.Center,
 
-            ) {
+        ) {
             Text(
                 text = goodsName,
                 style = typography.bodyR15,
@@ -110,7 +110,7 @@ fun KurlyAlsoViewedColumnItem(
                 .border(
                     1.dp,
                     CoolGray2,
-                    RoundedCornerShape(4.dp)
+                    RoundedCornerShape(4.dp),
                 )
                 .clip(RoundedCornerShape(4.dp))
                 .background(White)

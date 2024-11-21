@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
 class ExampleViewModel(
-    private val exampleRepository: ExampleRepository
+    private val exampleRepository: ExampleRepository,
 ) : ViewModel() {
     private val _signUpState = MutableLiveData<UiState>()
     val signUpState: LiveData<UiState> get() = _signUpState

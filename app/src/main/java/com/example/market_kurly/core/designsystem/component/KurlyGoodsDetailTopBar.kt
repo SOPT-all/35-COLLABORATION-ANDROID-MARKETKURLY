@@ -64,22 +64,22 @@ fun KurlyGoodsDetailTopBar(
                 )
             },
             navigationIcon = {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(id = R.drawable.icn_arrow_left),
-                        contentDescription = stringResource(R.string.kurly_icon_navigate_up_description),
-                        tint = Gray7,
-                        modifier = Modifier.size(48.dp)
-                            .noRippleClickable(navigateUp),
-                    )
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.icn_arrow_left),
+                    contentDescription = stringResource(R.string.kurly_icon_navigate_up_description),
+                    tint = Gray7,
+                    modifier = Modifier.size(48.dp)
+                        .noRippleClickable(navigateUp),
+                )
             },
             actions = {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(id = R.drawable.icn_cart_large),
-                        contentDescription = stringResource(R.string.kurly_icon_navigate_cart_description),
-                        tint = Gray8,
-                        modifier = Modifier.size(48.dp)
-                            .noRippleClickable(navigateToCart),
-                    )
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.icn_cart_large),
+                    contentDescription = stringResource(R.string.kurly_icon_navigate_cart_description),
+                    tint = Gray8,
+                    modifier = Modifier.size(48.dp)
+                        .noRippleClickable(navigateToCart),
+                )
             },
         )
         KurlyGoodsDetailTabRow(

@@ -15,11 +15,11 @@ import com.example.market_kurly.ui.theme.MarketKurlyTheme
 fun ReviewScreen(navController: NavHostController) {
     Box(
         modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         Text(
             text = stringResource(R.string.review_screen),
-            style = MarketKurlyTheme.typography.captionB12
+            style = MarketKurlyTheme.typography.captionB12,
         )
     }
 }
