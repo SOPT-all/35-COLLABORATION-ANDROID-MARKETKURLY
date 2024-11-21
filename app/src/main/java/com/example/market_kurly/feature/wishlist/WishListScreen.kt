@@ -42,7 +42,7 @@ fun WishListScreen(
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(vertical = 16.dp)
+            contentPadding = PaddingValues(bottom = 16.dp)
         ) {
             items(10) {
                 WishListProduct(
