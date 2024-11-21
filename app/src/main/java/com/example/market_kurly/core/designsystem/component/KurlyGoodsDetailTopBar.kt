@@ -28,7 +28,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
-import com.example.market_kurly.core.util.InteractionSource.rememberEmptyInteractionSource
+import com.example.market_kurly.core.util.interactionsource.rememberEmptyInteractionSource
 import com.example.market_kurly.core.util.KeyStorage
 import com.example.market_kurly.core.util.modifier.customTabIndicatorOffset
 import com.example.market_kurly.core.util.modifier.noRippleClickable

@@ -39,6 +39,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.market_kurly.R
+import com.example.market_kurly.core.base.BaseViewModelFactory
 import com.example.market_kurly.core.designsystem.component.KurlyGoodsDetailBottomBar
 import com.example.market_kurly.core.designsystem.component.KurlyGoodsDetailTopBar
 import com.example.market_kurly.core.util.KeyStorage.EMPTY_RESPONSE
@@ -54,7 +55,6 @@ import com.example.market_kurly.feature.goods.component.KurlyGoodsInfoText
 import com.example.market_kurly.feature.goods.component.KurlyGoodsMembershipToggleButton
 import com.example.market_kurly.feature.goods.state.GoodsState
 import com.example.market_kurly.feature.goods.viewmodel.GoodsViewModel
-import com.example.market_kurly.feature.goods.viewmodel.GoodsViewModelFactory
 import com.example.market_kurly.ui.theme.Gray2
 import com.example.market_kurly.ui.theme.Gray4
 import com.example.market_kurly.ui.theme.Gray5
@@ -70,7 +70,7 @@ fun GoodsScreen(
 ) {
     val context = LocalContext.current
     val goodsRepository by lazy { GoodsRepositoryImpl() }
-    val viewModelFactory by lazy { GoodsViewModelFactory(goodsRepository) }
+    val viewModelFactory by lazy { BaseViewModelFactory(goodsRepository = goodsRepository) }
     val viewModel: GoodsViewModel = viewModel(factory = viewModelFactory)
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()

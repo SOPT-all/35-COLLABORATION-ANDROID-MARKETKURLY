@@ -3,7 +3,7 @@ package com.example.market_kurly.domain.repositoryimpl
 import com.example.market_kurly.core.dummymodel.AlsoViewedData
 import com.example.market_kurly.core.dummymodel.GoodsDetailData
 import com.example.market_kurly.core.dummymodel.GoodsUiData
-import com.example.market_kurly.core.dummymodel.asGoodsUiData
+import com.example.market_kurly.core.dummymodel.toGoodsUiData
 import com.example.market_kurly.domain.repository.GoodsRepository
 import okhttp3.internal.immutableListOf
 
@@ -37,5 +37,5 @@ class GoodsRepositoryImpl() : GoodsRepository {
             view = 156327,
             weight = "1.3kg 내외",
             isFavorite = true,
-        ).asGoodsUiData()
+        ).toGoodsUiData()
 }

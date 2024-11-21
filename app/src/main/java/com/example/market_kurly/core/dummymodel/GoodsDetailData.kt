@@ -27,7 +27,7 @@ data class GoodsDetailData(
     val weight: String,
     val isFavorite: Boolean,
 )
-fun GoodsDetailData.asGoodsUiData() = GoodsUiData(
+fun GoodsDetailData.toGoodsUiData() = GoodsUiData(
     deliverType = this.deliverType,
     discount = this.discount,
     image = this.image,

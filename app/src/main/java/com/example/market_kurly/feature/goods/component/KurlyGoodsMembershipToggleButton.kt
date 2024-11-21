@@ -76,7 +76,7 @@ fun MembershipItemButton(
     Row(
         modifier = modifier
             .padding(vertical = 10.5.dp)
-            .noRippleClickable { onClick() },
+            .noRippleClickable(onClick),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {

@@ -1,4 +1,4 @@
-package com.example.market_kurly.core.util.InteractionSource
+package com.example.market_kurly.core.util.interactionsource
 
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
