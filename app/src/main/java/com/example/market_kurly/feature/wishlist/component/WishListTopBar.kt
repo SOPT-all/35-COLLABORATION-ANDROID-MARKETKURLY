@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
@@ -33,11 +34,11 @@ fun WishListTopBar(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_arrow_left),
-                contentDescription = "WishList TopBar Left Arrow",
+                contentDescription = stringResource(R.string.wishlist_top_bar_left_arrow_description),
             )
 
             Text(
-                text = "찜한 상품",
+                text = stringResource(R.string.wishlist_products),
                 style = MarketKurlyTheme.typography.titleM18
             )
         }
@@ -49,12 +50,12 @@ fun WishListTopBar(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_cart_icon),
-                contentDescription = "WishList TopBar Notification",
+                contentDescription = stringResource(R.string.wishlist_top_bar_cart_description),
             )
 
             Image(
                 painter = painterResource(id = R.drawable.ic_notification_icon),
-                contentDescription = "WishList TopBar Notification",
+                contentDescription = stringResource(R.string.wishlist_top_bar_notification_description),
             )
         }
     }

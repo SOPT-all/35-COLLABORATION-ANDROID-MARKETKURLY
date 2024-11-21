@@ -16,7 +16,12 @@
 
     <!-- Review Screen -->
     <string name="review_screen">Review</string>
+    <string name="review_more_image">+ 더보기</string>
 
     <!-- WishList Screen -->
     <string name="wishlist_screen">WishList</string>
+    <string name="wishlist_top_bar_left_arrow_description">WishList TopBar Left Arrow</string>
+    <string name="wishlist_products">찜한 상품</string>
+    <string name="wishlist_top_bar_cart_description">WishList TopBar Cart</string>
+    <string name="wishlist_top_bar_notification_description">WishList TopBar Notification</string>
 </resources>
