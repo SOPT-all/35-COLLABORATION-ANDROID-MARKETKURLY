@@ -72,7 +72,8 @@ fun ReviewImageRow(
                     painter = rememberAsyncImagePainter(model = url),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(81.dp).clip(cornerShape)
+                        .size(81.dp)
+                        .clip(cornerShape)
                         .background(Gray2),
                 )
             }

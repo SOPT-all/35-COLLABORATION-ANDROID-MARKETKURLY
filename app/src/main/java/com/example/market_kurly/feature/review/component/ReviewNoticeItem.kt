@@ -22,27 +22,27 @@ import com.example.market_kurly.ui.theme.MarketKurlyTheme
 @Composable
 fun ReviewNoticeItem(
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Image(
             painter = painterResource(R.drawable.ic_review_notice),
             contentDescription = null,
-            modifier = Modifier
-                .size(30.dp)
+            modifier = modifier
+                .size(30.dp),
         )
 
-        Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = modifier.width(8.dp))
 
         Text(
             text = text,
             style = MarketKurlyTheme.typography.bodyR15,
-            color = Gray7
+            color = Gray7,
         )
     }
 }
@@ -53,7 +53,7 @@ fun ReviewNoticeItemPreview() {
     MARKETKURLYTheme {
         ReviewNoticeItem(
             text = "[24년 11월 1주] 베스트 후기 선정 안내",
-            modifier = Modifier
+            modifier = Modifier,
         )
     }
 }

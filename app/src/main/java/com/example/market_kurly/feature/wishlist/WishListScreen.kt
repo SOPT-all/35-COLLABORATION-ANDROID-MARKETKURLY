@@ -37,7 +37,8 @@ fun WishListScreen(
         Spacer(modifier = Modifier.height(20.dp))
 
         WishListFilteringTab(
-            modifier = modifier.fillMaxWidth()
+            modifier = modifier.fillMaxWidth(),
+            onClick = {}
         )
 
         LazyColumn(
