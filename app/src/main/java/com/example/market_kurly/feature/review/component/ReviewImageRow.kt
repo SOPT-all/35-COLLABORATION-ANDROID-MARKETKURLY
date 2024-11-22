@@ -15,12 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.market_kurly.R
 import com.example.market_kurly.ui.theme.Gray2
-import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
 import com.example.market_kurly.ui.theme.White
 
@@ -76,27 +74,5 @@ fun ReviewImageRow(
                 )
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ReviewImageRowPreview() {
-    val dummyImageUrls =
-        listOf(
-            "https://via.placeholder.com/81",
-            "https://via.placeholder.com/81",
-            "https://via.placeholder.com/81",
-            "https://via.placeholder.com/81",
-            "https://via.placeholder.com/81",
-            "https://via.placeholder.com/81",
-            "https://via.placeholder.com/81",
-        )
-
-    MARKETKURLYTheme {
-        ReviewImageRow(
-            imageUrls = dummyImageUrls,
-            modifier = Modifier,
-        )
     }
 }
