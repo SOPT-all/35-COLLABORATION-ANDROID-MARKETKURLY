@@ -17,6 +17,13 @@
     <!-- Review Screen -->
     <string name="review_screen">Review</string>
     <string name="review_more_image">+ 더보기</string>
+    <string name="review_notice_best_review">[24년 11월 1주] 베스트 후기 선정 안내</string>
+    <string name="review_notice_savings_rule">상품후기 적립금 정책 안내</string>
+    <string name="review_photo_review">사진 후기</string>
+    <string name="review_total_number">총 11,002개</string>
+    <string name="review_filter_recent">최신순</string>
+    <string name="review_filter_most_stars">별점높은순</string>
+    <string name="review_filter_least_stars">별점낮은순</string>
 
     <!-- WishList Screen -->
     <string name="wishlist_screen">WishList</string>
