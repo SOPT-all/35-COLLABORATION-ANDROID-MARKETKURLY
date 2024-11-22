@@ -26,6 +26,7 @@ import com.example.market_kurly.core.util.KeyStorage.REVIEW_FILTER_RECENT
 import com.example.market_kurly.ui.theme.Gray7
 import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
+import com.example.market_kurly.ui.theme.PrimaryColor600
 import com.example.market_kurly.ui.theme.White
 
 @Composable
@@ -69,21 +70,36 @@ fun ReviewFilteringBar(
                     .background(White)
             ) {
                 DropdownMenuItem(
-                    text = { Text(stringResource(R.string.review_filter_recent)) },
+                    text = {
+                        Text(
+                            text = stringResource(R.string.review_filter_recent),
+                            color = if (selectedFilter == REVIEW_FILTER_RECENT) PrimaryColor600 else Gray7
+                        )
+                    },
                     onClick = {
                         selectedFilter = REVIEW_FILTER_RECENT
                         isDropDownMenuExpanded = false
                     }
                 )
                 DropdownMenuItem(
-                    text = { Text(stringResource(R.string.review_filter_most_stars)) },
+                    text = {
+                        Text(
+                            text = stringResource(R.string.review_filter_most_stars),
+                            color = if (selectedFilter == REVIEW_FILTER_MOST_STARS) PrimaryColor600 else Gray7
+                        )
+                    },
                     onClick = {
                         selectedFilter = REVIEW_FILTER_MOST_STARS
                         isDropDownMenuExpanded = false
                     }
                 )
                 DropdownMenuItem(
-                    text = { Text(stringResource(R.string.review_filter_least_stars)) },
+                    text = {
+                        Text(
+                            text = stringResource(R.string.review_filter_least_stars),
+                            color = if (selectedFilter == REVIEW_FILTER_LEAST_STARS) PrimaryColor600 else Gray7
+                        )
+                    },
                     onClick = {
                         selectedFilter = REVIEW_FILTER_LEAST_STARS
                         isDropDownMenuExpanded = false
