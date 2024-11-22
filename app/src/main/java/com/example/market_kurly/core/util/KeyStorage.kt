@@ -13,4 +13,9 @@ object KeyStorage {
     const val WISHLIST_CATEGORY_SIMPLE_PRODUCT = "간편식·밀키트·샐러드"
     const val WISHLIST_CATEGORY_FRUIT_NUTS_RICE = "과일·견과·쌀"
     const val WISHLIST_CATEGORY_SNACK = "간식·과자·떡"
+
+    // Review Filter
+    const val REVIEW_FILTER_RECENT = "최신순"
+    const val REVIEW_FILTER_MOST_STARS = "별점높은순"
+    const val REVIEW_FILTER_LEAST_STARS = "별점낮은순"
 }
