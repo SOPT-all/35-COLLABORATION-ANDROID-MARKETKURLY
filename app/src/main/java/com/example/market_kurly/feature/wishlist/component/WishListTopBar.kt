@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -45,17 +46,18 @@ fun WishListTopBar(
 
         Row(
             modifier = modifier
-                .align(Alignment.BottomEnd),
+                .align(Alignment.BottomEnd)
+                .padding(end = 6.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_cart_icon),
-                contentDescription = stringResource(R.string.wishlist_top_bar_cart_description),
+                painter = painterResource(id = R.drawable.ic_notification_icon),
+                contentDescription = stringResource(R.string.wishlist_top_bar_notification_description),
             )
 
             Image(
-                painter = painterResource(id = R.drawable.ic_notification_icon),
-                contentDescription = stringResource(R.string.wishlist_top_bar_notification_description),
+                painter = painterResource(id = R.drawable.ic_cart_icon),
+                contentDescription = stringResource(R.string.wishlist_top_bar_cart_description),
             )
         }
     }
