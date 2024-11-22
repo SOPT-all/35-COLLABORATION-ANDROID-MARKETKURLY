@@ -1,4 +1,4 @@
-package com.example.market_kurly.data
+package com.example.market_kurly.data.dummy
 
 data class WishListItem(
     val imageUrl: String,

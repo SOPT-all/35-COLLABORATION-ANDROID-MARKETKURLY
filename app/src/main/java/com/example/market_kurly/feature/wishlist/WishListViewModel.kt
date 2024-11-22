@@ -1,7 +1,7 @@
 package com.example.market_kurly.feature.wishlist
 
 import androidx.lifecycle.ViewModel
-import com.example.market_kurly.data.WishListItem
+import com.example.market_kurly.data.dummy.WishListItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
