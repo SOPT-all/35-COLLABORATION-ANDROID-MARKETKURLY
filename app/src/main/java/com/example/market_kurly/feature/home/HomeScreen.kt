@@ -20,23 +20,23 @@ import com.example.market_kurly.ui.theme.MarketKurlyTheme
 fun HomeScreen(navController: NavHostController) {
     Column(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         Text(
             text = stringResource(R.string.home_screen),
             style = MarketKurlyTheme.typography.titleB22,
             modifier = Modifier
-                .align(Alignment.CenterHorizontally)
+                .align(Alignment.CenterHorizontally),
         )
         Button(
             onClick = { navController.navigate(GOODS) },
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .padding(top = 16.dp)
+                .padding(top = 16.dp),
         ) {
             Text(
                 text = stringResource(R.string.btn_go_to_goods),
-                style = MarketKurlyTheme.typography.bodyB14
+                style = MarketKurlyTheme.typography.bodyB14,
             )
         }
     }

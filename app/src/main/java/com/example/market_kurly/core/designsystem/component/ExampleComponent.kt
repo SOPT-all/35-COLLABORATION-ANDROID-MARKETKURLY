@@ -32,7 +32,7 @@ fun ExampleTextField(
     onValueChange: (String) -> Unit,
     hint: String,
     modifier: Modifier = Modifier,
-    isPasswordField: Boolean = false
+    isPasswordField: Boolean = false,
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
 
@@ -52,16 +52,18 @@ fun ExampleTextField(
                     color = Color.White,
                     modifier = Modifier
                         .clickable { passwordVisible = !passwordVisible }
-                        .padding(8.dp)
+                        .padding(8.dp),
                 )
             }
-        } else null,
+        } else {
+            null
+        },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = PrimaryColor200,
             focusedTextColor = PrimaryColor600,
             unfocusedTextColor = PrimaryColor400,
             focusedPlaceholderColor = Gray6,
-            unfocusedPlaceholderColor = Gray4
-        )
+            unfocusedPlaceholderColor = Gray4,
+        ),
     )
 }
