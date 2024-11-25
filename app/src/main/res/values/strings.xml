@@ -9,14 +9,41 @@
     <string name="home_screen">Home</string>
     <string name="btn_go_to_goods">Go to Goods</string>
 
-    <!-- Goods Screen -->
-    <string name="goods_screen">Goods</string>
-    <string name="btn_go_to_review">Go to Review</string>
-    <string name="btn_go_to_wishlist">Go to WishList</string>
-
     <!-- Review Screen -->
     <string name="review_screen">Review</string>
 
     <!-- WishList Screen -->
     <string name="wishlist_screen">WishList</string>
+
+    <!-- Kurly Common Screen -->
+    <string name="kurly_icon_navigate_up_description">Navigate Up</string>
+    <string name="kurly_icon_navigate_cart_description">Cart</string>
+    <string name="kurly_icon_favorite_description">favorite button</string>
+    <string name="kurly_btn_buying">구매하기</string>
+
+    <!-- Goods Screen -->
+    <string name="goods_screen">Goods</string>
+    <string name="btn_go_to_review">Go to Review</string>
+    <string name="btn_go_to_wishlist">Go to WishList</string>
+    <string name="goods_btn_cart">담기</string>
+    <string name="goods_icon_share_description">share button</string>
+    <string name="goods_icon_more_information_description">goods more information icon</string>
+    <string name="goods_icon_next_goods_description">next goods button icon</string>
+    <string name="goods_icon_expand_membership_price_description">expand membership price icon</string>
+    <string name="goods_icon_right_arrow_description">right arrow icon</string>
+    <string name="goods_icon_membership_ticket_descrpition">membership ticket icon</string>
+    <string name="goods_snackbar_message_favorite">찜한 상품에 추가되었습니다.</string>
+    <string name="goods_snackbar_action_go_to_wishlist">찜한 상품으로 가기</string>
+    <string name="goods_text_price">%1$s원</string>
+    <string name="goods_text_percent">%1$s%%</string>
+    <string name="goods_text_origin">원산지: %1$s</string>
+    <string name="goods_text_membership">멤버스 최대혜택가</string>
+    <string name="goods_text_goods_information">상품정보</string>
+    <string name="goods_text_membership_sub_string_1">멤버스 가입하고</string>
+    <string name="goods_text_membership_sub_string_2">에 구매하기</string>
+    <string name="goods_text_delivery">배송</string>
+    <string name="goods_text_seller">판매자</string>
+    <string name="goods_text_also_viewed">다른 고객이 함께 본 상품</string>
+    <string name="goods_text_next_goods">다음상품</string>
+    <string name="goods_text_delivery_sub_description">23시 전 주문 시 수도권 / 충청 내일 아침 7시 전 도착\n(그 외 지역 아침 8시 전 도착)</string>
 </resources>

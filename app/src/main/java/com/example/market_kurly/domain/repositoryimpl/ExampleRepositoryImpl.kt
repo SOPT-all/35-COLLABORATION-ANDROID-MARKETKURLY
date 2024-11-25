@@ -5,7 +5,7 @@ import com.example.market_kurly.data.service.ExampleService
 import com.example.market_kurly.domain.repository.ExampleRepository
 
 class ExampleRepositoryImpl(
-    private val exampleService: ExampleService
+    private val exampleService: ExampleService,
 ) : ExampleRepository {
     override suspend fun signUp(request: RequestSignUpDto): Result<String> = runCatching {
         val response = exampleService.signUp(request)

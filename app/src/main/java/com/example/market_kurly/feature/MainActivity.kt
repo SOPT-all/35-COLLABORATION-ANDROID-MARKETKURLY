@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
             MARKETKURLYTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     val navController = rememberNavController()
                     NavGraph(navController = navController)
