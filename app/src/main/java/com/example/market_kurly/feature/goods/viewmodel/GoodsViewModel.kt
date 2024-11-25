@@ -1,6 +1,5 @@
 package com.example.market_kurly.feature.goods.viewmodel
 
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,6 +13,7 @@ import com.example.market_kurly.core.util.KeyStorage.PACKAGING_TYPE
 import com.example.market_kurly.core.util.KeyStorage.SELLING_UNIT
 import com.example.market_kurly.core.util.KeyStorage.WEIGHT
 import com.example.market_kurly.domain.repository.GoodsRepository
+import com.example.market_kurly.domain.repository.LikeRepository
 import com.example.market_kurly.feature.goods.state.GoodsState
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,6 +24,7 @@ import kotlinx.coroutines.launch
 
 class GoodsViewModel(
     private val goodsRepository: GoodsRepository,
+    private val likeRepository: LikeRepository,
 ) : ViewModel() {
 
     @StringRes
@@ -40,7 +41,7 @@ class GoodsViewModel(
 
     fun getGoodsDetailData(productId: Int, memberId: Int) {
         viewModelScope.launch {
-            val response = goodsRepository.getGoodsDetailById(productId, memberId)
+            goodsRepository.getGoodsDetailById(productId, memberId)
                 .onSuccess { goodsData ->
                     _uiState.update { currentState ->
                         currentState.copy(
@@ -61,7 +62,6 @@ class GoodsViewModel(
                     }
 
                 }
-            Log.d("HH", response.toString())
         }
     }
 
@@ -81,16 +81,27 @@ class GoodsViewModel(
         return emptyList()
     }
 
-    fun toggleFavorite() {
-        _uiState.update { currentState ->
-            currentState.copy(isFavorite = !_uiState.value.isFavorite)
-        }
+    fun toggleFavorite(productId: Int, memberId: Int) {
         viewModelScope.launch {
+            _uiState.update { currentState ->
+                currentState.copy(isFavorite = !_uiState.value.isFavorite)
+            }
             if (_uiState.value.isFavorite) {
-                _snackbarMessage.emit(R.string.goods_snackbar_message_favorite)
+                likeRepository.like(productId, memberId)
+                    .onSuccess {
+                            _snackbarMessage.emit(R.string.goods_snackbar_message_favorite)
+                    }
+                    .onFailure {
+                            _snackbarMessage.emit(R.string.goods_snackbar_message_fail)
+                    }
+            }
+            else{
+                likeRepository.unLike(productId, memberId)
+                    .onFailure {
+                        _snackbarMessage.emit(R.string.goods_snackbar_message_fail)
+                    }
             }
         }
-        // TODO: API 연동 추가
     }
 
     fun navigateToWishlist() {

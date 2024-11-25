@@ -50,6 +50,7 @@ import com.example.market_kurly.core.util.KeyStorage.WISHLIST
 import com.example.market_kurly.core.util.price.toDecimalFormat
 import com.example.market_kurly.data.ServicePool
 import com.example.market_kurly.domain.repositoryimpl.GoodsRepositoryImpl
+import com.example.market_kurly.domain.repositoryimpl.LikeRepositoryImpl
 import com.example.market_kurly.feature.goods.component.KurlyAlsoViewedColumnItem
 import com.example.market_kurly.feature.goods.component.KurlyGoodsInfoText
 import com.example.market_kurly.feature.goods.component.KurlyGoodsMembershipToggleButton
@@ -71,7 +72,12 @@ fun GoodsScreen(
 ) {
     val context = LocalContext.current
     val goodsRepository by lazy { GoodsRepositoryImpl(ServicePool.goodsService) }
-    val viewModelFactory by lazy { BaseViewModelFactory(goodsRepository = goodsRepository) }
+    val likeRepository by lazy { LikeRepositoryImpl(ServicePool.likeService) }
+    val viewModelFactory by lazy {
+        BaseViewModelFactory(
+            goodsRepository = goodsRepository,
+            likeRepository = likeRepository)
+    }
     val viewModel: GoodsViewModel = viewModel(factory = viewModelFactory)
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -125,11 +131,12 @@ fun GoodsScreen(
                 },
             )
         },
+        //TODO: 홈에서 productId 넘겨받아야함
         bottomBar = {
             KurlyGoodsDetailBottomBar(
                 modifier = Modifier.background(White),
                 isFavorite = uiState.isFavorite,
-                onFavoriteClick = { viewModel.toggleFavorite() },
+                onFavoriteClick = { viewModel.toggleFavorite(5, 1) },
             )
         },
     ) { innerPadding ->
