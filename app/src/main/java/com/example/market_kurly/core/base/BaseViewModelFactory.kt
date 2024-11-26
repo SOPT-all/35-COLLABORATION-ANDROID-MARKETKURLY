@@ -4,12 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.market_kurly.domain.repository.ExampleRepository
 import com.example.market_kurly.domain.repository.GoodsRepository
+import com.example.market_kurly.domain.repository.LikeRepository
 import com.example.market_kurly.feature.ExampleViewModel
 import com.example.market_kurly.feature.goods.viewmodel.GoodsViewModel
 
 class BaseViewModelFactory(
     private val exampleRepository: ExampleRepository? = null,
     private val goodsRepository: GoodsRepository? = null,
+    private val likeRepository: LikeRepository? = null,
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
@@ -17,10 +19,19 @@ class BaseViewModelFactory(
                 @Suppress("UNCHECKED_CAST")
                 exampleRepository?.let { ExampleViewModel(it) } as T
             }
+
             modelClass.isAssignableFrom(GoodsViewModel::class.java) -> {
                 @Suppress("UNCHECKED_CAST")
-                goodsRepository?.let { GoodsViewModel(it) } as T
+                goodsRepository?.let {
+                    likeRepository?.let {
+                        GoodsViewModel(
+                            goodsRepository = goodsRepository,
+                            likeRepository = likeRepository
+                        )
+                    }
+                } as T
             }
+
             else -> throw IllegalArgumentException("Unknown ViewModel class")
         }
     }

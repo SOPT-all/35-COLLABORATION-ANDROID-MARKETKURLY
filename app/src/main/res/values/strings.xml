@@ -48,6 +48,7 @@
     <string name="goods_icon_right_arrow_description">right arrow icon</string>
     <string name="goods_icon_membership_ticket_descrpition">membership ticket icon</string>
     <string name="goods_snackbar_message_favorite">찜한 상품에 추가되었습니다.</string>
+    <string name="goods_snackbar_message_fail">요청에 실패했습니다.</string>
     <string name="goods_snackbar_action_go_to_wishlist">찜한 상품으로 가기</string>
     <string name="goods_text_price">%1$s원</string>
     <string name="goods_text_percent">%1$s%%</string>
