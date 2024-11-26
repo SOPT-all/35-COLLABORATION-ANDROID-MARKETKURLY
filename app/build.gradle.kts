@@ -87,4 +87,7 @@ dependencies {
 
     // constraintlayout
     implementation(libs.constraintlayout.compose)
+
+    // Coil
+    implementation(libs.coil)
 }

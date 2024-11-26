@@ -5,18 +5,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.market_kurly.core.util.view.UiState
-import com.example.market_kurly.data.dto.request.RequestSignUpDto
+import com.example.market_kurly.domain.model.SignUpModel
 import com.example.market_kurly.domain.repository.ExampleRepository
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
 class ExampleViewModel(
-    private val exampleRepository: ExampleRepository
+    private val exampleRepository: ExampleRepository,
 ) : ViewModel() {
     private val _signUpState = MutableLiveData<UiState>()
     val signUpState: LiveData<UiState> get() = _signUpState
 
-    fun signUp(request: RequestSignUpDto) {
+    fun signUp(request: SignUpModel) {
         viewModelScope.launch {
             exampleRepository.signUp(request)
                 .onSuccess {

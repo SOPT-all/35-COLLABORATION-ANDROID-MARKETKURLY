@@ -10,11 +10,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 
 private val DarkColorScheme = darkColorScheme(
-    primary = PrimaryColor600
+    primary = PrimaryColor600,
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = PrimaryColor600
+    primary = PrimaryColor600,
 )
 
 private val LocalMarketKurlyTypography = staticCompositionLocalOf<MarketKurlyTypography> {
@@ -32,7 +32,7 @@ fun ProvideMarketKurlyTypography(typography: MarketKurlyTypography, content: @Co
     provideTypography.update(typography)
     CompositionLocalProvider(
         LocalMarketKurlyTypography provides provideTypography,
-        content = content
+        content = content,
     )
 }
 
@@ -41,7 +41,7 @@ fun MARKETKURLYTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = LightColorScheme
     val typography = marketKurlyTypography()

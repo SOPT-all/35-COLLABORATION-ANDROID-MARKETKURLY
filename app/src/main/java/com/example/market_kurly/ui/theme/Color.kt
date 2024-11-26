@@ -19,7 +19,7 @@ val Mint3 = Color(0xFF4DBED7)
 // Gray Scale
 val White = Color(0xFFFFFFFF)
 val Gray1 = Color(0xFFFCFCFC)
-val Gray2 = Color(0xFFF5F5F5)
+val Gray2 = Color(0xFFF4F4F4)
 val Gray3 = Color(0xFFDDDDDD)
 val Gray4 = Color(0xFFB6B6B6)
 val Gray5 = Color(0xFF999999)
