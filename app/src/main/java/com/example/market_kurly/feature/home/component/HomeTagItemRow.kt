@@ -31,7 +31,6 @@ fun HomeTagItemRow (
         chunkedList.forEach { group ->
             LazyRow(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(0.dp) // 메뉴 간 간격
             ) {
                 items(group) { tag ->
                     HomeTagItem(
