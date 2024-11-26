@@ -79,6 +79,12 @@ dependencies {
     // Timber
     implementation(libs.timber)
 
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.pager.indicators)
+
+    // constraintlayout
+    implementation(libs.constraintlayout.compose)
+
     // Coil
     implementation(libs.coil)
 }
