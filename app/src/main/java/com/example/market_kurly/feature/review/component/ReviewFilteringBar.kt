@@ -1,7 +1,7 @@
 package com.example.market_kurly.feature.review.component
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,10 +24,11 @@ import com.example.market_kurly.R
 import com.example.market_kurly.core.util.KeyStorage.REVIEW_FILTER_LEAST_STARS
 import com.example.market_kurly.core.util.KeyStorage.REVIEW_FILTER_MOST_STARS
 import com.example.market_kurly.core.util.KeyStorage.REVIEW_FILTER_RECENT
+import com.example.market_kurly.core.util.color.setDropDownMenuTextStyle
+import com.example.market_kurly.core.util.modifier.noRippleClickable
 import com.example.market_kurly.ui.theme.Gray7
 import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
-import com.example.market_kurly.ui.theme.PrimaryColor600
 import com.example.market_kurly.ui.theme.White
 
 @Composable
@@ -39,29 +41,44 @@ fun ReviewFilteringBar(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 14.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = stringResource(R.string.review_total_number),
             style = MarketKurlyTheme.typography.captionM12,
             color = Gray7,
-            modifier = Modifier.weight(1f)
+            modifier = modifier.weight(1f)
         )
 
         Box {
-            Text(
-                text = selectedFilter,
-                style = MarketKurlyTheme.typography.captionM12,
-                color = Gray7,
-                modifier = Modifier
+            Row(
+                modifier = modifier
                     .padding(horizontal = 8.dp, vertical = 14.dp)
-                    .then(
-                        Modifier.clickable {
-                            isDropDownMenuExpanded = !isDropDownMenuExpanded
-                        }
+                    .noRippleClickable { isDropDownMenuExpanded = !isDropDownMenuExpanded },
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = selectedFilter,
+                    style = MarketKurlyTheme.typography.captionM12,
+                    color = Gray7,
+                    modifier = modifier
+                        .padding(horizontal = 8.dp, vertical = 14.dp)
+                        .noRippleClickable { isDropDownMenuExpanded = !isDropDownMenuExpanded }
+                )
+
+                if (isDropDownMenuExpanded) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_review_drop_down_expanded_arrow),
+                        contentDescription = stringResource(R.string.review_drop_down_menu_expanded_arrow_description),
                     )
-            )
+                } else {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_review_drop_down_folded_arrow),
+                        contentDescription = stringResource(R.string.review_drop_down_menu_folded_arrow_description),
+                    )
+                }
+            }
 
             DropdownMenu(
                 expanded = isDropDownMenuExpanded,
@@ -71,9 +88,11 @@ fun ReviewFilteringBar(
             ) {
                 DropdownMenuItem(
                     text = {
+                        val style = setDropDownMenuTextStyle(selectedFilter, REVIEW_FILTER_RECENT)
                         Text(
                             text = stringResource(R.string.review_filter_recent),
-                            color = if (selectedFilter == REVIEW_FILTER_RECENT) PrimaryColor600 else Gray7
+                            color = style.color,
+                            style = style.typography
                         )
                     },
                     onClick = {
@@ -83,9 +102,11 @@ fun ReviewFilteringBar(
                 )
                 DropdownMenuItem(
                     text = {
+                        val style = setDropDownMenuTextStyle(selectedFilter, REVIEW_FILTER_MOST_STARS)
                         Text(
                             text = stringResource(R.string.review_filter_most_stars),
-                            color = if (selectedFilter == REVIEW_FILTER_MOST_STARS) PrimaryColor600 else Gray7
+                            color = style.color,
+                            style = style.typography
                         )
                     },
                     onClick = {
@@ -95,9 +116,11 @@ fun ReviewFilteringBar(
                 )
                 DropdownMenuItem(
                     text = {
+                        val style = setDropDownMenuTextStyle(selectedFilter, REVIEW_FILTER_LEAST_STARS)
                         Text(
                             text = stringResource(R.string.review_filter_least_stars),
-                            color = if (selectedFilter == REVIEW_FILTER_LEAST_STARS) PrimaryColor600 else Gray7
+                            color = style.color,
+                            style = style.typography
                         )
                     },
                     onClick = {
