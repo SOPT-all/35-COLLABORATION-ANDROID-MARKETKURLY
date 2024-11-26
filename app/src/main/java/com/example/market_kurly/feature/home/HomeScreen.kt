@@ -129,7 +129,7 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.height(23.dp))
                 HomeAllButton(
                     modifier = Modifier.padding(horizontal = 15.dp)
-                ) {}
+                )
                 Spacer(modifier = Modifier.height(20.dp))
             }
             Spacer(modifier = Modifier.height(44.dp))
@@ -155,7 +155,7 @@ fun HomeScreen(
 @Composable
 private fun HomeAllButton(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit = {}
 ) {
     Row(
         modifier = modifier

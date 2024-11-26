@@ -14,10 +14,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
+import com.example.market_kurly.feature.home.NavItem
 import com.example.market_kurly.ui.theme.Gray1
 import com.example.market_kurly.ui.theme.Gray3
 import com.example.market_kurly.ui.theme.MARKETKURLYTheme
@@ -25,9 +27,17 @@ import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 
 @Composable
 fun HomeBottomNav (
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    var selectedItem by remember { mutableStateOf("홈") }
+    val context = LocalContext.current
+    var selectedItem by remember { mutableStateOf(context.getString(R.string.home_buttonNav_home))}
+    val navItems = listOf(
+        NavItem(stringResource(id = R.string.home_buttonNav_home), R.drawable.ic_home_nav_home),
+        NavItem(stringResource(id = R.string.home_buttonNav_lounge), R.drawable.ic_home_nav_lounge),
+        NavItem(stringResource(id = R.string.home_buttonNav_category), R.drawable.ic_home_nav_category),
+        NavItem(stringResource(id = R.string.home_buttonNav_search), R.drawable.ic_home_nav_search),
+        NavItem(stringResource(id = R.string.home_buttonNav_mykurly), R.drawable.ic_home_nav_mykurly)
+    )
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -41,35 +51,20 @@ fun HomeBottomNav (
                     strokeWidth = strokeWidth
                 )
             }
-            .padding(horizontal = 18.dp),
+            .padding(
+                start = 18.dp,
+                end = 18.dp,
+                bottom = 20.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        HomeNavItem(
-            stringResource(id = R.string.home_buttonNav_home),
-            isSelected = selectedItem == stringResource(id = R.string.home_buttonNav_home),
-            R.drawable.ic_home_nav_home
-        ) { selectedItem = R.string.home_buttonNav_home.toString() }
-        HomeNavItem(
-            stringResource(id = R.string.home_buttonNav_lounge),
-            isSelected = selectedItem == stringResource(id = R.string.home_buttonNav_lounge),
-            R.drawable.ic_home_nav_lounge
-        ) { selectedItem = R.string.home_buttonNav_lounge.toString() }
-        HomeNavItem(
-            stringResource(id = R.string.home_buttonNav_category),
-            isSelected = selectedItem ==  stringResource(id = R.string.home_buttonNav_category),
-            R.drawable.ic_home_nav_category
-        ) { selectedItem =  R.string.home_buttonNav_category.toString() }
-        HomeNavItem(
-            stringResource(id = R.string.home_buttonNav_search),
-            isSelected = selectedItem == stringResource(id = R.string.home_buttonNav_search),
-            R.drawable.ic_home_nav_search
-        ) { selectedItem = R.string.home_buttonNav_search.toString() }
-        HomeNavItem(
-            stringResource(id = R.string.home_buttonNav_mykurly),
-            isSelected = selectedItem == stringResource(id = R.string.home_buttonNav_mykurly),
-            R.drawable.ic_home_nav_mykurly
-        ) { selectedItem = R.string.home_buttonNav_mykurly.toString() }
+        navItems.forEach { item ->
+            HomeNavItem(
+                item.title,
+                isSelected = selectedItem == item.title,
+                icon = item.icon
+            ) { selectedItem =  item.title }
+        }
     }
 }
 
