@@ -38,7 +38,7 @@ fun HomeRankingProduct (
     Column (
         modifier = modifier
             .width(177.dp)
-            .background(color = White, shape = RoundedCornerShape(10.dp))
+            .background(White, shape = RoundedCornerShape(10.dp))
     ) {
         AsyncImageFillWidth(
             imageUrl = imageUrl,

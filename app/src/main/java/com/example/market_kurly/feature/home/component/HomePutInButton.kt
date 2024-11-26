@@ -34,7 +34,7 @@ fun HomePutInButton (
     Box (
         modifier = modifier
             .fillMaxWidth()
-            .background(color = White, shape = RoundedCornerShape(4.dp))
+            .background(White, shape = RoundedCornerShape(4.dp))
             .border(width = 1.dp, color = CoolGray2, shape = RoundedCornerShape(4.dp))
             .noRippleClickable { onPutInClick() }
             .padding(vertical = 5.dp),

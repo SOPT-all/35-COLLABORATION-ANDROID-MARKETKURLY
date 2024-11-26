@@ -51,7 +51,7 @@ fun HomeTopBar (
     Column (
         modifier = modifier
             .fillMaxWidth()
-            .background(color = PrimaryColor600)
+            .background(PrimaryColor600)
     ){
         Row(
             modifier = Modifier
@@ -94,7 +94,7 @@ private fun HomeTopBarToggle(
     Row(
         modifier = modifier
             .clip(CircleShape)
-            .background(color = PrimaryColor500),
+            .background(PrimaryColor500),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -103,7 +103,7 @@ private fun HomeTopBarToggle(
             color = PrimaryColor600,
             modifier = modifier
                 .clip(CircleShape)
-                .background(color = White)
+                .background(White)
                 .padding(
                     horizontal = 9.5.dp,
                     vertical = 5.dp

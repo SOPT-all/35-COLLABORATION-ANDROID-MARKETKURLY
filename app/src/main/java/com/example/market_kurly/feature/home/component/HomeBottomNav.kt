@@ -41,7 +41,7 @@ fun HomeBottomNav (
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(color = Gray1)
+            .background(Gray1)
             .drawBehind {
                 val strokeWidth = 1.dp.toPx() // 선 두께
                 drawLine(

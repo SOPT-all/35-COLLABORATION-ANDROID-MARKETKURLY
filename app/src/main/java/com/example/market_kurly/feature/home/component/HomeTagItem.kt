@@ -44,7 +44,7 @@ fun HomeTagItem (
             contentDescription = "Tag Item",
             tint = Color.Unspecified,
             modifier = Modifier
-                .background(color = CoolGray1, shape = RoundedCornerShape(13.dp))
+                .background(CoolGray1, shape = RoundedCornerShape(13.dp))
                 .padding(7.dp)
         )
         Spacer(modifier = Modifier.height(2.dp))

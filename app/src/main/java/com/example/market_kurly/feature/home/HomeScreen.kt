@@ -160,7 +160,7 @@ private fun HomeAllButton(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(color = White, shape = RoundedCornerShape(4.dp))
+            .background(White, shape = RoundedCornerShape(4.dp))
             .padding(vertical = 14.dp)
             .noRippleClickable { onClick() },
         verticalAlignment = Alignment.CenterVertically,
