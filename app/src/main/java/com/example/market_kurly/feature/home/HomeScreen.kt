@@ -162,7 +162,7 @@ private fun HomeAllButton(
             .fillMaxWidth()
             .background(White, shape = RoundedCornerShape(4.dp))
             .padding(vertical = 14.dp)
-            .noRippleClickable { onClick() },
+            .noRippleClickable(onClick),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
     ) {

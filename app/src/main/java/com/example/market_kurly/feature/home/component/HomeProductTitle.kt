@@ -49,7 +49,7 @@ fun HomeProductTitle (
         Row(
             modifier = Modifier
                 .padding(vertical = 4.dp)
-                .noRippleClickable { onDetailClick() },
+                .noRippleClickable(onDetailClick),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
