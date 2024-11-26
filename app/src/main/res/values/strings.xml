@@ -11,6 +11,21 @@
 
     <!-- Review Screen -->
     <string name="review_screen">Review</string>
+    <string name="review_more_image">+ 더보기</string>
+    <string name="review_notice_best_review">[24년 11월 1주] 베스트 후기 선정 안내</string>
+    <string name="review_notice_savings_rule">상품후기 적립금 정책 안내</string>
+    <string name="review_photo_review">사진 후기</string>
+    <string name="review_total_number">총 11,002개</string>
+    <string name="review_filter_recent">최신순</string>
+    <string name="review_filter_most_stars">별점높은순</string>
+    <string name="review_filter_least_stars">별점낮은순</string>
+    <string name="review_notice_icon_description">Review notice image</string>
+    <string name="review_item_advertisement_icon_description">Review Item advertisement icon</string>
+    <string name="review_item_yellow_star_description">Yellow Star</string>
+    <string name="review_item_gray_star_description">Gray Star</string>
+    <string name="review_image_row_single_image_description">Review Single Image</string>
+    <string name="review_drop_down_menu_expanded_arrow_description">Drop Down Menu Expanded Arrow</string>
+    <string name="review_drop_down_menu_folded_arrow_description">Drop Down Menu Folded Arrow</string>
 
     <!-- WishList Screen -->
     <string name="wishlist_screen">WishList</string>
@@ -46,4 +61,8 @@
     <string name="goods_text_also_viewed">다른 고객이 함께 본 상품</string>
     <string name="goods_text_next_goods">다음상품</string>
     <string name="goods_text_delivery_sub_description">23시 전 주문 시 수도권 / 충청 내일 아침 7시 전 도착\n(그 외 지역 아침 8시 전 도착)</string>
+    <string name="wishlist_top_bar_left_arrow_description">WishList TopBar Left Arrow</string>
+    <string name="wishlist_products">찜한 상품</string>
+    <string name="wishlist_top_bar_cart_description">WishList TopBar Cart</string>
+    <string name="wishlist_top_bar_notification_description">WishList TopBar Notification</string>
 </resources>
