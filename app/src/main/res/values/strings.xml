@@ -10,10 +10,36 @@
     <string name="btn_go_to_goods">Go to Goods</string>
     <string name="home_topbar_marketkurly">마켓컬리</string>
     <string name="home_topbar_beatykurly">뷰티컬리</string>
+    <string name="home_all_view">전체보기</string>
     <string name="home_put_in">담기</string>
     <string name="home_price">%s원</string>
     <string name="home_percent">%s%%</string>
     <string name="home_review_count">%s+</string>
+    <string name="home_tag_lowestprice">최저가도전</string>
+    <string name="home_tag_members">멤버스특가</string>
+    <string name="home_tag_homeliving">홈&amp;리빙</string>
+    <string name="home_tag_fashion">패션</string>
+    <string name="home_tag_present">선물추천</string>
+    <string name="home_tag_livecommerce">라이브커머스</string>
+    <string name="home_tag_kurlymembers">컬리멤버스</string>
+    <string name="home_tag_kurlycurator">컬리큐레이터</string>
+    <string name="home_tag_luck">행운출첵</string>
+    <string name="home_tag_todaytarot">오늘의타로</string>
+    <string name="home_tag_mykurlyfarm">마이컬리맘</string>
+    <string name="home_tag_showcase">쇼케이스</string>
+    <string name="home_banner_description">Home Banner</string>
+    <string name="home_buttonNav_home">홈</string>
+    <string name="home_buttonNav_lounge">라운지</string>
+    <string name="home_buttonNav_category">카테고리</string>
+    <string name="home_buttonNav_search">검색</string>
+    <string name="home_buttonNav_mykurly">마이컬리</string>
+    <string name="home_firstProduct_title">👑 껄디님을 위해 엄선했어요</string>
+    <string name="home_firstProduct_subTitle">찜해 놓은 그 상품, 지금 빅세일로 저렴하게!</string>
+    <string name="home_rankingProduct_title">🏆 실시간 인기 랭킹 🏆</string>
+    <string name="home_rankingProduct_subTitle">가장 인기있는 상품만 모아보세요!</string>
+    <string name="home_secondProduct_title">🎊 이 상품은 어때요?</string>
+    <string name="home_secondProduct_subTitle">껄디님의 취향에 맞는 상품을 담아보세요</string>
+
 
 
     <!-- Goods Screen -->

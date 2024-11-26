@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
@@ -45,30 +46,30 @@ fun HomeBottomNav (
         verticalAlignment = Alignment.CenterVertically
     ) {
         HomeNavItem(
-            "홈",
-            isSelected = selectedItem == "홈",
+            stringResource(id = R.string.home_buttonNav_home),
+            isSelected = selectedItem == stringResource(id = R.string.home_buttonNav_home),
             R.drawable.ic_home_nav_home
-        ) { selectedItem = "홈" }
+        ) { selectedItem = R.string.home_buttonNav_home.toString() }
         HomeNavItem(
-            "라운지",
-            isSelected = selectedItem == "라운지",
+            stringResource(id = R.string.home_buttonNav_lounge),
+            isSelected = selectedItem == stringResource(id = R.string.home_buttonNav_lounge),
             R.drawable.ic_home_nav_lounge
-        ) { selectedItem = "라운지" }
+        ) { selectedItem = R.string.home_buttonNav_lounge.toString() }
         HomeNavItem(
-            "카테고리",
-            isSelected = selectedItem == "카테고리",
+            stringResource(id = R.string.home_buttonNav_category),
+            isSelected = selectedItem ==  stringResource(id = R.string.home_buttonNav_category),
             R.drawable.ic_home_nav_category
-        ) { selectedItem = "카테고리" }
+        ) { selectedItem =  R.string.home_buttonNav_category.toString() }
         HomeNavItem(
-            "검색",
-            isSelected = selectedItem == "검색",
+            stringResource(id = R.string.home_buttonNav_search),
+            isSelected = selectedItem == stringResource(id = R.string.home_buttonNav_search),
             R.drawable.ic_home_nav_search
-        ) { selectedItem = "검색" }
+        ) { selectedItem = R.string.home_buttonNav_search.toString() }
         HomeNavItem(
-            "마이컬리",
-            isSelected = selectedItem == "마이컬리",
+            stringResource(id = R.string.home_buttonNav_mykurly),
+            isSelected = selectedItem == stringResource(id = R.string.home_buttonNav_mykurly),
             R.drawable.ic_home_nav_mykurly
-        ) { selectedItem = "마이컬리" }
+        ) { selectedItem = R.string.home_buttonNav_mykurly.toString() }
     }
 }
 

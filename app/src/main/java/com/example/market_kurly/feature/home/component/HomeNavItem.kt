@@ -32,7 +32,7 @@ fun HomeNavItem (
     ) {
         Icon(
             painter = painterResource(id = icon),
-            contentDescription = "Home Nav Item",
+            contentDescription = "Home Nav Icon",
             tint = if (isSelected) PrimaryColor600 else Gray7
         )
         Text(
