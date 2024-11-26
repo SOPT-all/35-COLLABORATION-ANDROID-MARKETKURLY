@@ -83,7 +83,7 @@ fun HomeProduct (
                 tint = CoolGray3
             )
             Text(
-                stringResource(id = R.string.home_review_count, if (reviewCount > 999) 999 else reviewCount),
+                stringResource(id = R.string.home_review_count, if (reviewCount > 9999) 9999 else if(reviewCount > 999) 999 else reviewCount),
                 style = MarketKurlyTheme.typography.captionR12,
                 color = CoolGray3
             )
