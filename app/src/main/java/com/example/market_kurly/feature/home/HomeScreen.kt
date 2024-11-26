@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -102,8 +103,8 @@ fun HomeScreen(
                                 White,
                                 GrGray1
                             ),
-                            start = androidx.compose.ui.geometry.Offset(0f, 0f), // 시작점
-                            end = androidx.compose.ui.geometry.Offset(0f, 1000f) // 끝점
+                            start = Offset(0f, 0f), // 시작점
+                            end = Offset(0f, 1000f) // 끝점
                         )
                     )
             ) {
