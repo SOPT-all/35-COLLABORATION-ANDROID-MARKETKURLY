@@ -9,10 +9,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import coil3.compose.AsyncImage
-import coil3.request.ImageRequest
-import coil3.request.error
-import coil3.request.placeholder
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.market_kurly.R
 import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 
@@ -45,7 +43,7 @@ private fun HomeBannerPreview() {
     MARKETKURLYTheme {
         AsyncImageFillWidth(
             imageUrl = "https://velog.velcdn.com/images/roel_dev/post/7b723d45-14a7-45a9-b489-f6cbc9c2035e/image.png",
-            placeholder = R.mipmap.img_home_banner_dummy
+            placeholder = R.drawable.ic_launcher_background
         )
     }
 }
