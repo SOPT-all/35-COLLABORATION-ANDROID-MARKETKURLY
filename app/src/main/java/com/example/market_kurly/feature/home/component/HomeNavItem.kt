@@ -21,8 +21,8 @@ import com.example.market_kurly.ui.theme.PrimaryColor600
 @Composable
 fun HomeNavItem (
     menu: String,
-    isSelected: Boolean = false,
     @DrawableRes icon : Int,
+    isSelected: Boolean = false,
     onClick: () -> Unit = {}
 ) {
     Column (
