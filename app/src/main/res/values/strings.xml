@@ -19,6 +19,13 @@
     <string name="review_filter_recent">최신순</string>
     <string name="review_filter_most_stars">별점높은순</string>
     <string name="review_filter_least_stars">별점낮은순</string>
+    <string name="review_notice_icon_description">Review notice image</string>
+    <string name="review_item_advertisement_icon_description">Review Item advertisement icon</string>
+    <string name="review_item_yellow_star_description">Yellow Star</string>
+    <string name="review_item_gray_star_description">Gray Star</string>
+    <string name="review_image_row_single_image_description">Review Single Image</string>
+    <string name="review_drop_down_menu_expanded_arrow_description">Drop Down Menu Expanded Arrow</string>
+    <string name="review_drop_down_menu_folded_arrow_description">Drop Down Menu Folded Arrow</string>
 
     <!-- WishList Screen -->
     <string name="wishlist_screen">WishList</string>

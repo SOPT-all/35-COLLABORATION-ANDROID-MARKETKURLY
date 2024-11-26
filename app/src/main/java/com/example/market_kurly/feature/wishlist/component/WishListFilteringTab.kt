@@ -1,5 +1,6 @@
 package com.example.market_kurly.feature.wishlist.component
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,14 +30,15 @@ import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
 import com.example.market_kurly.ui.theme.PrimaryColor400
 import com.example.market_kurly.ui.theme.White
+import okhttp3.internal.immutableListOf
 
 @Composable
 fun WishListFilteringTab(
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
 ) {
     val categoryMenus =
-        listOf(
+        immutableListOf(
             WISHLIST_CATEGORY_TOTAL,
             WISHLIST_CATEGORY_DAIRY_PRODUCT,
             WISHLIST_CATEGORY_SIMPLE_PRODUCT,
@@ -55,6 +57,8 @@ fun WishListFilteringTab(
     ) {
         items(categoryMenus.size) { index ->
             val category = categoryMenus[index]
+            val interactionSource = remember { MutableInteractionSource() }
+
             FilterChip(
                 modifier = Modifier
                     .height(32.dp)
@@ -81,6 +85,7 @@ fun WishListFilteringTab(
                     enabled = true,
                     selected = selectedCategory == category,
                 ),
+                interactionSource = interactionSource
             )
         }
     }

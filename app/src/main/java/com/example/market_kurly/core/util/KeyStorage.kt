@@ -21,6 +21,9 @@ object KeyStorage {
     const val REVIEW_FILTER_MOST_STARS = "별점높은순"
     const val REVIEW_FILTER_LEAST_STARS = "별점낮은순"
 
+    // Review Star
+    const val STAR_MAX_COUNT = 5
+
     // Response null 대체 문자열
     const val EMPTY_RESPONSE = "0"
 

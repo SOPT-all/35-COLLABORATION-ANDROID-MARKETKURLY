@@ -66,7 +66,7 @@ fun ReviewImageRow(
             } else {
                 Image(
                     painter = rememberAsyncImagePainter(model = url),
-                    contentDescription = null,
+                    contentDescription = stringResource(R.string.review_image_row_single_image_description),
                     modifier = Modifier
                         .size(81.dp)
                         .clip(cornerShape)
