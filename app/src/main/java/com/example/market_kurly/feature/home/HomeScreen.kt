@@ -1,7 +1,6 @@
 package com.example.market_kurly.feature.home
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -103,10 +102,8 @@ fun HomeScreen(
             )
             Spacer(modifier = Modifier.height(17.dp))
             HomeProductRow(
-                mainTopProducts
-                ,modifier = Modifier.clickable {
-                    navController.navigate("goods")
-                }
+                mainTopProducts,
+                navController = navController
             )
             Spacer(modifier = Modifier.height(14.dp))
             AsyncImageFillWidth(
@@ -161,7 +158,10 @@ fun HomeScreen(
                     .padding(start = 15.dp, end = 9.dp)
             )
             Spacer(modifier = Modifier.height(17.dp))
-            HomeProductRow(mainBottomProducts)
+            HomeProductRow(
+                mainBottomProducts,
+                navController = navController
+            )
             Spacer(modifier = Modifier.height(28.dp))
         }
         HomeBottomNav(

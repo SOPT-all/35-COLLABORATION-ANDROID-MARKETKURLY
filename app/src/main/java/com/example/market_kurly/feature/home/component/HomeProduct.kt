@@ -15,12 +15,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
+import com.example.market_kurly.core.util.modifier.noRippleClickable
 import com.example.market_kurly.ui.theme.CoolGray3
 import com.example.market_kurly.ui.theme.Gray8
-import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
 import com.example.market_kurly.ui.theme.Red
 
@@ -34,10 +33,13 @@ fun HomeProduct (
     reviewCount: Int,
     modifier: Modifier = Modifier,
     imageUrl: String? = null,
-    onPutInClick: () -> Unit = {}
+    onPutInClick: () -> Unit = {},
+    onItemClick: () -> Unit = {}
 ) {
     Column (
-        modifier = modifier.width(140.dp)
+        modifier = modifier
+            .width(140.dp)
+            .noRippleClickable(onItemClick),
     ) {
         AsyncImageFillWidth(
             imageUrl = imageUrl,
@@ -87,20 +89,5 @@ fun HomeProduct (
                 color = CoolGray3
             )
         }
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-private fun HomeProductPreview() {
-    MARKETKURLYTheme {
-        HomeProduct(
-            "[3개 사면 33%] 비비고 통새우만두 200g",
-            6980,
-            33,
-            4630,
-            1200,
-        )
     }
 }

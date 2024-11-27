@@ -67,12 +67,12 @@ import com.example.market_kurly.ui.theme.White
 @Composable
 fun GoodsScreen(
     navController: NavHostController,
+    productId: Int,
 ) {
     val context = LocalContext.current
     val goodsRepository by lazy { GoodsRepositoryImpl() }
     val viewModelFactory by lazy { BaseViewModelFactory(goodsRepository = goodsRepository) }
     val viewModel: GoodsViewModel = viewModel(factory = viewModelFactory)
-
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val snackbarHostState = remember { SnackbarHostState() }
