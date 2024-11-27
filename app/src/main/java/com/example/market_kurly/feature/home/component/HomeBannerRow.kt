@@ -30,7 +30,6 @@ fun HomeBannerRow (
     ) { page ->
         AsyncImageFillWidth(
             imageUrl = bannerList[page],
-            placeholder = R.mipmap.img_home_banner_dummy
         )
     }
 }

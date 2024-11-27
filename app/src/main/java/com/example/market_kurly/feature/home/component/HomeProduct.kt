@@ -42,7 +42,6 @@ fun HomeProduct (
         AsyncImageFillWidth(
             imageUrl = imageUrl,
             modifier = Modifier.clip(RoundedCornerShape(4.dp)),
-            placeholder = R.mipmap.img_home_product_dummy
         )
         Spacer(modifier = Modifier.height(6.dp))
         HomePutInButton { onPutInClick() }
