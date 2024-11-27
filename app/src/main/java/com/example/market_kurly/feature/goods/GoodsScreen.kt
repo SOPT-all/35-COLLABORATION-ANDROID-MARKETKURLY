@@ -34,12 +34,10 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.market_kurly.R
-import com.example.market_kurly.core.base.BaseViewModelFactory
 import com.example.market_kurly.core.designsystem.component.KurlyGoodsDetailBottomBar
 import com.example.market_kurly.core.designsystem.component.KurlyGoodsDetailTopBar
 import com.example.market_kurly.core.util.KeyStorage.EMPTY_RESPONSE
@@ -48,9 +46,6 @@ import com.example.market_kurly.core.util.KeyStorage.MEMBERSHIP_EXPAND
 import com.example.market_kurly.core.util.KeyStorage.REVIEW
 import com.example.market_kurly.core.util.KeyStorage.WISHLIST
 import com.example.market_kurly.core.util.price.toDecimalFormat
-import com.example.market_kurly.data.ServicePool
-import com.example.market_kurly.domain.repositoryimpl.GoodsRepositoryImpl
-import com.example.market_kurly.domain.repositoryimpl.LikeRepositoryImpl
 import com.example.market_kurly.feature.goods.component.KurlyAlsoViewedColumnItem
 import com.example.market_kurly.feature.goods.component.KurlyGoodsInfoText
 import com.example.market_kurly.feature.goods.component.KurlyGoodsMembershipToggleButton
@@ -69,16 +64,9 @@ import kotlinx.coroutines.launch
 @Composable
 fun GoodsScreen(
     navController: NavHostController,
+    viewModel: GoodsViewModel
 ) {
     val context = LocalContext.current
-    val goodsRepository by lazy { GoodsRepositoryImpl(ServicePool.goodsService) }
-    val likeRepository by lazy { LikeRepositoryImpl(ServicePool.likeService) }
-    val viewModelFactory by lazy {
-        BaseViewModelFactory(
-            goodsRepository = goodsRepository,
-            likeRepository = likeRepository)
-    }
-    val viewModel: GoodsViewModel = viewModel(factory = viewModelFactory)
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 

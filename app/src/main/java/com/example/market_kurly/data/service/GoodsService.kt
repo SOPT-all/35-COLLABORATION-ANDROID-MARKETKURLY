@@ -8,10 +8,12 @@ import retrofit2.http.Path
 
 interface GoodsService {
     companion object {
+        const val API = "api"
+        const val V1 = "v1"
         const val PRODUCTS = "products"
     }
 
-    @GET("$PRODUCTS/{productId}")
+    @GET("$API/$V1/$PRODUCTS/{productId}")
     suspend fun getGoodsDetailById(
         @Path("productId") productsId : Int,
         @Header("memberId") memberId : Int,

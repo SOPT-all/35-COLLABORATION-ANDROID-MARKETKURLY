@@ -7,13 +7,13 @@ class LikeRepositoryImpl(
     private val likeService: LikeService,
 ) : LikeRepository {
 
-    override suspend fun like(productsId: Int, memberId: Int): Result<String?> = runCatching {
-        val response = likeService.like(productsId, memberId)
+    override suspend fun postProductsLike(productsId: Int, memberId: Int): Result<String?> = runCatching {
+        val response = likeService.postProductLike(productsId, memberId)
         response.data
     }
 
-    override suspend fun unLike(productsId: Int, memberId: Int): Result<String?> = runCatching {
-        val response = likeService.unLike(productsId, memberId)
+    override suspend fun deleteProductsLike(productsId: Int, memberId: Int): Result<String?> = runCatching {
+        val response = likeService.deleteProductLike(productsId, memberId)
         response.data
     }
 }
