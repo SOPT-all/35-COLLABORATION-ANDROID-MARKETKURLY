@@ -44,8 +44,8 @@ import com.example.market_kurly.feature.home.component.HomeProductTitle
 import com.example.market_kurly.feature.home.component.HomeRankingProductRow
 import com.example.market_kurly.feature.home.component.HomeTagItemRow
 import com.example.market_kurly.feature.home.component.HomeTopBar
-import com.example.market_kurly.feature.home.dummy.BannerDummy
 import com.example.market_kurly.feature.home.dummy.HomeScreenData
+import com.example.market_kurly.feature.home.dummy.bannerDummy
 import com.example.market_kurly.ui.theme.CoolGray4
 import com.example.market_kurly.ui.theme.GrGray1
 import com.example.market_kurly.ui.theme.Gray8
@@ -66,7 +66,7 @@ fun HomeScreen(
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    val bannerList = BannerDummy()
+    val bannerList = bannerDummy()
     val tagMenuList = HomeScreenData()
     val rankingProducts = uiState.mainMiddleData
     val mainTopProducts = uiState.mainTopData
