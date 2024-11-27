@@ -8,18 +8,20 @@ import retrofit2.http.Path
 
 interface LikeService {
     companion object {
+        const val API = "api"
+        const val V1 = "v1"
         const val LIKES = "likes"
         const val PRODUCTS = "products"
     }
 
-    @POST("$LIKES/$PRODUCTS/{productId}")
-    suspend fun like(
+    @POST("$API/$V1/$LIKES/$PRODUCTS/{productId}")
+    suspend fun postProductLike(
         @Path("productId") productsId : Int,
         @Header("memberId") memberId : Int,
     ): BaseResponse<String?>
 
-    @DELETE("$LIKES/$PRODUCTS/{productId}")
-    suspend fun unLike(
+    @DELETE("$API/$V1/$LIKES/$PRODUCTS/{productId}")
+    suspend fun deleteProductLike(
         @Path("productId") productsId : Int,
         @Header("memberId") memberId : Int,
     ): BaseResponse<String?>

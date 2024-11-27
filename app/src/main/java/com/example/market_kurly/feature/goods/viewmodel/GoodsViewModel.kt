@@ -87,7 +87,7 @@ class GoodsViewModel(
                 currentState.copy(isFavorite = !_uiState.value.isFavorite)
             }
             if (_uiState.value.isFavorite) {
-                likeRepository.like(productId, memberId)
+                likeRepository.postProductsLike(productId, memberId)
                     .onSuccess {
                             _snackbarMessage.emit(R.string.goods_snackbar_message_favorite)
                     }
@@ -96,7 +96,7 @@ class GoodsViewModel(
                     }
             }
             else{
-                likeRepository.unLike(productId, memberId)
+                likeRepository.deleteProductsLike(productId, memberId)
                     .onFailure {
                         _snackbarMessage.emit(R.string.goods_snackbar_message_fail)
                     }
