@@ -12,5 +12,5 @@ data class RequestSignUpDto(
     @SerialName("nickname")
     val nickname: String,
     @SerialName("phone")
-    val phone: String,
+    val phone: String?,
 )

@@ -1,7 +1,7 @@
 package com.example.market_kurly.domain.repository
 
-import com.example.market_kurly.data.dto.request.RequestSignUpDto
+import com.example.market_kurly.domain.model.SignUpModel
 
 interface ExampleRepository {
-    suspend fun signUp(request: RequestSignUpDto): Result<String>
+    suspend fun signUp(request: SignUpModel): Result<String>
 }

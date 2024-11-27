@@ -23,8 +23,11 @@ fun NavGraph(
         composable(HOME) {
             HomeScreen(navController)
         }
-        composable(GOODS) {
-            GoodsScreen(navController, goodsViewModel)
+        composable("$GOODS/{productId}") {
+            GoodsScreen(
+                navController,
+                goodsViewModel,
+                productId = it.arguments?.getString("productId")?.toInt() ?: 0,)
         }
         composable(REVIEW) {
             ReviewScreen(navController)

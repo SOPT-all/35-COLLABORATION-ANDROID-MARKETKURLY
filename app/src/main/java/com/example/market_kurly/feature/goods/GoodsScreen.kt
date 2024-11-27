@@ -65,6 +65,7 @@ import kotlinx.coroutines.launch
 fun GoodsScreen(
     navController: NavHostController,
     viewModel: GoodsViewModel
+    productId: Int,
 ) {
     val context = LocalContext.current
 
