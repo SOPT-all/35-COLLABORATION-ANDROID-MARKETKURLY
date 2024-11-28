@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.market_kurly.R
+import com.example.market_kurly.core.util.price.toDecimalFormat
 import com.example.market_kurly.ui.theme.Gray8
 import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
@@ -80,7 +81,7 @@ fun HomeRankingProduct (
                         )
                         Spacer(modifier = Modifier.width(3.dp))
                         Text(
-                            stringResource(id = R.string.home_price, discountAfterPrice),
+                            stringResource(id = R.string.home_price, discountAfterPrice.toDecimalFormat()),
                             style = MarketKurlyTheme.typography.bodyB16,
                             color = Gray8
                         )

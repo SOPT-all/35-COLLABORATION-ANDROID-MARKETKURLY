@@ -18,6 +18,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
 import com.example.market_kurly.core.util.modifier.noRippleClickable
+import com.example.market_kurly.core.util.price.toDecimalFormat
 import com.example.market_kurly.ui.theme.CoolGray3
 import com.example.market_kurly.ui.theme.Gray8
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
@@ -55,7 +56,7 @@ fun HomeProduct (
         )
         Spacer(modifier = Modifier.height(5.dp))
         Text(
-            stringResource(id = R.string.home_price, discountBeforePrice),
+            stringResource(id = R.string.home_price, discountBeforePrice.toDecimalFormat()),
             style = MarketKurlyTheme.typography.captionR12.copy(
                 textDecoration = TextDecoration.LineThrough
             ),
@@ -69,7 +70,7 @@ fun HomeProduct (
             )
             Spacer(modifier = Modifier.width(4.dp))
             Text(
-                stringResource(id = R.string.home_price, discountAfterPrice),
+                stringResource(id = R.string.home_price, discountAfterPrice.toDecimalFormat()),
                 style = MarketKurlyTheme.typography.bodyB16,
                 color = Gray8
             )
