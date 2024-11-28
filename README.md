@@ -7,7 +7,31 @@
 | SOPT 35th 안드로이드 | [김윤서](https://github.com/yskim6772) | [진지현](https://github.com/serioushyeon) | [안세홍](https://github.com/Roel4990) |
 |:------------------------------------:|:------------------------------------:|:-------------------------:|:------------------------------:|
 | <img src="https://github.com/user-attachments/assets/24b2842a-7b56-422a-bdba-2011bede4f41" alt="단체사진" width="420"/> | <img src="https://avatars.githubusercontent.com/u/131870144?v=4" alt="윤서" width="250"/> | <img src="https://avatars.githubusercontent.com/u/108039053?v=4" alt="지현" width="250"/> | <img src="https://avatars.githubusercontent.com/u/93641814?v=4" alt="세홍" width="250"/> |
-| **MarketKurly** |     `후기 뷰`, `위시리스트 뷰` <br> `후기, 위시리스트 api`     |       `상품 상세 뷰` <br> `상품 상세, 찜하기,` <br> `찜 취소 api`       |      `홈 뷰` <br> `홈 api`      |
+| **MarketKurly** |     `후기 뷰` <br> `위시리스트 뷰` <br> `후기, 위시리스트 api`     |       `상품 상세 뷰` <br> `상품 상세, 찜하기,` <br> `찜 취소 api`       |      `홈 뷰` <br> `홈 api`      |
+
+<br>
+
+## Screenshot & Video 💜
+### Screenshot 📹
+
+| <div align="center">홈</div> | <div align="center">상품 상세</div> | <div align="center">후기</div> | <div align="center">위시리스트</div> |
+|--------|--------|--------|--------|
+| <img src="https://github.com/user-attachments/assets/cd70e574-06d3-47a0-8c31-f972ff9e4e16" width="150"> <img src="https://github.com/user-attachments/assets/7db67868-c13b-4b91-a40c-b18cc812d3bb" width="150"> <img src="https://github.com/user-attachments/assets/f96bba71-be4f-43ca-8938-99543c1cc5a3" width="150"> | <img src="https://github.com/user-attachments/assets/e229b46d-ca86-48a8-be22-b1d1de41619d" width="150"> <img src="https://github.com/user-attachments/assets/29bdfa62-89d6-4852-aeb9-5d26bfb4c1ad" width="150"> <img src="https://github.com/user-attachments/assets/aaa794e6-ee01-42c2-81df-77a8b23fc1fe" width="150"> | <img src="https://github.com/user-attachments/assets/79301229-4463-4868-a912-f9d4d84e57fa" width="150"> <img src="https://github.com/user-attachments/assets/bb74d271-05e6-4836-8712-83ae250a8cd9" width="150"> <img src="https://github.com/user-attachments/assets/763faa98-bec4-4455-8d22-1453269b2b88" width="150"> | <img src="https://github.com/user-attachments/assets/8872737c-85bb-4eef-be2a-2433b16a6556" width="150"> <img src="https://github.com/user-attachments/assets/bb8edbae-ae1c-4db0-8e2b-7585697c9575" width="150"> <img src="https://github.com/user-attachments/assets/cdfb7302-4700-4900-8b2f-03e723fabc21" width="150"> | 
+
+<br>
+
+### Video 🎬
+#### [홈/Home]
+https://github.com/user-attachments/assets/129a1003-5153-4fd1-806b-eaa9b023f357
+
+#### [상품 상세/Goods]
+https://github.com/user-attachments/assets/a39a1d89-bbc5-4b32-8bd0-75141d74bf26
+
+#### [후기/Review]
+https://github.com/user-attachments/assets/3f7427b5-2531-4b3e-a117-8f0c5346c53a
+
+#### [위시리스트/WishList]
+https://github.com/user-attachments/assets/27e501fb-99ea-46e7-a293-feb5abdbba46
 
 <br>
 
