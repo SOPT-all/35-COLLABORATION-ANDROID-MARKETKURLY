@@ -41,7 +41,7 @@ fun ReviewFilteringBar(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -54,7 +54,7 @@ fun ReviewFilteringBar(
         Box {
             Row(
                 modifier = modifier
-                    .padding(horizontal = 8.dp, vertical = 14.dp)
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
                     .noRippleClickable { isDropDownMenuExpanded = !isDropDownMenuExpanded },
                 verticalAlignment = Alignment.CenterVertically
             ) {
