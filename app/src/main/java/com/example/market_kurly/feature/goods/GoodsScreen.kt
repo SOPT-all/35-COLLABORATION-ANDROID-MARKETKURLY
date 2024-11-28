@@ -117,7 +117,7 @@ fun GoodsScreen(
                     }
                 },
                 navigateGoodsReview = {
-                    navController.navigate(REVIEW) {
+                    navController.navigate("review/${productId}") {
                         popUpTo(REVIEW) { inclusive = true }
                         launchSingleTop = true
                     }

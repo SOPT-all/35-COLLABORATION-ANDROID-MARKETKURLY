@@ -24,8 +24,10 @@ fun NavGraph(navController: NavHostController) {
                 navController,
                 productId = it.arguments?.getString("productId")?.toInt() ?: 0,)
         }
-        composable(REVIEW) {
-            ReviewScreen(navController)
+        composable("$REVIEW/{productId}") {
+            ReviewScreen(
+                navController,
+                productId = it.arguments?.getString("productId")?.toInt() ?: 0,)
         }
         composable(WISHLIST) {
             WishListScreen(navController)

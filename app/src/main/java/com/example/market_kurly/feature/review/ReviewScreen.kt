@@ -25,12 +25,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.market_kurly.R
 import com.example.market_kurly.core.base.BaseViewModelFactory
 import com.example.market_kurly.core.designsystem.component.KurlyGoodsDetailBottomBar
@@ -47,13 +45,13 @@ import com.example.market_kurly.feature.review.component.ReviewItem
 import com.example.market_kurly.feature.review.component.ReviewNoticeItem
 import com.example.market_kurly.ui.theme.Gray2
 import com.example.market_kurly.ui.theme.Gray7
-import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
 import com.example.market_kurly.ui.theme.White
 
 @Composable
 fun ReviewScreen(
     navController: NavHostController,
+    productId: Int,
     modifier: Modifier = Modifier,
 ) {
     val viewModel: ReviewViewModel = viewModel(factory = BaseViewModelFactory())
@@ -73,7 +71,7 @@ fun ReviewScreen(
     }
 
     LaunchedEffect(true) {
-        viewModel.getProductReviewsData(19)
+        viewModel.getProductReviewsData(productId)
     }
 
     LaunchedEffect(Unit) {
@@ -202,10 +200,10 @@ fun ReviewScreen(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun ReviewScreenPreview() {
-    MARKETKURLYTheme {
-        ReviewScreen(modifier = Modifier, navController = rememberNavController())
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun ReviewScreenPreview() {
+//    MARKETKURLYTheme {
+//        ReviewScreen(modifier = Modifier, navController = rememberNavController())
+//    }
+//}
