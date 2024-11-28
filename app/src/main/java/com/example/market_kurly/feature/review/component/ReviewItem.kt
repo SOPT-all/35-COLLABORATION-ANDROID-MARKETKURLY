@@ -19,15 +19,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
 import com.example.market_kurly.core.util.KeyStorage.STAR_MAX_COUNT
+import com.example.market_kurly.core.util.date.toFormattedDate
 import com.example.market_kurly.ui.theme.Gray3
 import com.example.market_kurly.ui.theme.Gray4
 import com.example.market_kurly.ui.theme.Gray5
 import com.example.market_kurly.ui.theme.Gray7
-import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
 
 @Composable
@@ -91,7 +90,7 @@ fun ReviewItem(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = reviewDate,
+                text = reviewDate.toFormattedDate(),
                 style = MarketKurlyTheme.typography.captionR12,
                 color = Gray4
             )
