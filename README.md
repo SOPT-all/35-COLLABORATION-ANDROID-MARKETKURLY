@@ -60,3 +60,8 @@
 
 🛠️ `Repository 패턴`
 -> 아직 Repository 패턴을 적용해보지 않은 팀원들이 있어서, 이번 합동 세미나를 통해 적용해봄으로써 데이터 액세스 로직과 비즈니스 로직을 분리, 즉 관심사를 분리하는 과정을 공부해볼 예정입니다!
+
+<br>
+
+## UI 단 설계 💜
+[마켓컬리 Home, Goods, Review, WishList 뷰 UI 단 설계](https://www.figma.com/design/WMTdeUzJDbVObUf7NfaQBt/%EB%A7%88%EC%BC%93%EC%BB%AC%EB%A6%AC-%EC%95%88%EB%93%9C-3%ED%8C%80?node-id=0-1&t=22FuxsPW5NsKDq34-1)
