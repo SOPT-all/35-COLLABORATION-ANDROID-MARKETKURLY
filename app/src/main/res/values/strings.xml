@@ -39,7 +39,15 @@
     <string name="home_rankingProduct_subTitle">가장 인기있는 상품만 모아보세요!</string>
     <string name="home_secondProduct_title">🎊 이 상품은 어때요?</string>
     <string name="home_secondProduct_subTitle">껄디님의 취향에 맞는 상품을 담아보세요</string>
-
+    <string name="home_allShowBtn_description">Home AllShow Button</string>
+    <string name="home_kurlyLogo_description">Image Market Kurly Logo</string>
+    <string name="home_notification_description">Icon Home Notification</string>
+    <string name="home_cart_description">Icon Home Cart</string>
+    <string name="home_nav_description">Icon Home Nav</string>
+    <string name="home_review_description">Home Product Review</string>
+    <string name="home_productTitleArrowRight_description">Home Product Title Arrow Right</string>
+    <string name="home_putInButton_description">Home Put In Button</string>
+    <string name="home_tagItem_description">Tag Item</string>
 
 
     <!-- Review Screen -->

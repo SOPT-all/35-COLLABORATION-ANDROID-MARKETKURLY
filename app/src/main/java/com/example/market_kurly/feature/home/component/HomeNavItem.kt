@@ -9,12 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
 import com.example.market_kurly.core.util.modifier.noRippleClickable
 import com.example.market_kurly.ui.theme.Gray7
-import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
 import com.example.market_kurly.ui.theme.PrimaryColor600
 
@@ -32,7 +31,7 @@ fun HomeNavItem (
     ) {
         Icon(
             painter = painterResource(id = icon),
-            contentDescription = "Home Nav Icon",
+            contentDescription = stringResource(id = R.string.home_nav_description),
             tint = if (isSelected) PrimaryColor600 else Gray7
         )
         Text(

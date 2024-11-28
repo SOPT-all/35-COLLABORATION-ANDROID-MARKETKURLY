@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -42,7 +43,7 @@ fun HomeTagItem (
     ) {
         Icon(
             imageVector = ImageVector.vectorResource(icon),
-            contentDescription = "Tag Item",
+            contentDescription = stringResource(id = R.string.home_tagItem_description),
             tint = Color.Unspecified,
             modifier = Modifier
                 .background(CoolGray1, shape = RoundedCornerShape(13.dp))

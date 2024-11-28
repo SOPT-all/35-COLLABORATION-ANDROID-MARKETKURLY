@@ -45,7 +45,7 @@ fun HomePutInButton (
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_home_cart_18),
-                contentDescription = "Home Put In Button",
+                contentDescription = stringResource(id = R.string.home_putInButton_description),
                 tint = Gray7
             )
             Spacer(modifier = Modifier.width(4.dp))

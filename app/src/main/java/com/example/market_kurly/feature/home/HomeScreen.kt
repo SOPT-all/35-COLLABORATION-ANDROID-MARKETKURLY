@@ -185,7 +185,7 @@ private fun HomeAllButton(
         )
         Icon(
             painter = painterResource(id = R.drawable.ic_home_arrow_right),
-            contentDescription = "Home 전체보기 Button"
+            contentDescription = stringResource(R.string.home_allShowBtn_description)
         )
     }
 }

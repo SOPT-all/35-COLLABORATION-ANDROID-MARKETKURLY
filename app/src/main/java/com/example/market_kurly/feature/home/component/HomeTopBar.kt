@@ -67,18 +67,18 @@ fun HomeTopBar (
         ) {
             Image(
                 painter = painterResource(id = R.mipmap.img_home_logo),
-                contentDescription = "Image Market Kurly Logo"
+                contentDescription = stringResource(R.string.home_kurlyLogo_description)
             )
             HomeTopBarToggle()
             Row {
                 HomeIcon(
                     icon = R.drawable.ic_home_notification,
-                    contentDescription = "Icon Home Notification"
+                    contentDescription = stringResource(id = R.string.home_notification_description)
                 )
                 Spacer(modifier.width(19.dp))
                 HomeIcon(
                     icon = R.drawable.ic_home_cart,
-                    contentDescription = "Icon Home Cart"
+                    contentDescription = stringResource(id = R.string.home_cart_description)
                 )
                 Spacer(modifier.width(9.dp))
             }
