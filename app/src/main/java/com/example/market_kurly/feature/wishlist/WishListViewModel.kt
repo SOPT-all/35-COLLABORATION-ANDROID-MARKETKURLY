@@ -6,11 +6,8 @@ import com.example.market_kurly.core.util.KeyStorage.WISHLIST_CATEGORY_TOTAL
 import com.example.market_kurly.domain.model.WishListUiData
 import com.example.market_kurly.domain.repository.WishListRepository
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
