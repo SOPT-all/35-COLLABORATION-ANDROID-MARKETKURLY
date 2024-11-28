@@ -16,6 +16,6 @@ interface ReviewService {
 
     @GET("/$API/$V1/$PRODUCTS/{productId}/$REVIEWS")
     suspend fun getProductReviews(
-        @Path("productId") productId : Number
+        @Path("productId") productId: Number
     ) : BaseResponse<ResponseReviewsDto>
 }

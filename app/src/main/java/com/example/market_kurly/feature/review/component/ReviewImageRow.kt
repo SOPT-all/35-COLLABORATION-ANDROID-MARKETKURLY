@@ -25,7 +25,7 @@ import com.example.market_kurly.ui.theme.White
 @Composable
 fun ReviewImageRow(
     modifier: Modifier = Modifier,
-    imageUrls: List<String>?,
+    imageUrls: List<String?>,
 ) {
     Row(
         modifier = modifier
