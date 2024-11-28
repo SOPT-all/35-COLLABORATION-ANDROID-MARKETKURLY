@@ -11,7 +11,7 @@ fun ResponseReviewsDto.toReviewUiDataList(): List<ReviewUiData> {
 }
 
 fun ReviewItem.toReviewUiData() = ReviewUiData(
-    name = this.name,
+    userName = this.userName,
     content = this.content,
     score = this.score,
     isAdd = this.isAdd,

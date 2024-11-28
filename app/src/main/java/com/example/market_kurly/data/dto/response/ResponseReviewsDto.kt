@@ -11,8 +11,8 @@ data class ResponseReviewsDto(
 
 @Serializable
 data class ReviewItem(
-    @SerialName("name")
-    val name: String,
+    @SerialName("userName")
+    val userName: String,
     @SerialName("content")
     val content: String,
     @SerialName("score")

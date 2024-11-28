@@ -1,7 +1,7 @@
 package com.example.market_kurly.domain.model
 
 data class ReviewUiData(
-    val name: String,
+    val userName: String,
     val content: String,
     val score: Float,
     val isAdd: Boolean,
