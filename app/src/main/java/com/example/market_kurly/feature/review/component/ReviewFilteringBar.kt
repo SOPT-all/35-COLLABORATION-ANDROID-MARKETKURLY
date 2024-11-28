@@ -33,7 +33,8 @@ import com.example.market_kurly.ui.theme.White
 
 @Composable
 fun ReviewFilteringBar(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onFilterSelected: (String) -> Unit
 ) {
     var isDropDownMenuExpanded by remember { mutableStateOf(false) }
     var selectedFilter by remember { mutableStateOf(REVIEW_FILTER_RECENT) }
@@ -97,6 +98,7 @@ fun ReviewFilteringBar(
                     },
                     onClick = {
                         selectedFilter = REVIEW_FILTER_RECENT
+                        onFilterSelected(REVIEW_FILTER_RECENT)
                         isDropDownMenuExpanded = false
                     }
                 )
@@ -111,6 +113,7 @@ fun ReviewFilteringBar(
                     },
                     onClick = {
                         selectedFilter = REVIEW_FILTER_MOST_STARS
+                        onFilterSelected(REVIEW_FILTER_MOST_STARS)
                         isDropDownMenuExpanded = false
                     }
                 )
@@ -125,6 +128,7 @@ fun ReviewFilteringBar(
                     },
                     onClick = {
                         selectedFilter = REVIEW_FILTER_LEAST_STARS
+                        onFilterSelected(REVIEW_FILTER_LEAST_STARS)
                         isDropDownMenuExpanded = false
                     }
                 )
@@ -133,10 +137,10 @@ fun ReviewFilteringBar(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun ReviewFilteringBarPreview() {
-    MARKETKURLYTheme {
-        ReviewFilteringBar(modifier = Modifier)
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun ReviewFilteringBarPreview() {
+//    MARKETKURLYTheme {
+//        ReviewFilteringBar(modifier = Modifier)
+//    }
+//}

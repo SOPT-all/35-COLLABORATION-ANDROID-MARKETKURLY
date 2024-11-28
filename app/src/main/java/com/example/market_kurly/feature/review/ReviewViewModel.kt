@@ -1,6 +1,5 @@
 package com.example.market_kurly.feature.review
 
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
