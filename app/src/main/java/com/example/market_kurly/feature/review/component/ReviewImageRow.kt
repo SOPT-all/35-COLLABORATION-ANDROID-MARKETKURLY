@@ -34,18 +34,14 @@ fun ReviewImageRow(
     ) {
         val maxVisibleImages = 4
 
-        val visibleImages = imageUrls?.take(maxVisibleImages)
+        val visibleImages = imageUrls.filterNotNull().take(maxVisibleImages)
 
-        visibleImages?.forEachIndexed { index, url ->
+        visibleImages.forEachIndexed { index, url ->
             val cornerShape =
                 when {
-                    imageUrls.size == 1 -> RoundedCornerShape(8.dp)
+                    visibleImages.size == 1 -> RoundedCornerShape(8.dp)
                     index == 0 -> RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp)
-                    index == maxVisibleImages - 1 || (index == visibleImages.lastIndex && imageUrls.size <= maxVisibleImages) ->
-                        RoundedCornerShape(
-                            topEnd = 8.dp,
-                            bottomEnd = 8.dp,
-                        )
+                    index == visibleImages.lastIndex -> RoundedCornerShape(topEnd = 8.dp, bottomEnd = 8.dp)
                     else -> RoundedCornerShape(0.dp)
                 }
 
@@ -70,7 +66,7 @@ fun ReviewImageRow(
                     modifier = Modifier
                         .size(81.dp)
                         .clip(cornerShape)
-                        .background(Gray2),
+                        .background(White),
                 )
             }
         }
