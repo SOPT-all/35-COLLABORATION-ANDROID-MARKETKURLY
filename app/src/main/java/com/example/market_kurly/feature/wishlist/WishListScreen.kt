@@ -12,6 +12,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,6 +23,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.market_kurly.core.base.BaseViewModelFactory
+import com.example.market_kurly.core.util.KeyStorage.WISHLIST_CATEGORY_DAIRY_PRODUCT
+import com.example.market_kurly.core.util.KeyStorage.WISHLIST_CATEGORY_FRUIT_NUTS_RICE
+import com.example.market_kurly.core.util.KeyStorage.WISHLIST_CATEGORY_SIMPLE_PRODUCT
+import com.example.market_kurly.core.util.KeyStorage.WISHLIST_CATEGORY_SNACK
+import com.example.market_kurly.core.util.KeyStorage.WISHLIST_CATEGORY_TOTAL
 import com.example.market_kurly.feature.wishlist.component.WishListFilteringTab
 import com.example.market_kurly.feature.wishlist.component.WishListProduct
 import com.example.market_kurly.feature.wishlist.component.WishListTopBar
@@ -34,8 +42,21 @@ fun WishListScreen(
     val viewModel: WishListViewModel = viewModel(factory = BaseViewModelFactory())
     val wishList by viewModel.wishListItems.collectAsStateWithLifecycle()
 
+    var selectedCategory by remember { mutableStateOf(WISHLIST_CATEGORY_TOTAL) }
+
     LaunchedEffect(Unit) {
         viewModel.getWishListData(memberId = 1)
+    }
+
+    val filteredWishList = remember(wishList, selectedCategory) {
+        when (selectedCategory) {
+            WISHLIST_CATEGORY_TOTAL -> wishList
+            WISHLIST_CATEGORY_DAIRY_PRODUCT -> wishList.filter { it.categoryScope == "DairyProduct" }
+            WISHLIST_CATEGORY_SIMPLE_PRODUCT -> wishList.filter { it.categoryScope == "convenience" }
+            WISHLIST_CATEGORY_FRUIT_NUTS_RICE -> wishList.filter { it.categoryScope == "FruitsNutsRice" }
+            WISHLIST_CATEGORY_SNACK -> wishList.filter { it.categoryScope == "SnacksRicecakes" }
+            else -> wishList
+        }
     }
 
     Column(
@@ -51,14 +72,14 @@ fun WishListScreen(
 
         WishListFilteringTab(
             modifier = modifier.fillMaxWidth(),
-            onClick = {}
+            onClick = { category -> selectedCategory = category }
         )
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(bottom = 16.dp)
         ) {
-            items(wishList) { wishListItem ->
+            items(filteredWishList) { wishListItem ->
                 WishListProduct(
                     name = wishListItem.name,
                     image = wishListItem.image,
