@@ -34,8 +34,6 @@ import androidx.navigation.NavHostController
 import com.example.market_kurly.R
 import com.example.market_kurly.core.base.BaseViewModelFactory
 import com.example.market_kurly.core.util.modifier.noRippleClickable
-import com.example.market_kurly.data.ServicePool
-import com.example.market_kurly.domain.repositoryimpl.ProductsRepositoryImpl
 import com.example.market_kurly.feature.home.component.AsyncImageFillWidth
 import com.example.market_kurly.feature.home.component.HomeBannerRow
 import com.example.market_kurly.feature.home.component.HomeBottomNav
@@ -57,12 +55,7 @@ import com.example.market_kurly.ui.theme.White
 fun HomeScreen(
     navController: NavHostController
 ) {
-    val productsRepository by lazy { ProductsRepositoryImpl(ServicePool.productsService) }
-    val viewModelFactory by lazy {
-        BaseViewModelFactory(
-            productsRepository = productsRepository)
-    }
-    val viewModel: HomeViewModel = viewModel(factory = viewModelFactory)
+    val viewModel: HomeViewModel = viewModel(factory = BaseViewModelFactory())
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 

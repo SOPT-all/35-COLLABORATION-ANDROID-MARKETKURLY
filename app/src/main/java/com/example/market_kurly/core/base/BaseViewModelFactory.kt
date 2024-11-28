@@ -2,9 +2,11 @@ package com.example.market_kurly.core.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.market_kurly.data.ServicePool
 import com.example.market_kurly.domain.repository.ExampleRepository
 import com.example.market_kurly.domain.repository.GoodsRepository
 import com.example.market_kurly.domain.repository.ProductsRepository
+import com.example.market_kurly.domain.repositoryimpl.ProductsRepositoryImpl
 import com.example.market_kurly.feature.ExampleViewModel
 import com.example.market_kurly.feature.goods.viewmodel.GoodsViewModel
 import com.example.market_kurly.feature.home.HomeViewModel
@@ -26,11 +28,9 @@ class BaseViewModelFactory(
             }
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 @Suppress("UNCHECKED_CAST")
-                productsRepository?.let {
-                    HomeViewModel(
-                        productsRepository = productsRepository
-                    )
-                } as T
+                HomeViewModel(
+                    productsRepository ?: ProductsRepositoryImpl(ServicePool.productsService),
+                ) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class")
         }
