@@ -30,6 +30,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.market_kurly.R
+import com.example.market_kurly.core.base.BaseViewModelFactory
 import com.example.market_kurly.core.designsystem.component.KurlyGoodsDetailBottomBar
 import com.example.market_kurly.core.designsystem.component.KurlyGoodsDetailTopBar
 import com.example.market_kurly.core.util.KeyStorage.GOODS
@@ -49,13 +50,17 @@ import com.example.market_kurly.ui.theme.White
 fun ReviewScreen(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    viewModel: ReviewViewModel = viewModel()
 ) {
+    val viewModel: ReviewViewModel = viewModel(factory = BaseViewModelFactory())
     val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
 
-    val reviews = viewModel.reviews
+    val reviews by viewModel.reviews.collectAsStateWithLifecycle()
+
+    LaunchedEffect(true) {
+        viewModel.getProductReviewsData(1)
+    }
 
     LaunchedEffect(Unit) {
         viewModel.snackbarMessage.collect { message ->
@@ -164,12 +169,12 @@ fun ReviewScreen(
 
                     Column {
                         ReviewItem(
-                            userName = review.userName,
-                            productName = review.productName,
-                            imageUrls = review.imageUrls,
-                            reviewText = review.reviewText,
-                            reviewDate = review.reviewDate,
-                            starCount = review.starCount,
+                            userName = review.name,
+                            productName = review.content, // 앞에서 받아와야 할듯
+                            imageUrls = listOf(review.image1, review.image2, review.image3),
+                            reviewText = review.content,
+                            reviewDate = review.createdAt,
+                            starCount = review.score.toInt(),
                             modifier = modifier.padding(bottom = 16.dp)
                         )
 
