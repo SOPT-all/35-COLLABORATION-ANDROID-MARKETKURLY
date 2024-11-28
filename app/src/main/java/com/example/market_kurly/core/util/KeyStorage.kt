@@ -47,4 +47,8 @@ object KeyStorage {
 
     // Goods Membership Toggle Button Expand ItemId
     const val MEMBERSHIP_EXPAND = "expand_item"
+
+    // 단위
+    const val WON = "원"
+    const val PERCENT = "%"
 }

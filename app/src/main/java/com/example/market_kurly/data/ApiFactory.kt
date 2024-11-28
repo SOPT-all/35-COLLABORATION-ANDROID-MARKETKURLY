@@ -4,6 +4,8 @@ import com.example.market_kurly.BuildConfig
 import com.example.market_kurly.data.service.ExampleService
 import com.example.market_kurly.data.service.GoodsService
 import com.example.market_kurly.data.service.LikeService
+import com.example.market_kurly.data.service.ReviewService
+import com.example.market_kurly.data.service.WishListService
 import com.example.market_kurly.data.service.ProductService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -37,4 +39,6 @@ object ServicePool {
     val productsService = ApiFactory.create<ProductService>()
     val goodsService = ApiFactory.create<GoodsService>()
     val likeService = ApiFactory.create<LikeService>()
+    val reviewService = ApiFactory.create<ReviewService>()
+    val wishListService = ApiFactory.create<WishListService>()
 }
