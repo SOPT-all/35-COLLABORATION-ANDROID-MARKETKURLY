@@ -65,7 +65,6 @@ class GoodsViewModel(
         }
     }
 
-    //TODO: 서버쌤들이 null 반환 고쳐주면 수정 필요
     private fun createInfoPairs(info: GoodsInfoData?): List<Pair<String, String>> {
         info?.let {
             return listOf(
