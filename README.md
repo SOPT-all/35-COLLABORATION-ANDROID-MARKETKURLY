@@ -3,6 +3,14 @@
 
 <br>
 
+## Contributors 💜
+| SOPT 35th 안드로이드 | [김윤서](https://github.com/yskim6772) | [진지현](https://github.com/serioushyeon) | [안세홍](https://github.com/Roel4990) |
+|:------------------------------------:|:------------------------------------:|:-------------------------:|:------------------------------:|
+| <img src="https://github.com/user-attachments/assets/24b2842a-7b56-422a-bdba-2011bede4f41" alt="단체사진" width="420"/> | <img src="https://avatars.githubusercontent.com/u/131870144?v=4" alt="윤서" width="250"/> | <img src="https://avatars.githubusercontent.com/u/108039053?v=4" alt="지현" width="250"/> | <img src="https://avatars.githubusercontent.com/u/93641814?v=4" alt="세홍" width="250"/> |
+| **MarketKurly** |     `후기 뷰`, `위시리스트 뷰` <br> `후기, 위시리스트 api`     |       `상품 상세 뷰` <br> `상품 상세, 찜하기,` <br> `찜 취소 api`       |      `홈 뷰` <br> `홈 api`      |
+
+<br>
+
 ## 3팀의 협업 방식 💜
 ### 그라운드 룰 ⭐️
 
