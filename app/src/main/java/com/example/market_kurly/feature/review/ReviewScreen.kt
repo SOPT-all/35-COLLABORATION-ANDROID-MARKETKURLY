@@ -71,6 +71,7 @@ fun ReviewScreen(
     }
 
     LaunchedEffect(true) {
+        viewModel.getGoodsDetailData(productId)
         viewModel.getProductReviewsData(productId)
     }
 
@@ -97,13 +98,13 @@ fun ReviewScreen(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             KurlyGoodsDetailTopBar(
-                goodsName = uiState.goodsDetails?.name.orEmpty(),
+                goodsName = uiState.goodsName,
                 selectedIndex = uiState.selectedTabIndex,
                 navigateUp = {
                     navController.navigateUp()
                 },
                 navigateToGoodsDetail = {
-                    navController.navigate(GOODS) {
+                    navController.navigate("$GOODS/$productId") {
                         popUpTo(GOODS) { inclusive = true }
                         launchSingleTop = true
                     }
@@ -179,7 +180,7 @@ fun ReviewScreen(
                     Column {
                         ReviewItem(
                             userName = review.userName,
-                            productName = review.content, // 앞에서 받아와야 할듯
+                            productName = uiState.goodsName,
                             imageUrls = listOf(review.image1, review.image2, review.image3),
                             reviewText = review.content,
                             reviewDate = review.createdAt,
@@ -199,11 +200,3 @@ fun ReviewScreen(
         }
     }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun ReviewScreenPreview() {
-//    MARKETKURLYTheme {
-//        ReviewScreen(modifier = Modifier, navController = rememberNavController())
-//    }
-//}

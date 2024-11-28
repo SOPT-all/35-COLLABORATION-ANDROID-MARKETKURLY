@@ -8,4 +8,7 @@ data class ReviewState(
     val selectedTabIndex: Int = ALL_TABS.indexOf(GOODS_REVIEWS),
     val isFavorite: Boolean = false,
     val goodsDetails: GoodsUiData? = null,
-)
+) {
+    val goodsName: String
+        get() = goodsDetails?.name.orEmpty()
+}

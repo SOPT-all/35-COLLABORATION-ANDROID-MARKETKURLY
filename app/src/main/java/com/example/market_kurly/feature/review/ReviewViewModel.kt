@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.market_kurly.R
 import com.example.market_kurly.domain.model.ReviewUiData
+import com.example.market_kurly.domain.repository.GoodsRepository
 import com.example.market_kurly.domain.repository.ReviewRepository
 import com.example.market_kurly.feature.review.state.ReviewState
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -17,7 +18,8 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class ReviewViewModel(
-    private val reviewRepository: ReviewRepository
+    private val reviewRepository: ReviewRepository,
+    private val goodsRepository: GoodsRepository
 ) : ViewModel() {
 
     private val _reviews = MutableStateFlow<List<ReviewUiData>>(emptyList())
@@ -40,6 +42,22 @@ class ReviewViewModel(
             }.onFailure {
                 Timber.tag("getProductReviewsData").e(it)
             }
+        }
+    }
+
+    fun getGoodsDetailData(productId: Int) {
+        viewModelScope.launch {
+            goodsRepository.getGoodsDetailById(productId, 1)
+                .onSuccess { goodsData ->
+                    _uiState.update { currentState ->
+                        currentState.copy(
+                            goodsDetails = goodsData
+                        )
+                    }
+                }
+                .onFailure {
+                    Timber.tag("getGoodsDetailData").e(it)
+                }
         }
     }
 
