@@ -8,5 +8,7 @@ data class ProductData (
     val name: String,
     val price: Int,
     val discount: Int,
-    val image: String
+    val image: String,
+    val discountPrice: Int,
+    val reviewCount: Int,
 )

@@ -28,9 +28,9 @@ fun HomeProductRow (
                 product.name,
                 product.price,
                 product.discount,
-                product.price,
+                product.discountPrice,
                 imageUrl = product.image,
-                reviewCount = 999,
+                reviewCount = product.reviewCount,
                 onItemClick = {
                     navController.navigate("goods/${product.id}")
                 }
