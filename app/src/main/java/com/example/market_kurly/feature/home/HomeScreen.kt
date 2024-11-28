@@ -135,7 +135,6 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.height(24.dp))
                 HomeRankingProductRow(
                     rankingProducts,
-
                 )
                 Spacer(modifier = Modifier.height(23.dp))
                 HomeAllButton(
