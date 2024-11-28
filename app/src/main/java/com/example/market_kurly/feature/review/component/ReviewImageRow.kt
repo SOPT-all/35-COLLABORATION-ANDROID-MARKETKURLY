@@ -53,6 +53,20 @@ fun ReviewImageRow(
                         .background(Color.Gray.copy(alpha = 0.6f)),
                     contentAlignment = Alignment.Center,
                 ) {
+                    Image(
+                        painter = rememberAsyncImagePainter(model = url),
+                        contentDescription = stringResource(R.string.review_more_image),
+                        modifier = Modifier
+                            .matchParentSize()
+                            .clip(cornerShape)
+                    )
+
+                    Box(
+                        modifier = Modifier
+                            .matchParentSize()
+                            .background(Color.Black.copy(alpha = 0.6f))
+                    )
+
                     Text(
                         text = stringResource(R.string.review_more_image),
                         style = MarketKurlyTheme.typography.captionR12,
