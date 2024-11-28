@@ -53,7 +53,8 @@ class BaseViewModelFactory(
             modelClass.isAssignableFrom(ReviewViewModel::class.java) -> {
                 @Suppress("UNCHECKED_CAST")
                 ReviewViewModel(
-                    reviewRepository ?: ReviewRepositoryImpl(ServicePool.reviewService)
+                    reviewRepository ?: ReviewRepositoryImpl(ServicePool.reviewService),
+                    goodsRepository ?: GoodsRepositoryImpl(ServicePool.goodsService)
                 ) as T
             }
 
