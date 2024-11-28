@@ -15,8 +15,8 @@ import com.example.market_kurly.domain.model.ProductUiData
 @Composable
 fun HomeProductRow (
     products: List<ProductUiData>,
+    navController: NavController,
     modifier: Modifier = Modifier,
-    navController: NavController
 ) {
     LazyRow(
         modifier = modifier.fillMaxWidth(),
