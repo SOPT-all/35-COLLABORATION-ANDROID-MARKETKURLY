@@ -1,9 +1,6 @@
 package com.example.market_kurly.domain.model
 
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class ProductData (
+data class ProductUiData (
     val id: Int,
     val name: String,
     val price: Int,
@@ -12,3 +9,4 @@ data class ProductData (
     val discountPrice: Int,
     val reviewCount: Int,
 )
+
