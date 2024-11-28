@@ -15,6 +15,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -27,9 +28,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.market_kurly.R
+import com.example.market_kurly.core.base.BaseViewModelFactory
 import com.example.market_kurly.core.util.modifier.noRippleClickable
+import com.example.market_kurly.data.ServicePool
+import com.example.market_kurly.domain.repositoryimpl.ProductsRepositoryImpl
 import com.example.market_kurly.feature.home.component.AsyncImageFillWidth
 import com.example.market_kurly.feature.home.component.HomeBannerRow
 import com.example.market_kurly.feature.home.component.HomeBottomNav
@@ -38,10 +44,8 @@ import com.example.market_kurly.feature.home.component.HomeProductTitle
 import com.example.market_kurly.feature.home.component.HomeRankingProductRow
 import com.example.market_kurly.feature.home.component.HomeTagItemRow
 import com.example.market_kurly.feature.home.component.HomeTopBar
-import com.example.market_kurly.feature.home.dummy.BannerDummy
 import com.example.market_kurly.feature.home.dummy.HomeScreenData
-import com.example.market_kurly.feature.home.dummy.ProductDummy
-import com.example.market_kurly.feature.home.dummy.RankingProductDummy
+import com.example.market_kurly.feature.home.dummy.bannerDummy
 import com.example.market_kurly.ui.theme.CoolGray4
 import com.example.market_kurly.ui.theme.GrGray1
 import com.example.market_kurly.ui.theme.Gray8
@@ -53,11 +57,20 @@ import com.example.market_kurly.ui.theme.White
 fun HomeScreen(
     navController: NavHostController
 ) {
-    val bannerList = BannerDummy()
-    val tagMenuList = HomeScreenData()
-    val rankingProducts = RankingProductDummy()
-    val products = ProductDummy()
+    val productsRepository by lazy { ProductsRepositoryImpl(ServicePool.productsService) }
+    val viewModelFactory by lazy {
+        BaseViewModelFactory(
+            productsRepository = productsRepository)
+    }
+    val viewModel: HomeViewModel = viewModel(factory = viewModelFactory)
 
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    val bannerList = bannerDummy()
+    val tagMenuList = HomeScreenData()
+    val rankingProducts = uiState.mainMiddleData
+    val mainTopProducts = uiState.mainTopData
+    val mainBottomProducts = uiState.mainBottomData
     ConstraintLayout(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -88,11 +101,13 @@ fun HomeScreen(
                    .padding(start = 15.dp, end = 9.dp)
             )
             Spacer(modifier = Modifier.height(17.dp))
-            HomeProductRow(products)
+            HomeProductRow(
+                mainTopProducts,
+                navController = navController
+            )
             Spacer(modifier = Modifier.height(14.dp))
             AsyncImageFillWidth(
                 imageUrl = "https://prod-files-secure.s3.us-west-2.amazonaws.com/01c30015-16dc-4e14-8e54-35fb1a5705fe/826939ec-c3d6-4b17-9258-c7170db2bf29/IMG_0136_1.png",
-                placeholder = R.mipmap.img_home_center_banner_dummy
             )
             Column(
                 modifier = Modifier
@@ -125,7 +140,10 @@ fun HomeScreen(
                     color = CoolGray4
                 )
                 Spacer(modifier = Modifier.height(24.dp))
-                HomeRankingProductRow(rankingProducts)
+                HomeRankingProductRow(
+                    rankingProducts,
+
+                )
                 Spacer(modifier = Modifier.height(23.dp))
                 HomeAllButton(
                     modifier = Modifier.padding(horizontal = 15.dp)
@@ -140,7 +158,10 @@ fun HomeScreen(
                     .padding(start = 15.dp, end = 9.dp)
             )
             Spacer(modifier = Modifier.height(17.dp))
-            HomeProductRow(products)
+            HomeProductRow(
+                mainBottomProducts,
+                navController = navController
+            )
             Spacer(modifier = Modifier.height(28.dp))
         }
         HomeBottomNav(

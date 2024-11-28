@@ -1,4 +1,4 @@
-package com.example.market_kurly.core.dummymodel
+package com.example.market_kurly.domain.model
 
 data class AlsoViewedData(
     val image: String,

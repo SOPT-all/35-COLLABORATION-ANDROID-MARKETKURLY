@@ -29,7 +29,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
 import com.example.market_kurly.core.util.modifier.noRippleClickable
-import com.example.market_kurly.core.util.price.calculateDiscountWithFloor
 import com.example.market_kurly.core.util.price.toDecimalFormat
 import com.example.market_kurly.ui.theme.Gray7
 import com.example.market_kurly.ui.theme.MarketKurlyTheme.typography
@@ -61,7 +60,7 @@ fun KurlyGoodsMembershipToggleButton(
         if (expanded) {
             MembershipPriceAndSubscribe(
                 discount = discount,
-                disCountPrice = price.calculateDiscountWithFloor(discount),
+                disCountPrice = price,
             )
         }
     }

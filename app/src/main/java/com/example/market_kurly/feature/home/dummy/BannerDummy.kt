@@ -1,10 +1,16 @@
 package com.example.market_kurly.feature.home.dummy
 
-fun BannerDummy(): List<String> {
+import com.example.market_kurly.R
+
+fun bannerDummy(): List<Int> {
     return listOf(
-        "https://velog.velcdn.com/images/roel_dev/post/c6270de0-ab33-4374-bacd-eaa541ecc521/image.png",
-        "https://velog.velcdn.com/images/roel_dev/post/3d117f6f-9d9e-4899-bcba-cb137ac19c39/image.png",
-        "https://velog.velcdn.com/images/roel_dev/post/c6270de0-ab33-4374-bacd-eaa541ecc521/image.png",
-        "https://velog.velcdn.com/images/roel_dev/post/3d117f6f-9d9e-4899-bcba-cb137ac19c39/image.png",
+        R.mipmap.img_home_banner_dummy,
+        R.mipmap.img_home_banner_dummy2,
+        R.mipmap.img_home_banner_dummy3,
+        R.mipmap.img_home_banner_dummy4,
+        R.mipmap.img_home_banner_dummy5,
+        R.mipmap.img_home_banner_dummy6,
+        R.mipmap.img_home_banner_dummy7,
+        R.mipmap.img_home_banner_dummy8,
     )
 }

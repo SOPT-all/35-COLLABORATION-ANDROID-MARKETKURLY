@@ -15,12 +15,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.market_kurly.R
+import com.example.market_kurly.core.util.modifier.noRippleClickable
+import com.example.market_kurly.core.util.price.toDecimalFormat
 import com.example.market_kurly.ui.theme.CoolGray3
 import com.example.market_kurly.ui.theme.Gray8
-import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
 import com.example.market_kurly.ui.theme.Red
 
@@ -34,15 +34,17 @@ fun HomeProduct (
     reviewCount: Int,
     modifier: Modifier = Modifier,
     imageUrl: String? = null,
-    onPutInClick: () -> Unit = {}
+    onPutInClick: () -> Unit = {},
+    onItemClick: () -> Unit = {}
 ) {
     Column (
-        modifier = modifier.width(140.dp)
+        modifier = modifier
+            .width(140.dp)
+            .noRippleClickable(onItemClick),
     ) {
         AsyncImageFillWidth(
             imageUrl = imageUrl,
             modifier = Modifier.clip(RoundedCornerShape(4.dp)),
-            placeholder = R.mipmap.img_home_product_dummy
         )
         Spacer(modifier = Modifier.height(6.dp))
         HomePutInButton { onPutInClick() }
@@ -54,7 +56,7 @@ fun HomeProduct (
         )
         Spacer(modifier = Modifier.height(5.dp))
         Text(
-            stringResource(id = R.string.home_price, discountBeforePrice),
+            stringResource(id = R.string.home_price, discountBeforePrice.toDecimalFormat()),
             style = MarketKurlyTheme.typography.captionR12.copy(
                 textDecoration = TextDecoration.LineThrough
             ),
@@ -68,7 +70,7 @@ fun HomeProduct (
             )
             Spacer(modifier = Modifier.width(4.dp))
             Text(
-                stringResource(id = R.string.home_price, discountAfterPrice),
+                stringResource(id = R.string.home_price, discountAfterPrice.toDecimalFormat()),
                 style = MarketKurlyTheme.typography.bodyB16,
                 color = Gray8
             )
@@ -88,20 +90,5 @@ fun HomeProduct (
                 color = CoolGray3
             )
         }
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-private fun HomeProductPreview() {
-    MARKETKURLYTheme {
-        HomeProduct(
-            "[3개 사면 33%] 비비고 통새우만두 200g",
-            6980,
-            33,
-            4630,
-            1200,
-        )
     }
 }
