@@ -11,6 +11,8 @@ import com.example.market_kurly.domain.repository.WishListRepository
 import com.example.market_kurly.domain.repositoryimpl.ReviewRepositoryImpl
 import com.example.market_kurly.domain.repositoryimpl.WishListRepositoryImpl
 import com.example.market_kurly.domain.repository.ProductsRepository
+import com.example.market_kurly.domain.repositoryimpl.GoodsRepositoryImpl
+import com.example.market_kurly.domain.repositoryimpl.LikeRepositoryImpl
 import com.example.market_kurly.feature.ExampleViewModel
 import com.example.market_kurly.feature.goods.viewmodel.GoodsViewModel
 import com.example.market_kurly.feature.review.ReviewViewModel
@@ -21,7 +23,7 @@ class BaseViewModelFactory(
     private val exampleRepository: ExampleRepository? = null,
     private val goodsRepository: GoodsRepository? = null,
     private val likeRepository: LikeRepository? = null,
-    private val productsRepository: ProductsRepository? = null
+    private val productsRepository: ProductsRepository? = null,
     private val reviewRepository: ReviewRepository? = null,
     private val wishListRepository: WishListRepository ?= null
 ) : ViewModelProvider.Factory {
@@ -34,14 +36,10 @@ class BaseViewModelFactory(
 
             modelClass.isAssignableFrom(GoodsViewModel::class.java) -> {
                 @Suppress("UNCHECKED_CAST")
-                goodsRepository?.let {
-                    likeRepository?.let {
-                        GoodsViewModel(
-                            goodsRepository = goodsRepository,
-                            likeRepository = likeRepository
-                        )
-                    }
-                } as T
+                GoodsViewModel(
+                    goodsRepository ?: GoodsRepositoryImpl(ServicePool.goodsService),
+                    likeRepository ?: LikeRepositoryImpl(ServicePool.likeService)
+                ) as T
             }
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 @Suppress("UNCHECKED_CAST")

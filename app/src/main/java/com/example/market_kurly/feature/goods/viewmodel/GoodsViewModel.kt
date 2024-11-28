@@ -73,8 +73,8 @@ class GoodsViewModel(
                 SELLING_UNIT to info.sellingUnit,
                 WEIGHT to info.weight,
                 ALLERGY to info.allergy,
-                EXPIRATION to info.expiration.toString(),
-                BRIX to info.brix.toString(),
+                EXPIRATION to info.expiration,
+                BRIX to info.brix,
                 NOTIFICATION to info.notification,
             )
         }

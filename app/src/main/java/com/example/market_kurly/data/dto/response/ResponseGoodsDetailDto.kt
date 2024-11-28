@@ -3,7 +3,6 @@ package com.example.market_kurly.data.dto.response
 import kotlinx.serialization.Serializable
 
 
-//TODO: 서버쌤들이 null 반환 고쳐주면 수정 필요
 @Serializable
 data class ResponseGoodsDetailDto(
     val name: String,
@@ -19,7 +18,7 @@ data class ResponseGoodsDetailDto(
     val packagingType: String,
     val sellingUnit: String,
     val weight: String,
-    val expiration: String? = null,
+    val expiration: String,
     val brix: Float? = null,
     val notification: String,
     val category: String,

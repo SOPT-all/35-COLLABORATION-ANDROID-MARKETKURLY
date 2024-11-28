@@ -34,10 +34,12 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.market_kurly.R
+import com.example.market_kurly.core.base.BaseViewModelFactory
 import com.example.market_kurly.core.designsystem.component.KurlyGoodsDetailBottomBar
 import com.example.market_kurly.core.designsystem.component.KurlyGoodsDetailTopBar
 import com.example.market_kurly.core.util.KeyStorage.EMPTY_RESPONSE
@@ -64,18 +66,20 @@ import kotlinx.coroutines.launch
 @Composable
 fun GoodsScreen(
     navController: NavHostController,
-    viewModel: GoodsViewModel
     productId: Int,
 ) {
     val context = LocalContext.current
+
+    val viewModel: GoodsViewModel = viewModel(factory = BaseViewModelFactory())
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val snackbarHostState = remember { SnackbarHostState() }
 
-    //TODO: 홈에서 productId 넘겨받아야함
+    val memberId = 1
+
     LaunchedEffect(true) {
-        viewModel.getGoodsDetailData(5, 1)
+        viewModel.getGoodsDetailData(productId, memberId)
     }
     LaunchedEffect(Unit) {
         launch {
@@ -120,12 +124,11 @@ fun GoodsScreen(
                 },
             )
         },
-        //TODO: 홈에서 productId 넘겨받아야함
         bottomBar = {
             KurlyGoodsDetailBottomBar(
                 modifier = Modifier.background(White),
                 isFavorite = uiState.isFavorite,
-                onFavoriteClick = { viewModel.toggleFavorite(5, 1) },
+                onFavoriteClick = { viewModel.toggleFavorite(productId, memberId) },
             )
         },
     ) { innerPadding ->

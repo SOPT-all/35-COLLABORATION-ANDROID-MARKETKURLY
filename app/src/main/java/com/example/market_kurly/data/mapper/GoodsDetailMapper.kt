@@ -1,5 +1,6 @@
 package com.example.market_kurly.data.mapper
 
+import com.example.market_kurly.core.util.KeyStorage
 import com.example.market_kurly.data.dto.response.ResponseGoodsDetailDto
 import com.example.market_kurly.domain.model.GoodsInfoData
 import com.example.market_kurly.domain.model.GoodsUiData
@@ -17,7 +18,7 @@ fun ResponseGoodsDetailDto.toGoodsUiData() = GoodsUiData(
     isInterest = this.isInterest,
     infoData = GoodsInfoData(
         allergy = this.allergy,
-        brix = this.brix,
+        brix = brix?.toString() ?: KeyStorage.EMPTY_RESPONSE,
         expiration = this.expiration,
         notification = this.notification,
         packagingType = this.packagingType,
