@@ -13,6 +13,7 @@ import com.example.market_kurly.domain.repositoryimpl.WishListRepositoryImpl
 import com.example.market_kurly.domain.repository.ProductsRepository
 import com.example.market_kurly.domain.repositoryimpl.GoodsRepositoryImpl
 import com.example.market_kurly.domain.repositoryimpl.LikeRepositoryImpl
+import com.example.market_kurly.domain.repositoryimpl.ProductsRepositoryImpl
 import com.example.market_kurly.feature.ExampleViewModel
 import com.example.market_kurly.feature.goods.viewmodel.GoodsViewModel
 import com.example.market_kurly.feature.review.ReviewViewModel
@@ -43,11 +44,9 @@ class BaseViewModelFactory(
             }
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 @Suppress("UNCHECKED_CAST")
-                productsRepository?.let {
-                    HomeViewModel(
-                        productsRepository = productsRepository
-                    )
-                } as T
+                HomeViewModel(
+                    productsRepository ?: ProductsRepositoryImpl(ServicePool.productsService),
+                ) as T
             }
 
             modelClass.isAssignableFrom(ReviewViewModel::class.java) -> {

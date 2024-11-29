@@ -18,7 +18,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.market_kurly.R
 import com.example.market_kurly.ui.theme.Black18
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
 import com.example.market_kurly.ui.theme.White
@@ -75,7 +77,7 @@ private fun ImageFillWidth(
 ) {
     Image(
         painter = painterResource(id = image),
-        contentDescription = "Home Banner",
+        contentDescription = stringResource(R.string.home_banner_description),
         modifier = Modifier.fillMaxWidth(),
         contentScale = ContentScale.FillWidth
     )

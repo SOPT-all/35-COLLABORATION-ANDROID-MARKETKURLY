@@ -34,8 +34,6 @@ import androidx.navigation.NavHostController
 import com.example.market_kurly.R
 import com.example.market_kurly.core.base.BaseViewModelFactory
 import com.example.market_kurly.core.util.modifier.noRippleClickable
-import com.example.market_kurly.data.ServicePool
-import com.example.market_kurly.domain.repositoryimpl.ProductsRepositoryImpl
 import com.example.market_kurly.feature.home.component.AsyncImageFillWidth
 import com.example.market_kurly.feature.home.component.HomeBannerRow
 import com.example.market_kurly.feature.home.component.HomeBottomNav
@@ -57,12 +55,7 @@ import com.example.market_kurly.ui.theme.White
 fun HomeScreen(
     navController: NavHostController
 ) {
-    val productsRepository by lazy { ProductsRepositoryImpl(ServicePool.productsService) }
-    val viewModelFactory by lazy {
-        BaseViewModelFactory(
-            productsRepository = productsRepository)
-    }
-    val viewModel: HomeViewModel = viewModel(factory = viewModelFactory)
+    val viewModel: HomeViewModel = viewModel(factory = BaseViewModelFactory())
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -142,7 +135,6 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.height(24.dp))
                 HomeRankingProductRow(
                     rankingProducts,
-
                 )
                 Spacer(modifier = Modifier.height(23.dp))
                 HomeAllButton(
@@ -193,7 +185,7 @@ private fun HomeAllButton(
         )
         Icon(
             painter = painterResource(id = R.drawable.ic_home_arrow_right),
-            contentDescription = "Home 전체보기 Button"
+            contentDescription = stringResource(R.string.home_allShowBtn_description)
         )
     }
 }

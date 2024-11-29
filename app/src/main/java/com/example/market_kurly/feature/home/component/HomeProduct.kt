@@ -81,7 +81,7 @@ fun HomeProduct (
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_home_review),
-                contentDescription = "Home Product Review",
+                contentDescription = stringResource(id = R.string.home_review_description),
                 tint = CoolGray3
             )
             Text(

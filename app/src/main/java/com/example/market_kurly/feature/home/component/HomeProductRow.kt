@@ -9,14 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.market_kurly.domain.model.ProductData
+import com.example.market_kurly.domain.model.ProductUiData
 
 
 @Composable
 fun HomeProductRow (
-    products: List<ProductData>,
+    products: List<ProductUiData>,
+    navController: NavController,
     modifier: Modifier = Modifier,
-    navController: NavController
 ) {
     LazyRow(
         modifier = modifier.fillMaxWidth(),
