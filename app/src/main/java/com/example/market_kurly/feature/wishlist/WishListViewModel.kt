@@ -1,27 +1,37 @@
 package com.example.market_kurly.feature.wishlist
 
 import androidx.lifecycle.ViewModel
-import com.example.market_kurly.data.dummy.WishListItem
+import androidx.lifecycle.viewModelScope
+import com.example.market_kurly.core.util.KeyStorage.WISHLIST_CATEGORY_TOTAL
+import com.example.market_kurly.domain.model.WishListUiData
+import com.example.market_kurly.domain.repository.WishListRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class WishListViewModel : ViewModel() {
-    private val _wishListItems = MutableStateFlow<List<WishListItem>>(emptyList())
-    val wishListItems: StateFlow<List<WishListItem>> = _wishListItems
+class WishListViewModel(
+    private val wishListRepository: WishListRepository
+) : ViewModel() {
+    private val _wishListItems = MutableStateFlow<List<WishListUiData>>(emptyList())
+    val wishListItems: StateFlow<List<WishListUiData>> = _wishListItems
 
-    init {
-        loadDummyData()
-    }
+    private val _selectedCategory = MutableStateFlow(WISHLIST_CATEGORY_TOTAL)
+    val selectedCategory: StateFlow<String> = _selectedCategory.asStateFlow()
 
-    private fun loadDummyData() {
-        _wishListItems.value = List(10) { index ->
-            WishListItem(
-                imageUrl = "https://via.placeholder.com/96*125",
-                productName = "[프레지덩] 포션 버터 비가염 (10g X 20개입) $index",
-                discountRate = "${10 + index}%",
-                discountedPrice = "${9 - index},000원",
-                originalPrice = "10,000원"
-            )
+    private val _errorMessage = MutableStateFlow<String?>(null)
+    val errorMessage: StateFlow<String?> = _errorMessage.asStateFlow()
+
+    fun getWishListData(memberId: Number) {
+        viewModelScope.launch {
+            wishListRepository.getWishList(memberId)
+                .onSuccess { wishListItems ->
+                    _wishListItems.update { wishListItems }
+                }
+                .onFailure { error ->
+                    _errorMessage.update { error.message }
+                }
         }
     }
 }

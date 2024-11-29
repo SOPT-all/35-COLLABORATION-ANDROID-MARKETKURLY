@@ -19,21 +19,25 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.market_kurly.R
+import com.example.market_kurly.core.base.BaseViewModelFactory
 import com.example.market_kurly.core.designsystem.component.KurlyGoodsDetailBottomBar
 import com.example.market_kurly.core.designsystem.component.KurlyGoodsDetailTopBar
 import com.example.market_kurly.core.util.KeyStorage.GOODS
 import com.example.market_kurly.core.util.KeyStorage.REVIEW
+import com.example.market_kurly.core.util.KeyStorage.REVIEW_FILTER_LEAST_STARS
+import com.example.market_kurly.core.util.KeyStorage.REVIEW_FILTER_MOST_STARS
+import com.example.market_kurly.core.util.KeyStorage.REVIEW_FILTER_RECENT
 import com.example.market_kurly.core.util.KeyStorage.WISHLIST
 import com.example.market_kurly.feature.review.component.ReviewFilteringBar
 import com.example.market_kurly.feature.review.component.ReviewImageRow
@@ -41,21 +45,35 @@ import com.example.market_kurly.feature.review.component.ReviewItem
 import com.example.market_kurly.feature.review.component.ReviewNoticeItem
 import com.example.market_kurly.ui.theme.Gray2
 import com.example.market_kurly.ui.theme.Gray7
-import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
 import com.example.market_kurly.ui.theme.White
 
 @Composable
 fun ReviewScreen(
     navController: NavHostController,
+    productId: Int,
     modifier: Modifier = Modifier,
-    viewModel: ReviewViewModel = viewModel()
 ) {
+    val viewModel: ReviewViewModel = viewModel(factory = BaseViewModelFactory())
     val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
 
-    val reviews = viewModel.reviews
+    val reviews by viewModel.reviews.collectAsStateWithLifecycle()
+    var selectedFilter by remember { mutableStateOf(REVIEW_FILTER_RECENT) }
+    val filteredReviews = remember(reviews, selectedFilter) {
+        when (selectedFilter) {
+            REVIEW_FILTER_RECENT -> reviews.sortedByDescending { it.createdAt }
+            REVIEW_FILTER_MOST_STARS -> reviews.sortedByDescending { it.score }
+            REVIEW_FILTER_LEAST_STARS -> reviews.sortedBy { it.score }
+            else -> reviews
+        }
+    }
+
+    LaunchedEffect(true) {
+        viewModel.getGoodsDetailData(productId)
+        viewModel.getProductReviewsData(productId)
+    }
 
     LaunchedEffect(Unit) {
         viewModel.snackbarMessage.collect { message ->
@@ -80,13 +98,13 @@ fun ReviewScreen(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             KurlyGoodsDetailTopBar(
-                goodsName = uiState.goodsDetails?.name.orEmpty(),
+                goodsName = uiState.goodsName,
                 selectedIndex = uiState.selectedTabIndex,
                 navigateUp = {
                     navController.navigateUp()
                 },
                 navigateToGoodsDetail = {
-                    navController.navigate(GOODS) {
+                    navController.navigate("$GOODS/$productId") {
                         popUpTo(GOODS) { inclusive = true }
                         launchSingleTop = true
                     }
@@ -132,14 +150,9 @@ fun ReviewScreen(
                 modifier = modifier.padding(start = 16.dp)
             )
 
+            val firstImages = reviews.flatMap { listOfNotNull(it.image1, it.image2) }
             ReviewImageRow(
-                imageUrls = listOf(
-                    "https://via.placeholder.com/81*81",
-                    "https://via.placeholder.com/81*81",
-                    "https://via.placeholder.com/81*81",
-                    "https://via.placeholder.com/81*81",
-                    "https://via.placeholder.com/81*81"
-                ),
+                imageUrls = firstImages,
                 modifier = modifier
                     .padding(start = 16.dp, top = 8.dp)
             )
@@ -153,23 +166,25 @@ fun ReviewScreen(
                     .background(Gray2)
             )
 
-            ReviewFilteringBar()
+            ReviewFilteringBar(
+                onFilterSelected = { selectedFilter = it }
+            )
 
             LazyColumn(
                 modifier = modifier
                     .fillMaxSize()
                     .background(White)
             ) {
-                itemsIndexed(reviews) { index, review ->
+                itemsIndexed(filteredReviews) { index, review ->
 
                     Column {
                         ReviewItem(
                             userName = review.userName,
-                            productName = review.productName,
-                            imageUrls = review.imageUrls,
-                            reviewText = review.reviewText,
-                            reviewDate = review.reviewDate,
-                            starCount = review.starCount,
+                            productName = uiState.goodsName,
+                            imageUrls = listOf(review.image1, review.image2, review.image3),
+                            reviewText = review.content,
+                            reviewDate = review.createdAt,
+                            starCount = review.score.toInt(),
                             modifier = modifier.padding(bottom = 16.dp)
                         )
 
@@ -183,13 +198,5 @@ fun ReviewScreen(
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ReviewScreenPreview() {
-    MARKETKURLYTheme {
-        ReviewScreen(modifier = Modifier, navController = rememberNavController())
     }
 }

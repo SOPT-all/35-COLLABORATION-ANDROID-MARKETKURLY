@@ -4,16 +4,16 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.market_kurly.R
-import com.example.market_kurly.core.dummymodel.GoodsInfoData
+import com.example.market_kurly.domain.model.GoodsInfoData
 import com.example.market_kurly.core.util.KeyStorage.ALLERGY
 import com.example.market_kurly.core.util.KeyStorage.BRIX
 import com.example.market_kurly.core.util.KeyStorage.EXPIRATION
-import com.example.market_kurly.core.util.KeyStorage.LIVESTOCK
 import com.example.market_kurly.core.util.KeyStorage.NOTIFICATION
 import com.example.market_kurly.core.util.KeyStorage.PACKAGING_TYPE
 import com.example.market_kurly.core.util.KeyStorage.SELLING_UNIT
 import com.example.market_kurly.core.util.KeyStorage.WEIGHT
 import com.example.market_kurly.domain.repository.GoodsRepository
+import com.example.market_kurly.domain.repository.LikeRepository
 import com.example.market_kurly.feature.goods.state.GoodsState
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,11 +24,14 @@ import kotlinx.coroutines.launch
 
 class GoodsViewModel(
     private val goodsRepository: GoodsRepository,
+    private val likeRepository: LikeRepository,
 ) : ViewModel() {
 
-    @StringRes private val _snackbarMessage = MutableSharedFlow<Int>()
+    @StringRes
+    private val _snackbarMessage = MutableSharedFlow<Int>()
 
-    @StringRes val snackbarMessage: SharedFlow<Int> = _snackbarMessage
+    @StringRes
+    val snackbarMessage: SharedFlow<Int> = _snackbarMessage
 
     private val _navigateToWishlist = MutableSharedFlow<Unit>()
     val navigateToWishlist: SharedFlow<Unit> = _navigateToWishlist
@@ -36,44 +39,68 @@ class GoodsViewModel(
     private var _uiState = MutableStateFlow(GoodsState())
     val uiState = _uiState.asStateFlow()
 
-    init {
-        initializeGoodsState()
+    fun getGoodsDetailData(productId: Int, memberId: Int) {
+        viewModelScope.launch {
+            goodsRepository.getGoodsDetailById(productId, memberId)
+                .onSuccess { goodsData ->
+                    _uiState.update { currentState ->
+                        currentState.copy(
+                            isSuccess = true,
+                            alsoViewedList = goodsRepository.getDummyAlsoViewedList(),
+                            goodsDetails = goodsData,
+                            goodsInfoList = createInfoPairs(goodsData?.infoData),
+                            isFavorite = goodsData?.isInterest ?: false,
+                        )
+                    }
+                }
+                .onFailure {
+                    _uiState.update { currentState ->
+                        currentState.copy(
+                            isSuccess = false,
+                            alsoViewedList = goodsRepository.getDummyAlsoViewedList(),
+                        )
+                    }
+
+                }
+        }
     }
 
-    private fun initializeGoodsState() {
-        _uiState.update { currentState ->
-            val goodsDetailData = goodsRepository.getDummyGoodsDetail()
-            currentState.copy(
-                alsoViewedList = goodsRepository.getDummyAlsoViewedList(),
-                goodsDetails = goodsDetailData,
-                goodsInfoList = createInfoPairs(goodsDetailData.infoData),
-                isFavorite = goodsDetailData.isFavorite,
+    private fun createInfoPairs(info: GoodsInfoData?): List<Pair<String, String>> {
+        info?.let {
+            return listOf(
+                PACKAGING_TYPE to info.packagingType,
+                SELLING_UNIT to info.sellingUnit,
+                WEIGHT to info.weight,
+                ALLERGY to info.allergy,
+                EXPIRATION to info.expiration,
+                BRIX to info.brix,
+                NOTIFICATION to info.notification,
             )
         }
-    }
-    private fun createInfoPairs(info: GoodsInfoData): List<Pair<String, String>> {
-        return listOf(
-            PACKAGING_TYPE to info.packagingType,
-            SELLING_UNIT to info.sellingUnit,
-            WEIGHT to info.weight,
-            ALLERGY to info.allergy,
-            EXPIRATION to info.expiration,
-            BRIX to info.brix,
-            NOTIFICATION to info.notification,
-            LIVESTOCK to info.livestock,
-        )
+        return emptyList()
     }
 
-    fun toggleFavorite() {
-        _uiState.update { currentState ->
-            currentState.copy(isFavorite = !_uiState.value.isFavorite)
-        }
+    fun toggleFavorite(productId: Int, memberId: Int) {
         viewModelScope.launch {
+            _uiState.update { currentState ->
+                currentState.copy(isFavorite = !_uiState.value.isFavorite)
+            }
             if (_uiState.value.isFavorite) {
-                _snackbarMessage.emit(R.string.goods_snackbar_message_favorite)
+                likeRepository.postProductsLike(productId, memberId)
+                    .onSuccess {
+                            _snackbarMessage.emit(R.string.goods_snackbar_message_favorite)
+                    }
+                    .onFailure {
+                            _snackbarMessage.emit(R.string.goods_snackbar_message_fail)
+                    }
+            }
+            else{
+                likeRepository.deleteProductsLike(productId, memberId)
+                    .onFailure {
+                        _snackbarMessage.emit(R.string.goods_snackbar_message_fail)
+                    }
             }
         }
-        // TODO: API 연동 추가
     }
 
     fun navigateToWishlist() {

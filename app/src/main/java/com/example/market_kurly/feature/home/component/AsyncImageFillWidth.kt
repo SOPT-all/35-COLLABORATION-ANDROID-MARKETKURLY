@@ -9,6 +9,7 @@ import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.market_kurly.R
+import com.example.market_kurly.ui.theme.MARKETKURLYTheme
 
 @Composable
 fun AsyncImageFillWidth (

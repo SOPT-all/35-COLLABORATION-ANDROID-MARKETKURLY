@@ -25,7 +25,7 @@ object KeyStorage {
     const val STAR_MAX_COUNT = 5
 
     // Response null 대체 문자열
-    const val EMPTY_RESPONSE = "0"
+    const val EMPTY_RESPONSE = ""
 
     // GoodsDetail Tab 요소 상수화
     const val GOODS_DETAIL = "상품설명"
@@ -39,7 +39,6 @@ object KeyStorage {
     const val ALLERGY = "알레르기정보"
     const val BRIX = "당도"
     const val EXPIRATION = "소비기한(또는 유통기한)정보"
-    const val LIVESTOCK = "축산물 이력정보"
     const val NOTIFICATION = "안내사항"
     const val PACKAGING_TYPE = "포장타입"
     const val SELLING_UNIT = "판매단위"
@@ -47,4 +46,8 @@ object KeyStorage {
 
     // Goods Membership Toggle Button Expand ItemId
     const val MEMBERSHIP_EXPAND = "expand_item"
+
+    // 단위
+    const val WON = "원"
+    const val PERCENT = "%"
 }

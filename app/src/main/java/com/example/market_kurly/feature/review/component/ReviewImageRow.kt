@@ -18,14 +18,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.market_kurly.R
-import com.example.market_kurly.ui.theme.Gray2
 import com.example.market_kurly.ui.theme.MarketKurlyTheme
 import com.example.market_kurly.ui.theme.White
 
 @Composable
 fun ReviewImageRow(
     modifier: Modifier = Modifier,
-    imageUrls: List<String>?,
+    imageUrls: List<String?>,
 ) {
     Row(
         modifier = modifier
@@ -34,20 +33,28 @@ fun ReviewImageRow(
     ) {
         val maxVisibleImages = 4
 
-        val visibleImages = imageUrls?.take(maxVisibleImages)
+        val visibleImages = imageUrls.filterNotNull().filter { it.isNotBlank() }.take(maxVisibleImages)
 
-        visibleImages?.forEachIndexed { index, url ->
-            val cornerShape =
-                when {
-                    imageUrls.size == 1 -> RoundedCornerShape(8.dp)
-                    index == 0 -> RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp)
-                    index == maxVisibleImages - 1 || (index == visibleImages.lastIndex && imageUrls.size <= maxVisibleImages) ->
-                        RoundedCornerShape(
-                            topEnd = 8.dp,
-                            bottomEnd = 8.dp,
-                        )
+        visibleImages.forEachIndexed { index, url ->
+            val cornerShape = when (visibleImages.size) {
+                1 -> RoundedCornerShape(8.dp)
+                2 -> when (index) {
+                    0 -> RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp)
+                    1 -> RoundedCornerShape(topEnd = 8.dp, bottomEnd = 8.dp)
                     else -> RoundedCornerShape(0.dp)
                 }
+                3 -> when (index) {
+                    0 -> RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp)
+                    1 -> RoundedCornerShape(0.dp)
+                    2 -> RoundedCornerShape(topEnd = 8.dp, bottomEnd = 8.dp)
+                    else -> RoundedCornerShape(0.dp)
+                }
+                else -> when (index) {
+                    0 -> RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp)
+                    maxVisibleImages - 1 -> RoundedCornerShape(topEnd = 8.dp, bottomEnd = 8.dp)
+                    else -> RoundedCornerShape(0.dp)
+                }
+            }
 
             if (index == maxVisibleImages - 1 && imageUrls.size > maxVisibleImages) {
                 Box(
@@ -57,6 +64,20 @@ fun ReviewImageRow(
                         .background(Color.Gray.copy(alpha = 0.6f)),
                     contentAlignment = Alignment.Center,
                 ) {
+                    Image(
+                        painter = rememberAsyncImagePainter(model = url),
+                        contentDescription = stringResource(R.string.review_more_image),
+                        modifier = Modifier
+                            .matchParentSize()
+                            .clip(cornerShape)
+                    )
+
+                    Box(
+                        modifier = Modifier
+                            .matchParentSize()
+                            .background(Color.Black.copy(alpha = 0.6f))
+                    )
+
                     Text(
                         text = stringResource(R.string.review_more_image),
                         style = MarketKurlyTheme.typography.captionR12,
@@ -70,7 +91,7 @@ fun ReviewImageRow(
                     modifier = Modifier
                         .size(81.dp)
                         .clip(cornerShape)
-                        .background(Gray2),
+                        .background(White),
                 )
             }
         }

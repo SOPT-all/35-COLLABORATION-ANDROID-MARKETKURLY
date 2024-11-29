@@ -34,7 +34,7 @@ import okhttp3.internal.immutableListOf
 
 @Composable
 fun WishListFilteringTab(
-    onClick: () -> Unit,
+    onClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val categoryMenus =
@@ -62,9 +62,12 @@ fun WishListFilteringTab(
             FilterChip(
                 modifier = Modifier
                     .height(32.dp)
-                    .noRippleClickable(onClick),
+                    .noRippleClickable { onClick(category) },
                 selected = selectedCategory == category,
-                onClick = { selectedCategory = category },
+                onClick = {
+                    selectedCategory = category
+                    onClick(category)
+                },
                 label = {
                     Text(
                         text = category,

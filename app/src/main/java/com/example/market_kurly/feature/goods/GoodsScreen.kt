@@ -47,9 +47,7 @@ import com.example.market_kurly.core.util.KeyStorage.GOODS
 import com.example.market_kurly.core.util.KeyStorage.MEMBERSHIP_EXPAND
 import com.example.market_kurly.core.util.KeyStorage.REVIEW
 import com.example.market_kurly.core.util.KeyStorage.WISHLIST
-import com.example.market_kurly.core.util.price.calculateDiscountWithFloor
 import com.example.market_kurly.core.util.price.toDecimalFormat
-import com.example.market_kurly.domain.repositoryimpl.GoodsRepositoryImpl
 import com.example.market_kurly.feature.goods.component.KurlyAlsoViewedColumnItem
 import com.example.market_kurly.feature.goods.component.KurlyGoodsInfoText
 import com.example.market_kurly.feature.goods.component.KurlyGoodsMembershipToggleButton
@@ -63,6 +61,7 @@ import com.example.market_kurly.ui.theme.MarketKurlyTheme.typography
 import com.example.market_kurly.ui.theme.PrimaryColor400
 import com.example.market_kurly.ui.theme.Red
 import com.example.market_kurly.ui.theme.White
+import kotlinx.coroutines.launch
 
 @Composable
 fun GoodsScreen(
@@ -70,29 +69,35 @@ fun GoodsScreen(
     productId: Int,
 ) {
     val context = LocalContext.current
-    val goodsRepository by lazy { GoodsRepositoryImpl() }
-    val viewModelFactory by lazy { BaseViewModelFactory(goodsRepository = goodsRepository) }
-    val viewModel: GoodsViewModel = viewModel(factory = viewModelFactory)
+
+    val viewModel: GoodsViewModel = viewModel(factory = BaseViewModelFactory())
+
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val snackbarHostState = remember { SnackbarHostState() }
 
+    val memberId = 1
+
+    LaunchedEffect(true) {
+        viewModel.getGoodsDetailData(productId, memberId)
+    }
     LaunchedEffect(Unit) {
-        viewModel.snackbarMessage.collect { message ->
-            val result = snackbarHostState.showSnackbar(
-                message = context.getString(message),
-                actionLabel = context.getString(R.string.goods_snackbar_action_go_to_wishlist),
-                duration = SnackbarDuration.Short,
-            )
-            if (result == SnackbarResult.ActionPerformed) {
-                viewModel.navigateToWishlist()
+        launch {
+            viewModel.snackbarMessage.collect { message ->
+                val result = snackbarHostState.showSnackbar(
+                    message = context.getString(message),
+                    actionLabel = context.getString(R.string.goods_snackbar_action_go_to_wishlist),
+                    duration = SnackbarDuration.Short,
+                )
+                if (result == SnackbarResult.ActionPerformed) {
+                    viewModel.navigateToWishlist()
+                }
             }
         }
-    }
-
-    LaunchedEffect(Unit) {
-        viewModel.navigateToWishlist.collect {
-            navController.navigate(WISHLIST)
+        launch {
+            viewModel.navigateToWishlist.collect {
+                navController.navigate(WISHLIST)
+            }
         }
     }
 
@@ -112,7 +117,7 @@ fun GoodsScreen(
                     }
                 },
                 navigateGoodsReview = {
-                    navController.navigate(REVIEW) {
+                    navController.navigate("review/${productId}") {
                         popUpTo(REVIEW) { inclusive = true }
                         launchSingleTop = true
                     }
@@ -123,7 +128,7 @@ fun GoodsScreen(
             KurlyGoodsDetailBottomBar(
                 modifier = Modifier.background(White),
                 isFavorite = uiState.isFavorite,
-                onFavoriteClick = { viewModel.toggleFavorite() },
+                onFavoriteClick = { viewModel.toggleFavorite(productId, memberId) },
             )
         },
     ) { innerPadding ->
@@ -265,8 +270,7 @@ fun GoodsOverViewSection(uiState: GoodsState) {
                 text = stringResource(
                     R.string.goods_text_price,
                     uiState.goodsDetails
-                        ?.price
-                        ?.calculateDiscountWithFloor(uiState.goodsDetails.discount)
+                        ?.discountedPrice
                         ?.toDecimalFormat().orEmpty(),
                 ),
                 style = typography.titleB22,
@@ -278,7 +282,7 @@ fun GoodsOverViewSection(uiState: GoodsState) {
 
         KurlyGoodsMembershipToggleButton(
             discount = uiState.goodsDetails?.membersDiscount ?: 0,
-            price = uiState.goodsDetails?.price ?: 0,
+            price = uiState.goodsDetails?.membersDiscountedPrice ?: 0,
             itemId = MEMBERSHIP_EXPAND,
         )
     }
